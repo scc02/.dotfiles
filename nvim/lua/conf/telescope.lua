@@ -26,7 +26,7 @@ local opts           = {
     --   filename_first = {}
     -- },
     -- prompt_prefix = "",
-    -- file_ignore_patterns = { "node_modules" },
+    file_ignore_patterns = { "node_modules" },
     sorting_strategy = "ascending",
     layout_config = {
       prompt_position = "top",
