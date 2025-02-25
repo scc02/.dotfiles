@@ -78,7 +78,7 @@ map('n', '<leader>e', function()
   local starting_line = 0 -- line number of the first file
   local lines = vim.api.nvim_buf_get_lines(0, starting_line, -1, false)
   for i, file in ipairs(lines) do
-    if (file == cur_file) then
+    if (file == cur_file or file == cur_file .. "*") then
       vim.api.nvim_win_set_cursor(0, { starting_line + i, 0 })
       return
     end

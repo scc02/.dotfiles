@@ -1,3 +1,4 @@
+local map = require "util.map"
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -440,7 +441,7 @@ require("lazy").setup({
           draw = {
             -- padding = 1,
             -- gap = 4,
-            columns = { {"kind_icon", "label", "label_description", gap = 1 }, {  "kind", gap = 1 } },
+            columns = { { "kind_icon", "label", "label_description", gap = 1 }, { "kind", gap = 1 } },
             components = {
               kind = {
                 text = function(ctx)
@@ -507,7 +508,7 @@ require("lazy").setup({
             score_offset = 3,
             name = "LSP",
             module = "blink.cmp.sources.lsp",
-            fallbacks = { },
+            fallbacks = {},
           },
           path = {
             min_keyword_length = 0,
@@ -521,6 +522,21 @@ require("lazy").setup({
       },
     },
     opts_extend = { "sources.default" }
+  },
+  {
+    "ibhagwan/fzf-lua",
+    dependencies = { "echasnovski/mini.icons" },
+    config = function()
+      map('n', ',f', ":FzfLua files<cr>")
+      require("fzf-lua").setup({
+        files = {
+          no_ignore = true
+        },
+        grep = {
+          no_ignore = true
+        }
+      })
+    end
   },
 
   --[[ {

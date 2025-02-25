@@ -24,6 +24,10 @@ M.winbar_filetype_exclude = {
 
 local excludes = function()
   local modifiable = vim.api.nvim_eval("&ma")
+  local file_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
+  if file_name:match("%.lock$") then
+    return false
+  end
   if vim.tbl_contains(M.winbar_filetype_exclude, vim.bo.filetype) or modifiable == 0 or diffviewOpen then
     vim.opt_local.winbar = nil
     return true
