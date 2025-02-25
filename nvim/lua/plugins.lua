@@ -90,7 +90,7 @@ require("lazy").setup({
       require('conf.telescope')
     end,
     cmd = { "Telescope" },
-    keys = { ',f' },
+    -- keys = { ',f' },
     dependencies = {
       'nvim-lua/plenary.nvim',
       'trouble.nvim',
@@ -527,13 +527,37 @@ require("lazy").setup({
     "ibhagwan/fzf-lua",
     dependencies = { "echasnovski/mini.icons" },
     config = function()
+      local actions = require("fzf-lua").actions
       map('n', ',f', ":FzfLua files<cr>")
       require("fzf-lua").setup({
+        window = {
+          preview = {
+            hidden = true,
+          }
+        },
         files = {
-          no_ignore = true
+          no_header = true,
+          -- previewer = false,
+          -- no_ignore = true
         },
         grep = {
-          no_ignore = true
+          no_header = true,
+          -- no_ignore = true,
+        },
+        keymap = {
+          builtin = {
+            ["<a-p>"] = "toggle-preview",
+          },
+          fzf = {
+            ["alt-p"] = "toggle-preview",
+          }
+        },
+        actions = {
+          files = {
+            ["alt-i"] = actions.toggle_ignore,
+            ["alt-o"] = actions.toggle_hidden,
+            ["enter"] = actions.file_edit_or_qf,
+          }
         }
       })
     end
