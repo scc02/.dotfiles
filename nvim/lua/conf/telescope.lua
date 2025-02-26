@@ -9,6 +9,8 @@ local make_entry     = require "telescope.make_entry"
 local map            = require('util/map')
 local is_git         = require('util.is_git')
 local M              = {}
+local previewers     = require('telescope.previewers')
+local previewers_utils = require('telescope.previewers.utils')
 
 local get_file_index = function(prompt_nr)
   local action_state   = require "telescope.actions.state"
@@ -19,13 +21,37 @@ local get_file_index = function(prompt_nr)
   require('lualine').refresh()
 end
 
+local _bad           = { '.*%.csv', } -- Put all filetypes that slow you down in this array
+local bad_files      = function(filepath)
+  for _, v in ipairs(_bad) do
+    if filepath:match(v) then
+      return false
+    end
+  end
+
+  return true
+end
+
 local opts           = {
   defaults = {
-    -- path_display = { shorten = { len = 2, exclude = { 4, 5, 6, 7, 8, 9 } } },
-    -- path_display = {
-    --   filename_first = {}
-    -- },
-    -- prompt_prefix = "",
+    buffer_previewer_maker = function(filepath, bufnr, opts)
+      -- https://github.com/nvim-telescope/telescope.nvim/issues/623
+      local max_size = 10000
+      opts = opts or {}
+
+      filepath = vim.fn.expand(filepath)
+      vim.loop.fs_stat(filepath, function(_, stat)
+        if not stat then return end
+        if stat.size > max_size then
+          local cmd = { "head", "-c", max_size, filepath }
+          previewers_utils.job_maker(cmd, bufnr, opts)
+        else
+          -- 指定文件类型
+          opts.use_ft_detect = opts.use_ft_detect == false and false or bad_files(filepath)
+          previewers.buffer_previewer_maker(filepath, bufnr, opts)
+        end
+      end)
+    end,
     file_ignore_patterns = { "node_modules" },
     sorting_strategy = "ascending",
     layout_config = {

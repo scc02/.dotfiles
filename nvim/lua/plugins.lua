@@ -530,6 +530,12 @@ require("lazy").setup({
       local actions = require("fzf-lua").actions
       map('n', ',f', ":FzfLua files<cr>")
       require("fzf-lua").setup({
+        previewers = {
+          builtin = {
+            syntax_limit_b = 1024 * 100, -- 100K
+            limit_b        = 1024 * 1024 * 10
+          }
+        },
         window = {
           preview = {
             hidden = true,
@@ -537,6 +543,7 @@ require("lazy").setup({
         },
         files = {
           no_header = true,
+          cwd_prompt = false
           -- previewer = false,
           -- no_ignore = true
         },
@@ -549,7 +556,9 @@ require("lazy").setup({
             ["<a-p>"] = "toggle-preview",
           },
           fzf = {
-            ["alt-p"] = "toggle-preview",
+            ["alt-p"]  = "toggle-preview",
+            ["ctrl-f"] = "half-page-down",
+            ["ctrl-b"] = "half-page-up",
           }
         },
         actions = {
