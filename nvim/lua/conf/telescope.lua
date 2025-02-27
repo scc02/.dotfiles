@@ -174,7 +174,7 @@ end
 
 map('n', '<leader>fd', M.telescope_find_word_in_specifeid_file) -- map('n', '<leader>fo', M.reveal_in_finder)
 
-map('n', ',w', telescope_find_word)
+map('n', '<leader>fw', telescope_find_word)
 map('n', '<leader>fe', telescope_find_word_with_args)
 map('n', '<leader>fm', "<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand('<cword>') }<CR>")
 -- map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({theme = dropdown})<CR>")

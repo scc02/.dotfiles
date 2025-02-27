@@ -526,9 +526,11 @@ require("lazy").setup({
   {
     "ibhagwan/fzf-lua",
     dependencies = { "echasnovski/mini.icons" },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       local actions = require("fzf-lua").actions
       map('n', ',f', ":FzfLua files<cr>")
+      map('n', ',w', ":FzfLua grep<cr>")
       require("fzf-lua").setup({
         previewers = {
           builtin = {
@@ -543,7 +545,7 @@ require("lazy").setup({
         },
         files = {
           no_header = true,
-          cwd_prompt = false
+          cwd_prompt = false,
           -- previewer = false,
           -- no_ignore = true
         },
