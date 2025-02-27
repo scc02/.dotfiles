@@ -17,7 +17,13 @@ alias ps "python3 -m http.server"
 # alias nv '/Applications/neovide.app/Contents/MacOS/neovide'
 alias nv 'neovide --frame=none'
 
-alias gl 'git log --pretty=format:"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN%Cred%d %Creset%s" --graph'
+function glp
+    git log --pretty=format:"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN%Cred%d %Creset%s" --graph --date=format:"%Y/%m/%d %H:%M" | fzf --ansi --reverse --preview "echo {} | grep -o \"[a-f0-9]\\{7\\}\" | head -1 | xargs -I {} git -c color.ui=always show {}" --bind "ctrl-u:half-page-up,ctrl-d:half-page-down"
+end
+
+function gl
+    git log --pretty=format:"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN%Cred%d %Creset%s" --graph --date=format:"%Y/%m/%d %H:%M" | fzf --ansi --reverse --bind "ctrl-u:half-page-up,ctrl-d:half-page-down"
+end
 alias gs 'git status'
 alias gb 'git branch'
 alias ssr "http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890"
@@ -109,6 +115,9 @@ set -Ux FZF_DEFAULT_OPTS "\
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --color=selected-bg:#45475a \
 --multi"
+
+# fix esc slow
+export ESCDELAY="1"
 
 # set -Ux FZF_DEFAULT_OPTS "\
 # --color=bg+:-1,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \

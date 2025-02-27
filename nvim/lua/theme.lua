@@ -21,7 +21,7 @@ require("catppuccin").setup {
     }
   end,
   compile = {
-    enabled = false,
+    enabled = true,
     path = vim.fn.stdpath "cache" .. "/catppuccin"
   },
   integrations = {
