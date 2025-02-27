@@ -538,14 +538,19 @@ require("lazy").setup({
             limit_b        = 1024 * 1024 * 10
           }
         },
-        window = {
-          preview = {
-            hidden = true,
-          }
-        },
+        -- winopts = {
+        --   preview = {
+        --     hidden = true,
+        --   }
+        -- },
         files = {
           no_header = true,
           cwd_prompt = false,
+          winopts = {
+            preview = {
+              hidden = "hidden", -- 默认隐藏
+            },
+          },
           -- previewer = false,
           -- no_ignore = true
         },
