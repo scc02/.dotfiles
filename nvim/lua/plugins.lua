@@ -532,6 +532,12 @@ require("lazy").setup({
       map('n', ',f', ":FzfLua files<cr>")
       map('n', ',w', ":FzfLua grep<cr>")
       require("fzf-lua").setup({
+        -- winopts = {
+        --   on_create = function()
+        --     vim.cmd [[highlight FzfCursor gui=vert]]
+        --     vim.cmd [[setlocal winhighlight=TermCursor:FzfCursor]]
+        --   end
+        -- },
         previewers = {
           builtin = {
             syntax_limit_b = 1024 * 100, -- 100K
