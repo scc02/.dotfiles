@@ -11,7 +11,6 @@ alias p 'pnpm'
 alias ll " eza --icons -l --no-user "
 alias ls " eza --icons -l --no-user "
 alias ssr "http_proxy=http://127.0.0.1:1087 https_proxy=http://127.0.0.1:1087"
-alias ff "fzf | xargs nvim"
 
 alias ps "python3 -m http.server"
 # alias nv '/Applications/neovide.app/Contents/MacOS/neovide'
@@ -53,8 +52,8 @@ set -g PATH /Users/shichencong/.local/share/bob/nvim-bin $PATH
 #
 
 # 测试
-set -x PATH /Users/scc/rust-project/t-filter/target/release $PATH
-alias ff 't-filter'
+# set -x PATH /Users/scc/rust-project/t-filter/target/release $PATH
+# alias ff 't-filter'
 
 # set -x PATH /Users/scc/rust-project/fish-demo/target/release $PATH
 
@@ -107,7 +106,9 @@ set -Ux EDITOR $VISUAL   # 使 $EDITOR 指向 $VISUAL
 
 export GITHUB_TOKEN="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"
 
-alias fish='set selected (fzf --preview="bat --color=always {} --theme  Visual\ Studio\ Dark+"); and test -n "$selected"; and nvim "$selected"'
+alias ff='set selected (fzf --preview="bat --color=always {} --theme  Visual\ Studio\ Dark+"); and test -n "$selected"; and nvim "$selected"'
+# alias ff "fzf | xargs nvim"
+
 
 set -Ux FZF_DEFAULT_OPTS "\
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
