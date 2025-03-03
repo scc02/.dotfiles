@@ -24,10 +24,6 @@ require("catppuccin").setup {
     enabled = true,
     path = vim.fn.stdpath "cache" .. "/catppuccin"
   },
-  integrations = {
-    blink_cmp = true,
-    fzf = true,
-  }
   -- transparent_background = true
 }
 
