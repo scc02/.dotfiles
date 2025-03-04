@@ -75,7 +75,6 @@ require("lazy").setup({
       })
     end
   },
-  -- { 'mhartington/formatter.nvim',  config = function() require('conf.formatter') end, event = 'BufEnter' },
   {
     'akinsho/git-conflict.nvim',
     config = function()
