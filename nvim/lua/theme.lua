@@ -22,9 +22,12 @@ require("catppuccin").setup {
       CursorLine = {
         bg = u.vary_color(
           { latte = u.lighten(colors.mantle, 1, colors.base) },
-          u.darken(colors.surface0, 1.1, colors.base)
+          u.darken(colors.surface0, 1.5, colors.base)
         ),
       },
+      GitSignsCurrentLineBlame = {
+        fg = u.darken(colors.surface1, 2, colors.base),
+      }
     }
   end,
   compile = {
