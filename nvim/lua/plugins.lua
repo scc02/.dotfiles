@@ -584,7 +584,6 @@ require("lazy").setup({
       })
     end
   },
-
   --[[ {
     'hrsh7th/nvim-cmp',
     config = function()
