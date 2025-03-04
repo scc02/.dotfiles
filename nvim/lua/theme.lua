@@ -1,4 +1,5 @@
 -- vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
+local u = require("catppuccin.utils.colors")
 require("catppuccin").setup {
   -- catppuccin_flavour = 'macchiato',
   custom_highlights = function(colors)
@@ -17,7 +18,13 @@ require("catppuccin").setup {
       },
       BlinkCmpDocSeparator = {
         bg = colors.base
-      }
+      },
+      CursorLine = {
+        bg = u.vary_color(
+          { latte = u.lighten(colors.mantle, 1, colors.base) },
+          u.darken(colors.surface0, 1.1, colors.base)
+        ),
+      },
     }
   end,
   compile = {
