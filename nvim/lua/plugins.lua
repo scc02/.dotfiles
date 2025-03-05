@@ -427,7 +427,7 @@ require("lazy").setup({
       completion = {
         list = {
           selection = {
-            preselect = true
+            -- preselect = true
           }
         },
         accept = {
