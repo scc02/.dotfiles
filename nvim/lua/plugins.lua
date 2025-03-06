@@ -432,7 +432,7 @@ require("lazy").setup({
         },
         accept = {
           auto_brackets = {
-            enabled = false,
+            enabled = true,
           },
         },
         menu = {
@@ -557,7 +557,7 @@ require("lazy").setup({
             },
           },
           -- previewer = false,
-          -- no_ignore = true
+          no_ignore = true
         },
         grep = {
           no_header = true,
