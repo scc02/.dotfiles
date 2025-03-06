@@ -131,7 +131,11 @@ lualine.setup {
       -- 'filetype'
     },
     lualine_y = { 'progress' },
-    lualine_z = {}
+    lualine_z = { function()
+      local current_dir = vim.fn.getcwd()
+      local folder_name = vim.fn.fnamemodify(current_dir, ':t')
+      return folder_name
+    end }
   },
   inactive_sections = {
     lualine_c = { {

@@ -32,7 +32,7 @@ require("catppuccin").setup {
         ),
       },
       GitSignsCurrentLineBlame = {
-        fg = u.darken(colors.surface1, 2, colors.base),
+        fg = u.darken(colors.surface1, 1.8, colors.base),
       }
     }
   end,
