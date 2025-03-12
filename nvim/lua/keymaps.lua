@@ -232,7 +232,7 @@ map('n', 'mr', '<Cmd>BufferLineMoveNext<CR>')
 map('n', 'ml', '<Cmd>BufferLineMovePrev<CR>')
 
 -- fix删除文件后切换buffer，报错E211: File "xxx" no longer available
-local cleanup_invalid_buffers = function (type)
+local cleanup_invalid_buffers = function(type)
   local buffers = vim.api.nvim_list_bufs()
   for _, buf in ipairs(buffers) do
     if vim.api.nvim_buf_is_loaded(buf) then
@@ -240,13 +240,13 @@ local cleanup_invalid_buffers = function (type)
       if bufname ~= "" and vim.fn.filereadable(bufname) == 0 then
         vim.api.nvim_buf_delete(buf, { force = true })
         vim.cmd('lua vim.o.tabline = "%!v:lua.nvim_bufferline()"')
-        vim.defer_fn(function()
+        vim.schedule(function()
           if type == 1 then
             vim.cmd([[BufferLineCycleNext]])
           else
             vim.cmd([[BufferLineCyclePrev]])
           end
-        end, 1) -- 1 毫秒延迟，避免 buffer 处理冲突
+        end)
       end
     end
   end
