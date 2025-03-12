@@ -230,10 +230,36 @@ map('n', 'cl', '<Cmd>BufferLineCloseLeft<CR>', { noremap = true, silent = true }
 -- map('n', 'c;', '<cmd>BufferCloseAllButPinned<CR>')
 map('n', 'mr', '<Cmd>BufferLineMoveNext<CR>')
 map('n', 'ml', '<Cmd>BufferLineMovePrev<CR>')
-map("n", "<TAB>", "<cmd>BufferLineCycleNext<CR>")
-map("v", "<TAB>", "<cmd>BufferLineCycleNext<CR>")
-map("n", "<leader><TAB>", "<cmd>BufferLineCyclePrev<CR>")
-map("v", "<leader><TAB>", "<cmd>BufferLineCyclePrev<CR>")
+
+-- fix删除文件后切换buffer，报错E211: File "xxx" no longer available
+local cleanup_invalid_buffers = function (type)
+  local buffers = vim.api.nvim_list_bufs()
+  for _, buf in ipairs(buffers) do
+    if vim.api.nvim_buf_is_loaded(buf) then
+      local bufname = vim.api.nvim_buf_get_name(buf)
+      if bufname ~= "" and vim.fn.filereadable(bufname) == 0 then
+        vim.api.nvim_buf_delete(buf, { force = true })
+        vim.cmd('lua vim.o.tabline = "%!v:lua.nvim_bufferline()"')
+        vim.defer_fn(function()
+          if type == 1 then
+            vim.cmd([[BufferLineCycleNext]])
+          else
+            vim.cmd([[BufferLineCyclePrev]])
+          end
+        end, 1) -- 1 毫秒延迟，避免 buffer 处理冲突
+      end
+    end
+  end
+end
+
+map({ "n", "v" }, "<TAB>", function()
+  cleanup_invalid_buffers(1)
+  vim.cmd([[BufferLineCycleNext]])
+end)
+map({ "n", "v" }, "<leader><TAB>", function()
+  cleanup_invalid_buffers(2)
+  vim.cmd([[BufferLineCyclePrev]])
+end)
 -- map('n', '<leader>;', "<cmd>BufferLineTogglePin<CR>")
 -- map('n', 'c;', "<cmd>BufferLineGroupClose ungrouped<CR>")
 -- map('n', '<leader>;', "<Cmd>BufferPin<CR>", { nowait = true })
