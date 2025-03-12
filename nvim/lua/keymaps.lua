@@ -71,7 +71,7 @@ map('n', 'tc', ':tabclose<CR>')
 map('n', 'to', ':tabonly<CR>')
 
 -- map('n', '<leader>e', ':Explore <bar> :sil! /<C-R>=expand("%:t")<CR><CR> :noh<CR> <Left><Left>')
-map('n', '<leader>e', function()
+map({'n','v'}, '<leader>e', function()
   local cur_file = vim.fn.expand('%:t')
   vim.cmd.Ex()
 
