@@ -564,7 +564,7 @@ require("lazy").setup({
             },
           },
           -- previewer = false,
-          no_ignore = true
+          -- no_ignore = true
         },
         grep = {
           no_header = true,
