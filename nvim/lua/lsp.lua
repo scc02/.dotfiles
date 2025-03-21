@@ -2,7 +2,7 @@ local nvim_lsp = require('lspconfig')
 local map = require('util.map')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 require 'lsp-conf.tsserver'.init(capabilities)
-local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint' }
+local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint','sourcekit' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,

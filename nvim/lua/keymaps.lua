@@ -38,13 +38,13 @@ end)
 --   end)
 -- end)
 
+map('n',',r',":LspRestart<CR>")
 
 map('n', 'g;', 'g;')
 
 map('n', 'gq', ":q<CR>")
 map('n', 'mt', '%')
 map('v', 'mt', '%')
--- map('n', ',r', ":LiveServer start<CR>")
 
 map('n', 'yw', 'yiw')
 map('n', 'cw', '"_ciw')
@@ -130,8 +130,9 @@ end)
 
 map('n', "<BS>", ':noh<CR>')
 map('i', "<A-s>", "<Esc> :w<CR>")
--- map('i', ";w", "<Esc>:w<cr>")
+map('i', "<D-s>", "<Esc> :w<CR>")
 map('n', "<A-s>", ":w<CR>")
+map('n', "<D-s>", ":w<CR>")
 map('n', "<leader>,", ":split<bar>below<bar>resize 10<bar>term<CR>")
 map('n', '[[', "<Cmd>call search('[([{<]')<CR>")
 

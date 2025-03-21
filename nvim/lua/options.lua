@@ -100,3 +100,6 @@ let g:netrw_list_hide=ghregex
 vim.cmd [[
   hi Folded guibg=NONE guifg=NONE
 ]]
+
+-- 配置显示排序
+vim.g.netrw_sort_sequence = '[[\\/]$,*]'

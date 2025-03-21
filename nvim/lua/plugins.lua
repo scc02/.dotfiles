@@ -50,12 +50,24 @@ require("lazy").setup({
     config = function() require('conf.diffview') end,
     cmd = { 'DiffviewFileHistory', 'DiffviewOpen' }
   },
+  -- {
+  --   'norcalli/nvim-colorizer.lua',
+  --   config=function ()
+  --     require 'colorizer'.setup()
+  --   end
+  -- },
   {
     "brenoprata10/nvim-highlight-colors",
     config = function()
       require('nvim-highlight-colors').setup({})
     end,
-    event = 'BufEnter'
+    event = 'BufEnter',
+    cond = function()
+
+      -- https://github.com/brenoprata10/nvim-highlight-colors/issues/123
+      local cwd = vim.fn.getcwd()
+      return not cwd:match("expo")
+    end
   },
   {
     "windwp/nvim-ts-autotag",
