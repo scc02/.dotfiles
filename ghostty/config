@@ -1,9 +1,12 @@
-font-family = "Maple Mono NF CN"
-font-size = 15
+font-family = "Maple Mono Normal Nl CN"
+font-size = 14
 macos-option-as-alt = true
 macos-titlebar-style = hidden
 theme = catppuccin-mocha
-adjust-cell-height = 2
+adjust-cell-height = 1
 working-directory = true
 cursor-text = #131517
-keybind = cmd+n=new_tab
+maximize = true
+
+keybind = shift+enter=new_split:up
+# keybind = ctrl+s>l=new_split:right

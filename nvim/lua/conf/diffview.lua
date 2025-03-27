@@ -16,6 +16,12 @@ require("diffview").setup({
       ["q"]     = actions.close,
     },
   },
+  -- file_panel = {
+  --   win_config = {
+  --     position = "bottom", -- 将目录面板放在屏幕下方
+  --     height = 16,         -- 设置面板高度（可以根据需要调整）
+  --   },
+  -- },
   file_history_panel = {
     win_config = {
       height = 10

@@ -59,11 +59,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end
       -- 有错误的时候跳转错误，没有错误则跳转信息提示
       if has_error then
-        -- vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true })
-        vim.diagnostic.goto_prev({ float = { max_width = 100 }, severity = vim.diagnostic.severity.ERROR })
+        vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true })
       else
-        vim.diagnostic.goto_prev({ float = { max_width = 100 } })
-        -- vim.diagnostic.jump({ count = -1, float = true })
+        vim.diagnostic.jump({ count = -1, float = true })
       end
     end)
     map('n', ']d', function()
@@ -76,11 +74,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
       end
       if has_error then
-        vim.diagnostic.goto_next({ float = { max_width = 100 }, severity = vim.diagnostic.severity.ERROR })
-        -- vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
+        vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
       else
-        vim.diagnostic.goto_next({ float = { max_width = 100 } })
-        -- vim.diagnostic.jump({ count = 1, float = true })
+        vim.diagnostic.jump({ count = 1, float = true })
       end
     end)
   end,
@@ -122,14 +118,14 @@ local config = {
   float = {
     focusable = true,
     style = "minimal",
-    border = "rounded",
+    -- border = "rounded",
     source = "always",
     header = "",
     prefix = "",
   },
 }
 
-vim.diagnostic.config(config)
+ vim.diagnostic.config(config)
 
 -- require 'lsp-conf.eslint'.init()
 
@@ -137,6 +133,6 @@ vim.diagnostic.config(config)
 require('lspconfig.ui.windows').default_options.border = 'single'
 
 -- -- 全局统一修改Hover的信息框
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
-})
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+--   border = "rounded",
+-- })

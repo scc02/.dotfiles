@@ -1,4 +1,5 @@
 local options = {
+  winborder = 'rounded',
   -- -- 侧边滚动
   -- sidescrolloff = 5,
   -- -- 上下滚动
