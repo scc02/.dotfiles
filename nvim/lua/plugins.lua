@@ -63,7 +63,6 @@ require("lazy").setup({
     end,
     event = 'BufEnter',
     cond = function()
-
       -- https://github.com/brenoprata10/nvim-highlight-colors/issues/123
       local cwd = vim.fn.getcwd()
       return not cwd:match("expo")
@@ -431,6 +430,15 @@ require("lazy").setup({
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      cmdline = {
+        completion = {
+          menu = { auto_show = true },
+          ghost_text = { enabled = false }
+        },
+        keymap = {
+          ["<CR>"] = { "select_and_accept", "fallback" }
+        }
+      },
       snippets = { preset = 'luasnip' },
       -- appearance = {
       --   use_nvim_cmp_as_default = true,
@@ -451,7 +459,7 @@ require("lazy").setup({
         },
         accept = {
           auto_brackets = {
-            enabled = true,
+            -- enabled = true,
           },
         },
         menu = {
@@ -602,31 +610,6 @@ require("lazy").setup({
       })
     end
   },
-  --[[ {
-    'hrsh7th/nvim-cmp',
-    config = function()
-      require('conf.cmp')
-    end,
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    -- event = { 'BufRead' },
-    dependencies = {
-      { "onsails/lspkind.nvim" },
-      {
-        "L3MON4D3/LuaSnip",
-        version = "v2.3.0",
-        build = "make install_jsregexp",
-        config = function()
-          require('conf.luasnip')
-        end
-      },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'hrsh7th/cmp-cmdline' },
-    }
-  }, ]]
-
 }, {
   defaults = {
     lazy = false

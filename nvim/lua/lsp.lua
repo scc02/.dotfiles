@@ -6,15 +6,21 @@ local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lu
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
-    settings = {
-      tailwindCSS = {
-        experimental = {
-          configFile = './node_modules/@dian/vite-preset-react/lib/tailwindcss.config.js'
-        }
+    single_file_support = true,
+  }
+end
+
+nvim_lsp["tailwindCSS"].setup {
+  capabilities = capabilities,
+  root_dir = vim.fn.getcwd(),
+  settings = {
+    tailwindCSS = {
+      experimental = {
+        configFile = './node_modules/@dian/vite-preset-react/lib/tailwindcss.config.js'
       }
     }
   }
-end
+}
 
 -- nvim_lsp.denols.setup {
 --   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
@@ -96,7 +102,7 @@ vim.diagnostic.config({
   --   current_line = true,
   --   prefix = "●",
   -- },
-  virtual_lines = true,
+  virtual_lines = false,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = '󰅚 ',
