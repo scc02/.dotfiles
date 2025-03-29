@@ -1,4 +1,3 @@
-local map = require "util.map"
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -432,8 +431,8 @@ require("lazy").setup({
     opts = {
       cmdline = {
         completion = {
-          menu = { auto_show = true },
-          ghost_text = { enabled = false }
+          -- menu = { auto_show = true },
+          -- ghost_text = { enabled = false }
         },
         keymap = {
           ["<CR>"] = { "select_and_accept", "fallback" }
@@ -554,60 +553,7 @@ require("lazy").setup({
     dependencies = { "echasnovski/mini.icons" },
     -- dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      local actions = require("fzf-lua").actions
-      map('n', ',f', ":FzfLua files<cr>")
-      map('n', ',w', ":FzfLua grep<cr>")
-      require("fzf-lua").setup({
-        -- winopts = {
-        --   on_create = function()
-        --     vim.cmd [[highlight FzfCursor gui=vert]]
-        --     vim.cmd [[setlocal winhighlight=TermCursor:FzfCursor]]
-        --   end
-        -- },
-        previewers = {
-          builtin = {
-            syntax_limit_b = 1024 * 100, -- 100K
-            limit_b        = 1024 * 1024 * 10
-          }
-        },
-        -- winopts = {
-        --   preview = {
-        --     hidden = true,
-        --   }
-        -- },
-        files = {
-          no_header = true,
-          cwd_prompt = false,
-          winopts = {
-            preview = {
-              hidden = "hidden", -- 默认隐藏
-            },
-          },
-          -- previewer = false,
-          -- no_ignore = true
-        },
-        grep = {
-          no_header = true,
-          -- no_ignore = true,
-        },
-        keymap = {
-          builtin = {
-            ["<a-p>"] = "toggle-preview",
-          },
-          fzf = {
-            ["alt-p"]  = "toggle-preview",
-            ["ctrl-f"] = "half-page-down",
-            ["ctrl-b"] = "half-page-up",
-          }
-        },
-        actions = {
-          files = {
-            ["alt-i"] = actions.toggle_ignore,
-            ["alt-o"] = actions.toggle_hidden,
-            ["enter"] = actions.file_edit_or_qf,
-          }
-        }
-      })
+      require('conf.fzf-lua')
     end
   },
 }, {
