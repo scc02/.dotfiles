@@ -431,8 +431,8 @@ require("lazy").setup({
     opts = {
       cmdline = {
         completion = {
-          -- menu = { auto_show = true },
-          -- ghost_text = { enabled = false }
+          menu = { auto_show = true },
+          ghost_text = { enabled = false }
         },
         keymap = {
           ["<CR>"] = { "select_and_accept", "fallback" }
@@ -527,6 +527,12 @@ require("lazy").setup({
           snippets = {
             min_keyword_length = 1,
             score_offset = 4,
+          },
+          cmdline = {
+            min_keyword_length = 3,
+            -- should_show_items = function(ctx)
+            --   return true
+            -- end
           },
           lsp = {
             min_keyword_length = 0,
