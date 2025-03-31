@@ -529,10 +529,13 @@ require("lazy").setup({
             score_offset = 4,
           },
           cmdline = {
-            min_keyword_length = 3,
-            -- should_show_items = function(ctx)
-            --   return true
-            -- end
+            should_show_items = function(ctx)
+              local arr = { "w", "wq", "q" }
+              if vim.tbl_contains(arr, ctx.line) then
+                return false
+              end
+              return true
+            end
           },
           lsp = {
             min_keyword_length = 0,
