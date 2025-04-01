@@ -530,7 +530,7 @@ require("lazy").setup({
           },
           cmdline = {
             should_show_items = function(ctx)
-              local arr = { "w", "wq", "q" }
+              local arr = { "w", "wq", "q", "e" }
               if vim.tbl_contains(arr, ctx.line) then
                 return false
               end

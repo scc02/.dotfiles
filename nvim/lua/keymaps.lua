@@ -38,7 +38,7 @@ end)
 --   end)
 -- end)
 
-map('n',',r',":LspRestart<CR>")
+map('n', ',r', ":LspRestart<CR>")
 
 map('n', 'g;', 'g;')
 
@@ -71,7 +71,7 @@ map('n', 'tc', ':tabclose<CR>')
 map('n', 'to', ':tabonly<CR>')
 
 -- map('n', '<leader>e', ':Explore <bar> :sil! /<C-R>=expand("%:t")<CR><CR> :noh<CR> <Left><Left>')
-map({'n','v'}, '<leader>e', function()
+map({ 'n', 'v' }, '<leader>e', function()
   local cur_file = vim.fn.expand('%:t')
   vim.cmd.Ex()
 
@@ -236,6 +236,14 @@ map('n', 'ml', '<Cmd>BufferLineMovePrev<CR>')
 local cleanup_invalid_buffers = function(type)
   local buffers = vim.api.nvim_list_bufs()
   for _, buf in ipairs(buffers) do
+    local buf = vim.api.nvim_get_current_buf()
+
+    -- 检查缓冲区的 buflisted 选项
+    local is_listed = vim.api.nvim_buf_get_option(buf, 'buflisted')
+    if is_listed == false then
+      return
+    end
+
     if vim.api.nvim_buf_is_loaded(buf) then
       local bufname = vim.api.nvim_buf_get_name(buf)
       if bufname ~= "" and vim.fn.filereadable(bufname) == 0 then
