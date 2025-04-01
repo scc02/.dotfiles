@@ -21,7 +21,7 @@ require('lspconfig').sourcekit.setup {
     local ios_dir = current_dir .. '/ios'
 
     if vim.fn.isdirectory(ios_dir) == 1 then
-      filename = current_dir .. '/ios'
+      filename = current_dir .. '/ios' -- /Users/shichencong/workplace/2025/expo/ios
     end
     -- local file = io.open("a.log", "w")
     -- file:write(filename)
