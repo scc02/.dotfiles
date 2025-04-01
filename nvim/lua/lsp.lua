@@ -1,14 +1,39 @@
 local nvim_lsp = require('lspconfig')
+local util = require 'lspconfig.util'
 local map = require('util.map')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 require 'lsp-conf.tsserver'.init(capabilities)
-local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint', 'sourcekit' }
+local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
     single_file_support = true,
   }
 end
+
+require('lspconfig').sourcekit.setup {
+  cmd = { 'sourcekit-lsp' },
+  capabilities = capabilities,
+  filetypes = { 'swift', 'objc', 'objcpp', 'c', 'cpp' },
+  root_dir = function(filename)
+    -- fix expo项目主入口在ios文件夹里
+    local current_dir = vim.fn.getcwd()
+    local ios_dir = current_dir .. '/ios'
+
+    if vim.fn.isdirectory(ios_dir) == 1 then
+      filename = current_dir .. '/ios'
+    end
+    -- local file = io.open("a.log", "w")
+    -- file:write(filename)
+    -- file:close()
+
+    return util.root_pattern 'buildServer.json' (filename)
+        or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+        -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
+        or util.root_pattern('compile_commands.json', 'Package.swift')(filename)
+        or vim.fs.dirname(vim.fs.find('.git', { path = filename, upward = true })[1])
+  end,
+}
 
 nvim_lsp["tailwindCSS"].setup {
   capabilities = capabilities,
