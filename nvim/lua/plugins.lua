@@ -58,14 +58,23 @@ require("lazy").setup({
   {
     "brenoprata10/nvim-highlight-colors",
     config = function()
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+          if client and client.name == 'sourcekit' then
+            client.server_capabilities.colorProvider = false
+          end
+        end,
+      })
       require('nvim-highlight-colors').setup({})
     end,
     event = 'BufEnter',
-    cond = function()
-      -- https://github.com/brenoprata10/nvim-highlight-colors/issues/123
-      local cwd = vim.fn.getcwd()
-      return not cwd:match("expo")
-    end
+    -- cond = function()
+    --   -- https://github.com/brenoprata10/nvim-highlight-colors/issues/123
+    --   local cwd = vim.fn.getcwd()
+    --   return not cwd:match("expo")
+    -- end
   },
   {
     "windwp/nvim-ts-autotag",
@@ -93,7 +102,7 @@ require("lazy").setup({
     event = 'BufEnter'
   },
 
-  {
+  --[[ {
     'nvim-telescope/telescope.nvim',
     config = function()
       require('conf.telescope')
@@ -110,7 +119,7 @@ require("lazy").setup({
         -- end
       },
     }
-  },
+  }, ]]
   {
     "akinsho/toggleterm.nvim",
     keys = { "<C-\\>" },
@@ -118,7 +127,13 @@ require("lazy").setup({
   },
 
   { "lewis6991/gitsigns.nvim", config = function() require('conf.gitsign') end,   event = 'VeryLazy' },
-  { "tpope/vim-fugitive",      cmd = 'Git' },
+  {
+    "tpope/vim-fugitive",
+    cmd = 'Git',
+    config = function()
+      require('conf.fugitive')
+    end
+  },
 
   {
     'nvim-treesitter/nvim-treesitter',
@@ -431,11 +446,11 @@ require("lazy").setup({
     opts = {
       cmdline = {
         completion = {
-          menu = { auto_show = true },
-          ghost_text = { enabled = false }
+          -- menu = { auto_show = true },
+          -- ghost_text = { enabled = false }
         },
         keymap = {
-          ["<CR>"] = { "select_and_accept", "fallback" }
+          -- ["<CR>"] = { "select_and_accept", "fallback" }
         }
       },
       snippets = { preset = 'luasnip' },
@@ -528,15 +543,15 @@ require("lazy").setup({
             min_keyword_length = 1,
             score_offset = 4,
           },
-          cmdline = {
-            should_show_items = function(ctx)
-              local arr = { "w", "wq", "q", "e" }
-              if vim.tbl_contains(arr, ctx.line) then
-                return false
-              end
-              return true
-            end
-          },
+          -- cmdline = {
+          --   should_show_items = function(ctx)
+          --     local arr = { "w", "wq", "q", "e" }
+          --     if vim.tbl_contains(arr, ctx.line) then
+          --       return false
+          --     end
+          --     return true
+          --   end
+          -- },
           lsp = {
             min_keyword_length = 0,
             score_offset = 3,

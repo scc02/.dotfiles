@@ -38,7 +38,9 @@ map('n', '<leader>fd', function()
   local path = vim.api.nvim_exec2("echo b:netrw_curdir", { output = true }).output;
   local file = vim.api.nvim_exec2("echo expand('<cfile>')", { output = true }).output;
   local fullPath = path .. '/' .. file;
-  require('conf.telescope').telescope_find_word_in_specifeid_file(fullPath)
+  require("fzf-lua").grep({
+    cwd = fullPath, -- 指定搜索目录
+  })
 end, { remap = true, buffer = true })
 -- reveal in finder
 map('n', '<leader>fo', function()

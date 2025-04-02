@@ -71,7 +71,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', 'gd', vim.lsp.buf.definition, bufopts)
     map('n', 'K', vim.lsp.buf.hover, bufopts)
     map('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    map('n', '<space>.', vim.lsp.buf.code_action, bufopts)
+    -- map('n', '<space>.', vim.lsp.buf.code_action, bufopts)
     map('n', '<space>gi', '<cmd>Trouble lsp_implementations<cr>', bufopts)
     map('n', 'gr', '<cmd>Trouble lsp_references<cr>', bufopts)
     map('n', '<leader>gr', function() vim.lsp.buf.references({ includeDeclaration = false }) end, bufopts)

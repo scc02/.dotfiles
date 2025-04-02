@@ -172,7 +172,7 @@ local function telescope_find_word_with_args()
   end
 end
 
-map('n', '<leader>fd', M.telescope_find_word_in_specifeid_file) -- map('n', '<leader>fo', M.reveal_in_finder)
+-- map('n', '<leader>fd', M.telescope_find_word_in_specifeid_file) -- map('n', '<leader>fo', M.reveal_in_finder)
 
 map('n', '<leader>fw', telescope_find_word)
 map('n', '<leader>fe', telescope_find_word_with_args)
@@ -191,9 +191,8 @@ map('n', '<leader>fg', "<cmd>Telescope git_status<CR>")
 map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').git_branches()<CR>")
 -- map('n', '<leader>fch', "<cmd>lua require('telescope.builtin').command_history()<CR>")
 -- map('n', '<leader>fi', "<cmd>lua require('telescope.builtin').registers()<CR>")
-map('n', ',o', "<cmd>Telescope oldfiles only_cwd=true<CR>")
-require("telescope").load_extension("ui-select")
-
+-- map('n', ',o', "<cmd>Telescope oldfiles only_cwd=true<CR>")
+-- require("telescope").load_extension("ui-select")
 vim.api.nvim_create_autocmd("User", {
   pattern = "TelescopePreviewerLoaded",
   callback = function(args)
