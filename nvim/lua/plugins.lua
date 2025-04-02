@@ -575,6 +575,7 @@ require("lazy").setup({
   {
     "ibhagwan/fzf-lua",
     dependencies = { "echasnovski/mini.icons" },
+    event = 'BufRead',
     -- dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require('conf.fzf-lua')
