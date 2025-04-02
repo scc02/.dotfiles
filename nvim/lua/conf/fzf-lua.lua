@@ -11,9 +11,9 @@ map('n', '<leader>fe', function()
     local args = vim.fn.input("Args > ")
     local arg_len = #args
     if arg_len ~= 0 then
-      require("fzf-lua").live_grep({ 
+      require("fzf-lua").live_grep({
         search = word,
-        rg_opts = args, 
+        rg_opts = args,
         prompt = "Grep> "
       })
     end
@@ -105,35 +105,27 @@ require("fzf-lua").setup({
   }
 })
 
+vim.keymap.set("n", "<leader>fg", function()
+  local word1 = vim.fn.input("Enter first word: ")
+  if word1 == "" then return end -- 如果输入为空，则退出
 
-local fzf = require("fzf-lua")
+  local word2 = vim.fn.input("Enter second word: ")
+  if word2 == "" then return end -- 如果输入为空，则退出
 
-local function lsp_code_actions_bottom()
-  fzf.lsp_code_actions({
-    winopts = {
-      relative = "cursor",
-      row = 1.0,
-      col = 0.5,
-      width = 0.4,
-      height = 0.4,
+  local cmd = string.format(
+    "rg --hidden --iglob !.git --files-with-matches %s | xargs rg --with-filename --column --line-number --no-heading -e %s",
+    vim.fn.shellescape(word1), -- 转义第一个词以防止 shell 注入
+    vim.fn.shellescape(word2)  -- 转义第二个词
+  )
+
+  require("fzf-lua").fzf_exec(cmd, {
+    actions = {
+      -- 当用户按 Enter 选择结果时触发
+      ["enter"] = function(selected, opts)
+        print("Selected: " .. selected[1])
+        require("fzf-lua").actions.file_edit_or_qf(selected, opts)
+      end,
     },
-    previewer = false,
+    previewer = "builtin",                 -- 使用内置预览器显示上下文（可选）
   })
-end
-
--- 绑定到命令
--- vim.api.nvim_create_user_command("LspCodeActionsBottom", lsp_code_actions_bottom, {})
--- map('n', '<space>.', lsp_code_actions_bottom)
-
--- Add table.join function
-local function table_join(tbl, sep)
-  sep = sep or " "
-  local result = ""
-  for i, v in ipairs(tbl) do
-    if i > 1 then
-      result = result .. sep
-    end
-    result = result .. v
-  end
-  return result
-end
+end, { desc = "Live grep for two words" }) -- 键映射描述
