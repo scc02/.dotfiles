@@ -113,7 +113,7 @@ vim.keymap.set("n", "<leader>fg", function()
   if word2 == "" then return end -- 如果输入为空，则退出
 
   local cmd = string.format(
-    "rg --hidden --iglob !.git --files-with-matches %s | xargs rg --with-filename --column --line-number --no-heading -e %s",
+    "rg --hidden --iglob !.git --files-with-matches %s | xargs rg --with-filename --column --line-number --no-heading --color=always -e %s",
     vim.fn.shellescape(word1), -- 转义第一个词以防止 shell 注入
     vim.fn.shellescape(word2)  -- 转义第二个词
   )
@@ -122,10 +122,10 @@ vim.keymap.set("n", "<leader>fg", function()
     actions = {
       -- 当用户按 Enter 选择结果时触发
       ["enter"] = function(selected, opts)
-        print("Selected: " .. selected[1])
         require("fzf-lua").actions.file_edit_or_qf(selected, opts)
       end,
     },
-    previewer = "builtin",                 -- 使用内置预览器显示上下文（可选）
+    previewer = "builtin",
   })
 end, { desc = "Live grep for two words" }) -- 键映射描述
+-- require("fzf-lua").grep({ search = string.format("(?=.*%s)(?=.*%s)", 'half', 'page'), no_esc=true, rg_opts = [[--pcre2 --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e]] })

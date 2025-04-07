@@ -4,6 +4,7 @@ local is_git               = require('util.is_git')
 local get_listed_buf_count = require('util.util').get_listed_buf_count
 
 map('i', '<C-;>', '<C-w>')
+map("n", "<CR>", ":write!<CR>", {})
 
 -- map('n', 'n', 'nzzzv')
 -- map('n', 'N', 'Nzzzv')
