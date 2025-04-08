@@ -47,5 +47,5 @@ map('n', '<leader>fo', function()
   local path = vim.api.nvim_exec2("echo b:netrw_curdir", { output = true }).output;
   local file = vim.api.nvim_exec2("echo expand('<cfile>')", { output = true }).output;
   local fullPath = path .. '/' .. file;
-  require('conf.telescope').reveal_in_finder(fullPath)
+  vim.fn.jobstart('open -R "' .. fullPath .. '"', { detach = true })
 end, { remap = true, buffer = true })

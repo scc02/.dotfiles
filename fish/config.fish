@@ -126,3 +126,8 @@ export ESCDELAY="1"
 # --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 # --color=selected-bg:-1 \
 # --multi"
+
+# 检查是否为 alacritty 终端
+# if test "$TERM" = "xterm-256color"
+#     export TERM=alacritty
+# end
