@@ -11,8 +11,8 @@ map('n', 'K', '<Plug>NetrwMakeDir', { remap = true, buffer = true })
 map('n', '.', 'gh', { remap = true, buffer = true })
 -- delete file
 map('n', 'd', function()
-  local path = vim.api.nvim_exec("echo b:netrw_curdir", true);
-  local file = vim.api.nvim_exec("echo expand('<cfile>')", true);
+  local path = vim.b.netrw_curdir
+  local file = vim.fn.expand("<cfile>")
   local current_path = path .. '/' .. file;
   if vim.fn.isdirectory(current_path) == 1 then
     local confirmation = vim.fn.input("Delete directory " .. current_path .. " and its contents? (y/n): ")
