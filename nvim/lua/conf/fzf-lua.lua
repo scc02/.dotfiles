@@ -58,10 +58,11 @@ require("fzf-lua").setup({
         row = 1.0,    -- 1.0 表示底部（0.0 是顶部）
         col = 0.5,    -- 水平居中
         width = 0.4,  -- 宽度占满屏幕
-        height = 0.2, -- 高度占屏幕的 30%
+        height = 0.15, -- 高度占屏幕的 30%
         relative = "cursor",
+        backdrop = 100
       },
-      -- previewer = false, -- 禁用预览
+      previewer = false, -- 禁用预览
     },
   },
   -- winopts = {
