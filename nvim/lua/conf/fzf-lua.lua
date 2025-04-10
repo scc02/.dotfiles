@@ -30,6 +30,9 @@ end)
 -- end) -- map('n', '<leader>fo', M.reveal_in_finder)
 
 require("fzf-lua").setup({
+  fzf_opts = {
+    ["--cycle"] = "", -- 启用循环
+  },
   -- winopts = {
   --   on_create = function()
   --     vim.cmd [[highlight FzfCursor gui=vert]]
@@ -57,7 +60,7 @@ require("fzf-lua").setup({
       winopts = {
         row = 1.0,    -- 1.0 表示底部（0.0 是顶部）
         col = 0.5,    -- 水平居中
-        width = 0.4,  -- 宽度占满屏幕
+        width = 0.5,  -- 宽度占满屏幕
         height = 0.15, -- 高度占屏幕的 30%
         relative = "cursor",
         backdrop = 100

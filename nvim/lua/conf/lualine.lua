@@ -93,9 +93,9 @@ lualine.setup {
       {
         lsp_reference_count,
         path = 1,
-        color = { fg = '#545970' },
+        color = { fg = '#CDD6F5' },
       },
-      {
+      --[[ {
         function()
           if enable == false then
             return ''
@@ -112,7 +112,7 @@ lualine.setup {
         end,
         path = 1,
         color = { fg = '#545970' },
-      }
+      } ]]
 
       -- {
       --   'filename',
