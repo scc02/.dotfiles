@@ -1,5 +1,6 @@
 ---@diagnostic disable: missing-fields
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local map                  = require('util.map')
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -582,6 +583,11 @@ require("lazy").setup({
       require('conf.fzf-lua')
     end
   },
+  --[[ { 'augmentcode/augment.vim',config = function ()
+      vim.keymap.set('i', '<c-cr>', '<cmd>call augment#Accept()<cr>')
+      -- vim.keymap.set('v', '<c-o>', ':Augment chat ')
+      -- vim.keymap.set('n', '<c-o>', ':Augment chat ')
+  end }, ]]
 }, {
   defaults = {
     lazy = false

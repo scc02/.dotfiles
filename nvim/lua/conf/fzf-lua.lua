@@ -33,16 +33,15 @@ require("fzf-lua").setup({
   fzf_opts = {
     ["--cycle"] = "", -- 启用循环
   },
-  -- winopts = {
-  --   on_create = function()
-  --     vim.cmd [[highlight FzfCursor gui=vert]]
-  --     vim.cmd [[setlocal winhighlight=TermCursor:FzfCursor]]
-  --   end
-  -- },
   oldfiles = {
-    cwd_only = true, -- 限制只显示当前工作目录下的历史文件
+    winopts = {
+      split = "belowright new",
+      border = "none",
+    },
+    cwd_only = true,  -- 限制只显示当前工作目录下的历史文件
     stat_file = true, -- 确保文件存在（可选）
-    prompt = 'History❯ ', -- 自定义提示符（可选）
+    -- prompt = 'History❯ ', -- 自定义提示符（可选）
+    -- cwd_prompt = false,
   },
   previewers = {
     builtin = {
@@ -50,37 +49,30 @@ require("fzf-lua").setup({
       limit_b        = 1024 * 1024 * 10
     }
   },
-  -- winopts = {
-  --   preview = {
-  --     hidden = true,
-  --   }
-  -- },
   lsp = {
     code_actions = {
       winopts = {
-        row = 1.0,    -- 1.0 表示底部（0.0 是顶部）
-        col = 0.5,    -- 水平居中
-        width = 0.5,  -- 宽度占满屏幕
+        split = nil,
+        row = 1.0,     -- 1.0 表示底部（0.0 是顶部）
+        col = 0.5,     -- 水平居中
+        width = 0.5,   -- 宽度占满屏幕
         height = 0.15, -- 高度占屏幕的 30%
         relative = "cursor",
         backdrop = 100
       },
+      prompt = '❯ ',
       previewer = false, -- 禁用预览
     },
   },
-  -- winopts = {
-  --   relative = "editor", -- 相对于整个编辑器
-  --   row = 1.0,     -- 1.0 表示底部（0.0 是顶部）
-  --   col = 0.5,     -- 水平居中
-  --   width = 1.0,   -- 宽度占满屏幕
-  --   height = 0.3,  -- 高度占屏幕的 30%
-  -- },
   files = {
     no_header = true,
     cwd_prompt = false,
     winopts = {
+      split = "belowright new",
+      border = "none",
       preview = {
-        hidden = "hidden", -- 默认隐藏
+        border = 'none'
+        -- hidden = "hidden", -- 默认隐藏
       },
     },
     -- previewer = false,
@@ -88,6 +80,11 @@ require("fzf-lua").setup({
   },
   grep = {
     no_header = true,
+    winopts = {
+      split = "belowright new",
+      border = "none",
+    },
+
     -- no_ignore = true,
   },
   keymap = {

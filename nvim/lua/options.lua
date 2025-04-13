@@ -104,3 +104,5 @@ vim.cmd [[
 
 -- 配置显示排序
 vim.g.netrw_sort_sequence = '[[\\/]$,*]'
+
+vim.g.augment_workspace_folders = { "." }

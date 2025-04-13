@@ -121,7 +121,7 @@ end)
 map('n', '<C-;>', '<C-6>')
 map('n', ',c', ":let @+ = fnamemodify(expand('%'), ':~:.')<CR>")
 
-map('i', '<C-o>', '<Esc>ddO')
+-- map('i', '<C-o>', '<Esc>ddO')
 map('i', '<C-d>', function()
   vim.api.nvim_input('<Esc>')
   vim.cmd.normal('"0yy')
