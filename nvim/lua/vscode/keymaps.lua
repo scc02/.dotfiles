@@ -9,7 +9,7 @@ map('n', '}', "}zz")
 map('n', "<BS>", ':noh<CR>')
 map('n', ";", ":")
 map('i', '<C-d>', '<Esc>yypi')
--- map('i', '<C-o>', '<Esc>ddO')
+map('i', '<C-o>', '<Esc>ddO')
 
 map('n', '[[', "<Cmd>call search('[([{<]')<CR>")
 
