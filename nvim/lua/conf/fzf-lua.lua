@@ -42,7 +42,7 @@ require("fzf-lua").setup({
   oldfiles = {
     cwd_only = true, -- 限制只显示当前工作目录下的历史文件
     stat_file = true, -- 确保文件存在（可选）
-    prompt = 'History❯ ', -- 自定义提示符（可选）
+    prompt = '❯ ', -- 自定义提示符（可选）
   },
   previewers = {
     builtin = {
@@ -65,6 +65,7 @@ require("fzf-lua").setup({
         relative = "cursor",
         backdrop = 100
       },
+      prompt='❯ ',
       previewer = false, -- 禁用预览
     },
   },
