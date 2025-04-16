@@ -131,3 +131,5 @@ export ESCDELAY="1"
 # if test "$TERM" = "xterm-256color"
 #     export TERM=alacritty
 # end
+
+bind \cl accept-autosuggestion
