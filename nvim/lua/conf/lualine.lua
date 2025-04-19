@@ -79,7 +79,7 @@ lualine.setup {
     theme = "catppuccin",
     globalstatus = true,
     section_separators = { left = '', right = '' },
-    component_separators = { left = '', right = '' },
+    component_separators = { left = '|', right = '|' },
     disabled_filetypes = {},
     always_divide_middle = true
   },
@@ -124,6 +124,11 @@ lualine.setup {
       -- 'encoding',
       -- lsp_reference_count,
       'searchcount',
+      {
+        function ()
+          return vim.api.nvim_call_function("codeium#GetStatusString", {})
+        end
+      },
       {
         'diagnostics',
         sources = { "nvim_diagnostic" },

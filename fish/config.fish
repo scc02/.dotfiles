@@ -132,4 +132,4 @@ export ESCDELAY="1"
 #     export TERM=alacritty
 # end
 
-bind \cl accept-autosuggestion
+bind \cb accept-autosuggestion

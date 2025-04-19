@@ -3,7 +3,6 @@ local keep_position        = require('util.keep_position')
 local is_git               = require('util.is_git')
 local get_listed_buf_count = require('util.util').get_listed_buf_count
 
-map('i', '<C-;>', '<C-w>')
 map("n", "<CR>", ":write!<CR>", {})
 
 -- map('n', 'n', 'nzzzv')
@@ -118,7 +117,6 @@ map('n', 'mm', function()
   end
 end)
 
-map('n', '<C-;>', '<C-6>')
 map('n', ',c', ":let @+ = fnamemodify(expand('%'), ':~:.')<CR>")
 
 -- map('i', '<C-o>', '<Esc>ddO')
