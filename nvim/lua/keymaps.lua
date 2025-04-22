@@ -7,7 +7,7 @@ map("n", "<CR>", ":write!<CR>", {})
 
 -- map('n', 'n', 'nzzzv')
 -- map('n', 'N', 'Nzzzv')
-map('n', 'J', 'mzJ`z')
+map('n', 'J', 'mzJ`z:delmarks z<cr>')
 map('n', "<C-d>", '<C-d>zz')
 map('n', "<C-u>", '<C-u>zz')
 -- map('n', '<A-z>', 'u')
@@ -402,3 +402,6 @@ end
 
 map('n', 'q', '<Nop>')
 map('n', 's', '<Nop>')
+vim.keymap.set("n", "ycc", function()
+    return 'yy' .. vim.v.count1 .. "gcc']p"
+end, { remap = true, expr = true })

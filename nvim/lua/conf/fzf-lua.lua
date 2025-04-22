@@ -4,6 +4,7 @@ map('n', ',f', ":FzfLua files<cr>")
 map('n', ',w', ":FzfLua grep<cr>")
 map('n', ',o', ":FzfLua oldfiles<CR>")
 map('n', '<space>.', ":FzfLua lsp_code_actions<CR>")
+map('n', '<leader>fs', ":FzfLua git_status<CR>")
 map('n', '<leader>fe', function()
   local word = vim.fn.input("Search > ")
   local len = #word
@@ -43,6 +44,11 @@ require("fzf-lua").setup({
     cwd_only = true, -- 限制只显示当前工作目录下的历史文件
     stat_file = true, -- 确保文件存在（可选）
     prompt = '❯ ', -- 自定义提示符（可选）
+  },
+  git = {
+    status = {
+      no_header = true
+    }
   },
   previewers = {
     builtin = {
