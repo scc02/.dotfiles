@@ -94,6 +94,22 @@ local log_with_prefix_snip = s("ll", { t 'console.log(', f(function()
   end
 end), t ')' })
 
+local react_native_function_component = s(
+  "fr",
+  fmt([[
+import {{ View }} from 'react-native';
+
+export default function {}() {{
+  return (
+    <View>{}</View>
+  );
+}}
+]], {
+    i(1, "MyComponent"), -- 函数名
+    i(0),               -- 光标直接定位到 <View> 内部
+  })
+)
+
 local frontend_file = {
   "javascript", "javascriptreact", "typescript", "typescriptreact"
 }
@@ -105,25 +121,26 @@ for _, value in ipairs(frontend_file) do
     use_state_snip,
     -- log_with_prefix_snip,
     js_doc_snip,
-    class_name_snip
+    class_name_snip,
+    react_native_function_component
   })
 end
 
 local chore = s("c", fmt([[
   chore({}): {}
-]], {i(1),i(0)}))
+]], { i(1), i(0) }))
 local style = s("s", fmt([[
   style({}): {}
-]], {i(1),i(0)}))
+]], { i(1), i(0) }))
 local feat = s("f", fmt([[
   feat({}): {}
-]], {i(1),i(0)}))
+]], { i(1), i(0) }))
 local fix = s("fb", fmt([[
   fix({}): {}
-]], {i(1),i(0)}))
+]], { i(1), i(0) }))
 local refactor = s("r", fmt([[
   refactor({}): {}
-]], {i(1),i(0)}))
+]], { i(1), i(0) }))
 
 ls.add_snippets('gitcommit', {
   chore,

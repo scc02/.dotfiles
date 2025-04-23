@@ -35,3 +35,10 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 -- vim.treesitter.language.register('scss', 'less')
+--
+-- 可选：打开文件时自动展开折叠（防止 treesitter 异常时全折叠）
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--   callback = function()
+--     vim.cmd("normal zR")
+--   end
+-- })
