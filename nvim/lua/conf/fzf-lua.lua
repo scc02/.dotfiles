@@ -5,6 +5,7 @@ map('n', ',w', ":FzfLua grep<cr>")
 map('n', ',o', ":FzfLua oldfiles<CR>")
 map('n', '<space>.', ":FzfLua lsp_code_actions<CR>")
 map('n', '<leader>fs', ":FzfLua git_status<CR>")
+-- 用于查找完整的单词
 map('n', '<leader>fe', function()
   local word = vim.fn.input("Search > ")
   local len = #word
@@ -116,6 +117,7 @@ require("fzf-lua").setup({
   }
 })
 
+-- 查找两个单词
 vim.keymap.set("n", "<leader>fg", function()
   local word1 = vim.fn.input("Enter first word: ")
   if word1 == "" then return end -- 如果输入为空，则退出
