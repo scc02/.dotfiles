@@ -35,12 +35,16 @@ require("fzf-lua").setup({
   fzf_opts = {
     ["--cycle"] = "", -- 启用循环
   },
-  -- winopts = {
-  --   on_create = function()
-  --     vim.cmd [[highlight FzfCursor gui=vert]]
-  --     vim.cmd [[setlocal winhighlight=TermCursor:FzfCursor]]
-  --   end
-  -- },
+  winopts = {
+    preview = {
+      layout = "vertical",   -- 上下分屏（"horizontal" 是左右）
+      -- vertical = "down:50%", -- 向下展开，占用 50% 高度
+    },
+    -- on_create = function()
+    --   vim.cmd [[highlight FzfCursor gui=vert]]
+    --   vim.cmd [[setlocal winhighlight=TermCursor:FzfCursor]]
+    -- end
+  },
   oldfiles = {
     cwd_only = true, -- 限制只显示当前工作目录下的历史文件
     stat_file = true, -- 确保文件存在（可选）
@@ -65,14 +69,14 @@ require("fzf-lua").setup({
   lsp = {
     code_actions = {
       winopts = {
-        row = 1.0,    -- 1.0 表示底部（0.0 是顶部）
-        col = 0.5,    -- 水平居中
-        width = 0.5,  -- 宽度占满屏幕
+        row = 1.0,     -- 1.0 表示底部（0.0 是顶部）
+        col = 0.5,     -- 水平居中
+        width = 0.5,   -- 宽度占满屏幕
         height = 0.15, -- 高度占屏幕的 30%
         relative = "cursor",
         backdrop = 100
       },
-      prompt='❯ ',
+      prompt = '❯ ',
       previewer = false, -- 禁用预览
     },
   },
@@ -84,15 +88,16 @@ require("fzf-lua").setup({
   --   height = 0.3,  -- 高度占屏幕的 30%
   -- },
   files = {
+    -- 搜索所有文件，除了 node_modules 和 .git 目录，如果想要搜索node_modules，netrw里使用<leader>ff在指定目录下搜索
+    cmd = "rg --files --hidden --no-ignore --iglob '!node_modules/**' --iglob '!.git/**'",
+    gitignore = false, -- 禁用 fzf-lua 默认的 gitignore 过滤
     no_header = true,
     cwd_prompt = false,
     winopts = {
       preview = {
-        hidden = "hidden", -- 默认隐藏
+        hidden = "hidden", -- 默认隐藏预览
       },
-    },
-    -- previewer = false,
-    -- no_ignore = true
+    }
   },
   grep = {
     no_header = true,

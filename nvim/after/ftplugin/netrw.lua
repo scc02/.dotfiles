@@ -42,6 +42,24 @@ map('n', '<leader>fd', function()
     cwd = fullPath, -- 指定搜索目录
   })
 end, { remap = true, buffer = true })
+
+-- 搜索文件
+map('n', '<leader>ff', function()
+  local path = vim.api.nvim_exec2("echo b:netrw_curdir", { output = true }).output;
+  local file = vim.api.nvim_exec2("echo expand('<cfile>')", { output = true }).output;
+  local fullPath
+  
+  -- 如果当前选中的是文件，则使用其所在目录；如果是目录，则使用该目录
+  if vim.fn.isdirectory(path .. '/' .. file) == 1 then
+    fullPath = path .. '/' .. file
+  else
+    fullPath = path
+  end
+  
+  require("fzf-lua").files({
+    cwd = fullPath, -- 指定搜索目录
+  })
+end, { remap = true, buffer = true })
 -- reveal in finder
 map('n', '<leader>fo', function()
   local path = vim.api.nvim_exec2("echo b:netrw_curdir", { output = true }).output;
