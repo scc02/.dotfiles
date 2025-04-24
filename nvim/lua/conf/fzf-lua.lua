@@ -89,7 +89,7 @@ require("fzf-lua").setup({
   -- },
   files = {
     -- 搜索所有文件，除了 node_modules 和 .git 目录，如果想要搜索node_modules，netrw里使用<leader>ff在指定目录下搜索
-    cmd = "rg --files --hidden --no-ignore --iglob '!node_modules/**' --iglob '!.git/**'",
+    rg_opts = [[--files --hidden --no-ignore --iglob '!node_modules/**' --iglob '!.git/**']],
     gitignore = false, -- 禁用 fzf-lua 默认的 gitignore 过滤
     no_header = true,
     cwd_prompt = false,
