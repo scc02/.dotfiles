@@ -98,6 +98,7 @@ require("lazy").setup({
   },
   {
     'akinsho/git-conflict.nvim',
+    tag = 'v2.1.0',
     config = function()
       require('git-conflict').setup({})
     end,
@@ -475,7 +476,7 @@ require("lazy").setup({
         },
         accept = {
           auto_brackets = {
-            -- enabled = true,
+            enabled = false,
           },
         },
         menu = {
