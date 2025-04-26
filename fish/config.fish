@@ -133,3 +133,6 @@ export ESCDELAY="1"
 # end
 
 bind \cb accept-autosuggestion
+
+# Added by Windsurf
+fish_add_path /Users/shichencong/.codeium/windsurf/bin
