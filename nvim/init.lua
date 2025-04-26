@@ -6,5 +6,5 @@ if not vim.g['vscode'] then
   require('plugins')
   require('autocmd')
 else
-  require('vscode.keymaps')
+  -- require('vscode.keymaps')
 end
