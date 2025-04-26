@@ -449,11 +449,17 @@ require("lazy").setup({
     opts = {
       cmdline = {
         completion = {
-          -- menu = { auto_show = true },
-          -- ghost_text = { enabled = false }
+          menu = {
+            auto_show = function(ctx)
+              return vim.fn.getcmdtype() == ':'
+              -- enable for inputs as well, with:
+              -- or vim.fn.getcmdtype() == '@'
+            end,
+          },
+          ghost_text = { enabled = false }
         },
         keymap = {
-          -- ["<CR>"] = { "select_and_accept", "fallback" }
+          ["<CR>"] = { "select_and_accept", "fallback" }
         }
       },
       snippets = { preset = 'luasnip' },
@@ -546,15 +552,13 @@ require("lazy").setup({
             min_keyword_length = 1,
             score_offset = 4,
           },
-          -- cmdline = {
-          --   should_show_items = function(ctx)
-          --     local arr = { "w", "wq", "q", "e" }
-          --     if vim.tbl_contains(arr, ctx.line) then
-          --       return false
-          --     end
-          --     return true
-          --   end
-          -- },
+          cmdline = {
+            min_keyword_length = function(ctx)
+              -- when typing a command, only show when the keyword is 3 characters or longer
+              if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+              return 0
+            end
+          },
           lsp = {
             min_keyword_length = 0,
             score_offset = 3,
@@ -584,16 +588,16 @@ require("lazy").setup({
       require('conf.fzf-lua')
     end
   },
-   {
-  'Exafunction/windsurf.vim',
-  config = function ()
-    -- Change '<C-g>' here to any keycode you like.
-    vim.keymap.set('i', '<C-;>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-    -- vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-    -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-    -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-  end
-}
+  {
+    'Exafunction/windsurf.vim',
+    config = function()
+      -- Change '<C-g>' here to any keycode you like.
+      vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+      -- vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+      -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+      -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+    end
+  }
 
   --[[ { 'augmentcode/augment.vim',config = function ()
       vim.keymap.set('i', '<c-cr>', '<cmd>call augment#Accept()<cr>')
