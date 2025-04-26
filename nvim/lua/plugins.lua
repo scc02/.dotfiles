@@ -597,7 +597,15 @@ require("lazy").setup({
       require('conf.fzf-lua')
     end
   },
-  {
+   {
+      "supermaven-inc/supermaven-nvim",
+      config = function()
+        require("supermaven-nvim").setup({
+          accept_suggestion = "<C-;>",
+      })
+      end,
+    },
+  --[[ {
     'Exafunction/windsurf.vim',
     config = function()
       -- Change '<C-g>' here to any keycode you like.
@@ -606,7 +614,7 @@ require("lazy").setup({
       -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
       -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
     end
-  }
+  } ]]
 
   --[[ { 'augmentcode/augment.vim',config = function ()
       vim.keymap.set('i', '<c-cr>', '<cmd>call augment#Accept()<cr>')
