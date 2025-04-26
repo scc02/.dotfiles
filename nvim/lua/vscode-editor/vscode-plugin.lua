@@ -13,24 +13,24 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
-    {
-        'Wansmer/treesj',
-        dependencies = { 'nvim-treesitter' },
-        config = function()
-          require('treesj').setup({
-            _default_keymaps = false,
-          });
-          vim.keymap.set('n', '<leader>j', ':TSJToggle<CR>', { silent = true })
-        end,
-        keys = '<leader>j'
-      },
-      ({
-        "kylechui/nvim-surround",
-        config = function()
-          require("nvim-surround").setup({})
-        end,
-        event = "InsertEnter",
-      })
+  {
+    'Wansmer/treesj',
+    dependencies = { 'nvim-treesitter' },
+    config = function()
+      require('treesj').setup({
+        _default_keymaps = false,
+      });
+      vim.keymap.set('n', '<leader>j', ':TSJToggle<CR>', { silent = true })
+    end,
+    keys = '<leader>j'
+  },
+  ({
+    "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup({})
+    end,
+    event = "InsertEnter",
+  })
 }, {
   defaults = {
     lazy = false
