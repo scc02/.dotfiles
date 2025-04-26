@@ -390,8 +390,8 @@ require("lazy").setup({
       map("v", "<leader>m", mc.matchCursors)
 
       -- 通过匹配单词/选择来添加或跳过添加新光标
-		map({ "n", "v" }, "<leader>k", function() mc.matchAddCursor(1) end)
-		map({ "n", "v" }, "<leader>l", function() mc.matchSkipCursor(1) end)
+      map({ "n", "v" }, "<leader>k", function() mc.matchAddCursor(1) end)
+      map({ "n", "v" }, "<leader>l", function() mc.matchSkipCursor(1) end)
 
       -- use MultiCursorCursor and MultiCursorVisual to customize
       -- additional cursors appearance
@@ -597,14 +597,24 @@ require("lazy").setup({
       require('conf.fzf-lua')
     end
   },
-   {
+  {
+    "github/copilot.vim",
+    config = function()
+      vim.keymap.set('i', '<C-;>', 'copilot#Accept("\\<CR>")', {
+        expr = true,
+        replace_keycodes = false
+      })
+      vim.g.copilot_no_tab_map = true
+    end,
+  },
+  --[[ {
       "supermaven-inc/supermaven-nvim",
       config = function()
         require("supermaven-nvim").setup({
           accept_suggestion = "<C-;>",
       })
       end,
-    },
+    }, ]]
   --[[ {
     'Exafunction/windsurf.vim',
     config = function()
