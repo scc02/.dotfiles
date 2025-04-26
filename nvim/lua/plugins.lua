@@ -380,24 +380,28 @@ require("lazy").setup({
   { "Bilal2453/luvit-meta",  lazy = true }, -- optional `vim.uv` typings,
   {
     "jake-stewart/multicursor.nvim",
-    event = 'InsertEnter',
+    event = "InsertEnter",
+    branch = "1.0",
     config = function()
       local mc = require("multicursor-nvim")
 
       mc.setup()
+      map({ "n", "v" }, "<leader>m", mc.toggleCursor)
 
       -- use MultiCursorCursor and MultiCursorVisual to customize
       -- additional cursors appearance
-      vim.cmd.hi("link", "MultiCursorCursor", "Cursor")
-      vim.cmd.hi("link", "MultiCursorVisual", "Visual")
-
-      vim.keymap.set("n", "<esc>", function()
-        if mc.hasCursors() then
-          mc.clearCursors()
-        else
-          -- default <esc> handler
-        end
-      end)
+      -- vim.cmd.hi("link", "MultiCursorCursor", "Cursor")
+      -- vim.cmd.hi("link", "MultiCursorVisual", "Visual")
+      --
+      map("n", "<esc>", function()
+			if not mc.cursorsEnabled() then
+				mc.enableCursors()
+			elseif mc.hasCursors() then
+				mc.clearCursors()
+			else
+				-- Default <esc> handler.
+			end
+		end)
 
       -- add cursors above/below the main cursor
       -- vim.keymap.set("n", "<up>", function() mc.addCursor("k") end)
