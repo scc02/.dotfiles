@@ -386,7 +386,12 @@ require("lazy").setup({
       local mc = require("multicursor-nvim")
 
       mc.setup()
-      map({ "n", "v" }, "<leader>m", mc.toggleCursor)
+      map({ "n" }, "<leader>m", mc.toggleCursor)
+      map("v", "<leader>m", mc.matchCursors)
+
+      -- 通过匹配单词/选择来添加或跳过添加新光标
+		map({ "n", "v" }, "<leader>k", function() mc.matchAddCursor(1) end)
+		map({ "n", "v" }, "<leader>l", function() mc.matchSkipCursor(1) end)
 
       -- use MultiCursorCursor and MultiCursorVisual to customize
       -- additional cursors appearance
@@ -394,14 +399,14 @@ require("lazy").setup({
       -- vim.cmd.hi("link", "MultiCursorVisual", "Visual")
       --
       map("n", "<esc>", function()
-			if not mc.cursorsEnabled() then
-				mc.enableCursors()
-			elseif mc.hasCursors() then
-				mc.clearCursors()
-			else
-				-- Default <esc> handler.
-			end
-		end)
+        if not mc.cursorsEnabled() then
+          mc.enableCursors()
+        elseif mc.hasCursors() then
+          mc.clearCursors()
+        else
+          -- Default <esc> handler.
+        end
+      end)
 
       -- add cursors above/below the main cursor
       -- vim.keymap.set("n", "<up>", function() mc.addCursor("k") end)
