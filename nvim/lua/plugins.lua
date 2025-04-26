@@ -437,6 +437,7 @@ require("lazy").setup({
   {
     "saghen/blink.cmp",
     dependencies = {
+      "saghen/blink.compat",
       {
         'L3MON4D3/LuaSnip',
         version = 'v2.*',
@@ -557,6 +558,10 @@ require("lazy").setup({
       sources = {
         default = { 'snippets', 'lsp', 'path', 'buffer' },
         providers = {
+          codeium = {
+            name = "codeium",
+            module = "blink.compat.source",
+          },
           snippets = {
             min_keyword_length = 1,
             score_offset = 4,
@@ -597,7 +602,7 @@ require("lazy").setup({
       require('conf.fzf-lua')
     end
   },
-  {
+  --[[ {
     "github/copilot.vim",
     config = function()
       vim.keymap.set('i', '<C-;>', 'copilot#Accept("\\<CR>")', {
@@ -606,7 +611,7 @@ require("lazy").setup({
       })
       vim.g.copilot_no_tab_map = true
     end,
-  },
+  }, ]]
   --[[ {
       "supermaven-inc/supermaven-nvim",
       config = function()
@@ -615,7 +620,7 @@ require("lazy").setup({
       })
       end,
     }, ]]
-  --[[ {
+  {
     'Exafunction/windsurf.vim',
     config = function()
       -- Change '<C-g>' here to any keycode you like.
@@ -624,7 +629,7 @@ require("lazy").setup({
       -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
       -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
     end
-  } ]]
+  }
 
   --[[ { 'augmentcode/augment.vim',config = function ()
       vim.keymap.set('i', '<c-cr>', '<cmd>call augment#Accept()<cr>')
