@@ -57,7 +57,7 @@ map('n', '<C-r>', "<Cmd>call VSCodeNotify('redo')<CR>")
 -- map('n', 'sj', "<cmd>call VSCodeNotify('workbench.action.navigateDown')<CR>")
 
 -- --获取相对路径 alf似乎无法生效
--- map('n','<A-f>',function ()
+-- map('n','<M-f>',function ()
 --     -- require('vscode').action('workbench.action.copyRelativeFilePath')
 --   require('vscode').action('copyRelativeFilePath')
 -- end)
