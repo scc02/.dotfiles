@@ -18,7 +18,7 @@ map('i', '<C-d>', '<Esc>yypi')
 
 map('n', '[[', "<Cmd>call search('[([{<]')<CR>")
 map('n','gd', function ()
-    require('vscode').action('editor.action.revealDefinitionAside')
+    require('vscode').action('editor.action.revealDefinition')
 end)
 
 -- 前进光标记录newer

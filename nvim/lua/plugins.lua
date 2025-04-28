@@ -391,7 +391,7 @@ require("lazy").setup({
 
       -- 通过匹配单词/选择来添加或跳过添加新光标
       map({ "n", "v" }, "<leader>k", function() mc.matchAddCursor(1) end)
-      map({ "n", "v" }, "<leader>l", function() mc.matchSkipCursor(1) end)
+      map({ "n", "v" }, "<leader><leader>k", function() mc.matchSkipCursor(1) end)
 
       -- use MultiCursorCursor and MultiCursorVisual to customize
       -- additional cursors appearance
