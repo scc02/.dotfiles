@@ -123,10 +123,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- end
 
 vim.diagnostic.config({
-  -- virtual_text = {
-  --   current_line = true,
-  --   prefix = "●",
-  -- },
+  virtual_text = {
+    current_line = true,
+    prefix = " ●",
+  },
   virtual_lines = false,
   signs = {
     text = {

@@ -1,5 +1,6 @@
 -- vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
 local u = require("catppuccin.utils.colors")
+local o = require("catppuccin").options
 require("catppuccin").setup {
   -- catppuccin_flavour = 'macchiato',
   custom_highlights = function(colors)
@@ -33,7 +34,31 @@ require("catppuccin").setup {
       },
       GitSignsCurrentLineBlame = {
         fg = u.darken(colors.surface1, 1.8, colors.base),
-      }
+      },
+      DiagnosticVirtualTextWarn = {
+        bg = u.vary_color(
+          { latte = u.lighten(colors.mantle, 1, colors.base) },
+          u.darken(colors.surface0, 1.5, colors.base)
+        ),
+      },
+      DiagnosticVirtualTextError = {
+        bg = u.vary_color(
+          { latte = u.lighten(colors.mantle, 1, colors.base) },
+          u.darken(colors.surface0, 1.5, colors.base)
+        ),
+      },
+      DiagnosticVirtualTextHint = {
+        bg = u.vary_color(
+          { latte = u.lighten(colors.mantle, 1, colors.base) },
+          u.darken(colors.surface0, 1.5, colors.base)
+        ),
+      },
+      DiagnosticVirtualTextInfo = {
+        bg = u.vary_color(
+          { latte = u.lighten(colors.mantle, 1, colors.base) },
+          u.darken(colors.surface0, 1.5, colors.base)
+        ),
+      },
     }
   end,
   compile = {

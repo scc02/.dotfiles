@@ -222,15 +222,6 @@
                     },
                     "ignore": false,
                     "treat_as_built_in_keyboard": true
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "is_pointing_device": true,
-                        "product_id": 8205,
-                        "vendor_id": 9642
-                    },
-                    "ignore": false
                 }
             ],
             "name": "Default profile",
