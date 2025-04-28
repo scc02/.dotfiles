@@ -629,13 +629,14 @@ require("lazy").setup({
       -- vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
       -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
     end
-  }
+  },
 
-  --[[ { 'augmentcode/augment.vim',config = function ()
-      vim.keymap.set('i', '<c-cr>', '<cmd>call augment#Accept()<cr>')
-      -- vim.keymap.set('v', '<c-o>', ':Augment chat ')
-      -- vim.keymap.set('n', '<c-o>', ':Augment chat ')
-  end }, ]]
+  {
+    'sontungexpt/better-diagnostic-virtual-text',
+    config = function(_)
+      require('better-diagnostic-virtual-text').setup({})
+    end
+  },
 }, {
   defaults = {
     lazy = false

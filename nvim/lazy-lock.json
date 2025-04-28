@@ -4,6 +4,7 @@
   "YankAssassin.nvim": { "branch": "main", "commit": "c08ad31c68a9b3750f2f0d3ef2836801fa5f6cc2" },
   "accelerated-jk.nvim": { "branch": "main", "commit": "8fb5dad4ccc1811766cebf16b544038aeeb7806f" },
   "auto-session": { "branch": "main", "commit": "00334ee24b9a05001ad50221c8daffbeedaa0842" },
+  "better-diagnostic-virtual-text": { "branch": "main", "commit": "eb3a77e714aa6c295bdb4f074fccbda637090f6e" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
   "blink.compat": { "branch": "main", "commit": "f1836ed7a07f8d082ff6c3fbae1e476ba2adee84" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
