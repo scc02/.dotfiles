@@ -129,7 +129,7 @@ require("lazy").setup({
     config = function() require('conf.toggleterm') end,
   },
 
-  { "lewis6991/gitsigns.nvim", config = function() require('conf.gitsign') end,   event = 'VeryLazy' },
+  { "lewis6991/gitsigns.nvim", config = function() require('conf.gitsign') end },
   {
     "tpope/vim-fugitive",
     cmd = 'Git',
@@ -495,16 +495,16 @@ require("lazy").setup({
     end
   },
 
-  {
-    'sontungexpt/better-diagnostic-virtual-text',
-    config = function(_)
-      require('better-diagnostic-virtual-text').setup({
-        ui = {
-          wrap_line_after = true
-        }
-      })
-    end
-  },
+  -- {
+  --   'sontungexpt/better-diagnostic-virtual-text',
+  --   config = function(_)
+  --     require('better-diagnostic-virtual-text').setup({
+  --       ui = {
+  --         wrap_line_after = true
+  --       }
+  --     })
+  --   end
+  -- },
 }, {
   defaults = {
     lazy = false
