@@ -98,3 +98,12 @@ map('n', '<leader>e', "<Cmd>call VSCodeNotify('revealInExplorer')<CR>")
 -- map('n', 'mk', "<cmd>call VSCodeNotify('bookmarks.toggleLabeled')<CR>")
 -- map('n', 'ma', "<cmd>call VSCodeNotify('bookmarks.listFromAllFiles')<CR>")
 -- map('n', 'md', "<cmd>call VSCodeNotify('bookmarks.clear')<CR>")
+--
+
+map('n','<leader>l',function ()
+  require('vscode').action('editor.action.showHover')
+end)
+
+map('n','<leader>.',function ()
+  require('vscode').action('editor.action.quickFix')
+end)
