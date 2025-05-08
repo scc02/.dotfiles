@@ -58,7 +58,7 @@ local options = {
   completeopt = { "menu", "menuone", "noselect" },
   -- CursorHold触发的时间
   updatetime = 500,
-  cursorline = true,
+  cursorline = false,
   -- 侧边数字列的宽度
   numberwidth = 1,
   timeoutlen = 500,

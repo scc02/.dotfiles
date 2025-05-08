@@ -24,13 +24,13 @@ require("lazy").setup({
     end,
     keys = '<leader>j'
   },
-  ({
+  {
     "kylechui/nvim-surround",
     config = function()
       require("nvim-surround").setup({})
     end,
     event = "InsertEnter",
-  })
+  },
 }, {
   defaults = {
     lazy = false
