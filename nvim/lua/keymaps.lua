@@ -49,10 +49,20 @@ map('v', 'mt', '%')
 map('n', 'yw', 'yiw')
 map('n', 'cw', '"_ciw')
 map('n', "<leader>w", ":/ \\<\\><Left><Left>", { silent = false })
-map('n', '<A-/>', function()
+--[[ map('n', '<A-/>', function()
   local word = vim.fn.input("Search > ")
   if word ~= nil and #word ~= 0 then
     vim.fn.setreg('/', word)
+    vim.cmd('set hlsearch')
+    vim.cmd('normal n')
+  end
+end) ]]
+map('n', '<A-/>', function()
+  local word = vim.fn.input("Search Literal > ")
+  if word ~= nil and #word ~= 0 then
+    local escaped_word = string.gsub(word, "\\", "\\\\")
+    local literal_pattern = "\\V" .. string.gsub(escaped_word, "\n", "\\n")
+    vim.fn.setreg('/', literal_pattern)
     vim.cmd('set hlsearch')
     vim.cmd('normal n')
   end
