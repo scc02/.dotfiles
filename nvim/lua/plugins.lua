@@ -423,7 +423,6 @@ require("lazy").setup({
     end,
   },
   {
-
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
     config = function()

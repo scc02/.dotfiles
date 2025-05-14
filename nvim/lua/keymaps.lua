@@ -57,7 +57,7 @@ map('n', "<leader>w", ":/ \\<\\><Left><Left>", { silent = false })
     vim.cmd('normal n')
   end
 end) ]]
-map('n', '<A-/>', function()
+map('n', ',s', function()
   local word = vim.fn.input("Search Literal > ")
   if word ~= nil and #word ~= 0 then
     local escaped_word = string.gsub(word, "\\", "\\\\")
