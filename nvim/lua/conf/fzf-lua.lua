@@ -68,6 +68,7 @@ require("fzf-lua").setup({
   -- },
   lsp = {
     code_actions = {
+      silent = true,
       winopts = {
         row = 1.0,     -- 1.0 表示底部（0.0 是顶部）
         col = 0.5,     -- 水平居中
