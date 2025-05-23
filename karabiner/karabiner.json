@@ -229,16 +229,7 @@
                         "product_id": 12297,
                         "vendor_id": 14000
                     },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "caps_lock" },
-                            "to": [{ "key_code": "left_control" }]
-                        },
-                        {
-                            "from": { "key_code": "left_control" },
-                            "to": [{ "key_code": "caps_lock" }]
-                        }
-                    ]
+                    "treat_as_built_in_keyboard": true
                 },
                 {
                     "identifiers": {
@@ -248,17 +239,7 @@
                         "vendor_id": 14000
                     },
                     "ignore": false,
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "caps_lock" },
-                            "to": [{ "key_code": "left_control" }]
-                        },
-                        {
-                            "from": { "key_code": "left_control" },
-                            "to": [{ "key_code": "caps_lock" }]
-                        }
-                    ],
-                    "treat_as_built_in_keyboard": true
+                    "manipulate_caps_lock_led": false
                 }
             ],
             "name": "Default profile",
