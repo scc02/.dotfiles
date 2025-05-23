@@ -20,6 +20,7 @@ map('n', '<C-i>', '<C-i>')
 
 -- map('n', ',w', ':w<CR>', { silent = true })
 map('n', ',q', ':q<CR>', { silent = true })
+map('n', 'gq', ":q!<CR>")
 -- map('n', '<cr>', '"_ciw')
 
 -- 宏
@@ -42,7 +43,6 @@ map('n', ',r', ":LspRestart<CR>")
 
 map('n', 'g;', 'g;')
 
-map('n', 'gq', ":q<CR>")
 map('n', 'mt', '%')
 map('v', 'mt', '%')
 

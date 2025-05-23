@@ -7,6 +7,9 @@ configstore
 raycast
 rio
 
+karabiner/assets
+karabiner
+karabiner/automatic_backups
 fish/fish_variables
 
 nvim/plugin/packer_compiled.lua
