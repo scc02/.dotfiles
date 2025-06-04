@@ -63,7 +63,6 @@ blink.setup({
   },
 
   keymap = {
-    ["<C-e>"] = { "hide", "fallback" },
     ["<CR>"] = {
       function(cmp)
         local mode = vim.api.nvim_get_mode().mode
@@ -97,6 +96,8 @@ blink.setup({
       "snippet_backward",
       "fallback",
     },
+    ["<C-k>"] = { "show" },
+    ["<C-j>"] = { "hide", "fallback" },
   },
   sources = {
     default = { 'snippets', 'lsp', 'path', 'buffer' },

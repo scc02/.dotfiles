@@ -58,15 +58,34 @@ map('n', "<leader>w", ":/ \\<\\><Left><Left>", { silent = false })
   end
 end) ]]
 map('n', ',s', function()
-  local word = vim.fn.input("Search Literal > ")
-  if word ~= nil and #word ~= 0 then
-    local escaped_word = string.gsub(word, "\\", "\\\\")
-    local literal_pattern = "\\V" .. string.gsub(escaped_word, "\n", "\\n")
-    vim.fn.setreg('/', literal_pattern)
-    vim.cmd('set hlsearch')
-    vim.cmd('normal n')
+  local word = vim.fn.input("搜索文字 > ")
+  if word == nil or #word == 0 then
+    -- 如果输入为空，清除搜索高亮并退出
+    vim.cmd('nohlsearch')
+    return
   end
-end)
+
+  -- 转义输入文字以进行字面搜索
+  local escaped_word = string.gsub(word, "\\", "\\\\")
+  local literal_pattern = "\\V" .. string.gsub(escaped_word, "\n", "\\n")
+
+  -- 设置搜索寄存器
+  vim.fn.setreg('/', literal_pattern)
+
+  -- 启用搜索高亮
+  vim.cmd('set hlsearch')
+
+  -- 尝试执行搜索，捕获可能的错误
+  local success, err = pcall(function()
+    vim.cmd('normal! n')
+  end)
+
+  if not success then
+    -- 如果搜索失败，通知用户并清除高亮
+    print("未找到模式: " .. word)
+    vim.cmd('nohlsearch')
+  end
+end, { noremap = true, silent = false })
 
 map('n', ',t', function()
   keep_position.stay_position(function()
