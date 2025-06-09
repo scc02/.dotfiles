@@ -317,7 +317,7 @@ map('n', '<leader>,g', function()
 end)
 map('n', '<leader>gr', ":diffget //3<CR>")
 map('n', '<leader>gl', ":diffget //2<CR>")
--- map('n', ',b', ':Git blame<CR>')
+map('n', ',b', ':Git blame<CR>')
 
 --diffview
 map('n', '<leader>gh', '<cmd>DiffviewFileHistory<CR>')
