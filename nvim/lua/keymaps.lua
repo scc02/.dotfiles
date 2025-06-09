@@ -317,7 +317,31 @@ map('n', '<leader>,g', function()
 end)
 map('n', '<leader>gr', ":diffget //3<CR>")
 map('n', '<leader>gl', ":diffget //2<CR>")
-map('n', ',b', ':Git blame<CR>')
+-- map('n', ',b', ':Git blame<CR>')
+-- 定义切换 Git blame 的函数
+vim.api.nvim_create_user_command('ToggleGitBlame', function()
+  local blame_win = 0
+  -- 遍历所有窗口
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.api.nvim_get_option_value('filetype', { buf = buf }) == 'fugitiveblame' then
+      blame_win = win
+      break
+    end
+  end
+
+  if blame_win > 0 then
+    -- 切换到 blame 窗口并关闭
+    vim.api.nvim_set_current_win(blame_win)
+    vim.cmd('q')
+  else
+    -- 打开 Git blame
+    vim.cmd('Git blame')
+  end
+end, {})
+
+-- 映射 ,b 到切换函数
+vim.keymap.set('n', ',b', ':ToggleGitBlame<CR>', { noremap = true, silent = true })
 
 --diffview
 map('n', '<leader>gh', '<cmd>DiffviewFileHistory<CR>')
