@@ -107,3 +107,10 @@ end)
 map('n','<leader>.',function ()
   require('vscode').action('editor.action.quickFix')
 end)
+
+vim.api.nvim_create_autocmd("InsertLeave", { callback = function()
+ require('vscode').action('editor.cpp.disableenabled')
+ end });
+vim.api.nvim_create_autocmd("InsertEnter", { callback = function()
+ require('vscode').action('editor.action.enableCppGlobally')
+ end });
