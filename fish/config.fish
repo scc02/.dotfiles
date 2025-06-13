@@ -21,7 +21,7 @@ function glp
 end
 
 function gl
-    git log --pretty=format:"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN%Cred%d %Creset%s" --graph --date=format:"%Y/%m/%d %H:%M" | fzf --ansi --reverse --bind "ctrl-u:half-page-up,ctrl-d:half-page-down"
+  git log --pretty=format:"%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN %Creset%s %Cred%d" --graph --date=format:"%Y/%m/%d %H:%M" --decorate | fzf --ansi --reverse --bind "ctrl-u:half-page-up,ctrl-d:half-page-down"
 end
 alias gs 'git status'
 alias gb 'git branch'

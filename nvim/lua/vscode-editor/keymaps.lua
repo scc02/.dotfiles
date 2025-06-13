@@ -36,8 +36,8 @@ map('n', 'p', "p`]")
 map('n', '<tab>', "<Cmd>call VSCodeNotify('workbench.action.nextEditorInGroup')<CR>")
 map('n', '<S-tab>', "<Cmd>call VSCodeNotify('workbench.action.previousEditorInGroup')<CR>")
 
--- map('n', 'sv', "<Cmd>call VSCodeNotify('workbench.action.splitEditorRight')<CR>")
--- map('n', 'ss', "<Cmd>call VSCodeNotify('workbench.action.splitEditorDown')<CR>")
+map('n', 'sv', "<Cmd>call VSCodeNotify('workbench.action.splitEditorRight')<CR>")
+map('n', 'ss', "<Cmd>call VSCodeNotify('workbench.action.splitEditorDown')<CR>")
 map('n', '<leader>o', "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>")
 map('n', 'co', "<Cmd>call VSCodeNotify('workbench.action.closeOtherEditors')<CR>")
 
