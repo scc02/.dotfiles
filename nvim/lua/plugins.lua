@@ -49,14 +49,9 @@ require("lazy").setup({
     'sindrets/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     config = function() require('conf.diffview') end,
-    cmd = { 'DiffviewFileHistory', 'DiffviewOpen' }
+    cmd = { 'DiffviewFileHistory', 'DiffviewOpen' },
+    version = "4516612fe98ff56ae0415a259ff6361a89419b0a"
   },
-  -- {
-  --   'norcalli/nvim-colorizer.lua',
-  --   config=function ()
-  --     require 'colorizer'.setup()
-  --   end
-  -- },
   {
     "brenoprata10/nvim-highlight-colors",
     config = function()
