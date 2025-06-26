@@ -96,6 +96,8 @@ require("lazy").setup({
     tag = 'v2.1.0',
     config = function()
       require('git-conflict').setup({})
+      vim.keymap.set('n', 'cco', ':GitConflictChooseOurs<CR>', {})
+      vim.keymap.set('n', 'cct', ':GitConflictChooseTheirs<CR>', {})
     end,
     event = 'BufEnter'
   },
@@ -335,7 +337,7 @@ require("lazy").setup({
       })
     end
   },
-  --[[ {
+  {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
     branch = 'dev',
@@ -360,7 +362,7 @@ require("lazy").setup({
         }
       })
     end
-  }, ]]
+  },
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
@@ -470,14 +472,6 @@ require("lazy").setup({
       vim.g.copilot_no_tab_map = true
     end,
   }, ]]
-  --[[ {
-      "supermaven-inc/supermaven-nvim",
-      config = function()
-        require("supermaven-nvim").setup({
-          accept_suggestion = "<C-;>",
-      })
-      end,
-    }, ]]
   {
     'Exafunction/windsurf.vim',
     config = function()

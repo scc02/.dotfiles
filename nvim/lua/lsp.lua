@@ -1,9 +1,10 @@
 local nvim_lsp = require('lspconfig')
-local util = require 'lspconfig.util'
+local lspconfig_util = require 'lspconfig.util'
+local util = require 'util.util'
 local map = require('util.map')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
-require 'lsp-conf.tsserver'.init(capabilities)
-local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint' }
+-- require 'lsp-conf.tsserver'.init(capabilities)
+local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint', 'ts_ls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
@@ -27,10 +28,10 @@ require('lspconfig').sourcekit.setup {
     -- file:write(filename)
     -- file:close()
 
-    return util.root_pattern 'buildServer.json' (filename)
-        or util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+    return lspconfig_util.root_pattern 'buildServer.json' (filename)
+        or lspconfig_util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
         -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
-        or util.root_pattern('compile_commands.json', 'Package.swift')(filename)
+        or lspconfig_util.root_pattern('compile_commands.json', 'Package.swift')(filename)
         or vim.fs.dirname(vim.fs.find('.git', { path = filename, upward = true })[1])
   end,
 }
@@ -47,28 +48,30 @@ nvim_lsp["tailwindCSS"].setup {
   }
 }
 
--- nvim_lsp.denols.setup {
---   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
--- }
-
--- require('lspconfig').ds_pinyin_lsp.setup {
---   capabilities = capabilities,
---   filetypes = { 'typescript', 'javascript', 'typescriptreact', 'rust', 'lua', 'gitcommit', 'TelescopePrompt' },
---   init_options = {
---     db_path = "/Users/scc/lsp/dict.db3",
---     completion_on = true,
---     match_as_same_as_input = true,
---     show_symbols_only_follow_by_hanzi = true
---   },
--- }
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
     local bufopts = { noremap = true, silent = true, buffer = ev.buf }
     map('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    map('n', 'gd', vim.lsp.buf.definition, bufopts)
+    map('n', 'gd', function()
+      vim.lsp.buf.definition({
+        on_list = function(options)
+          if options.items and #options.items > 1 then
+            local filtered_result = util.filter(options.items, util.filterReactDTS)
+            options.items = filtered_result
+            vim.fn.setqflist({}, " ", options)
+            vim.cmd("cfirst")
+          elseif options.items and #options.items == 1 then
+            local item = options.items[1]
+            vim.fn.setqflist({ item }, "r")
+            vim.cmd("cfirst")
+          else
+            print("No definition found")
+          end
+        end,
+      })
+    end, bufopts)
     map('n', 'K', vim.lsp.buf.hover, bufopts)
     map('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     -- map('n', '<space>.', vim.lsp.buf.code_action, bufopts)
@@ -166,3 +169,4 @@ vim.diagnostic.config({
 --     end
 --   end
 -- })
+

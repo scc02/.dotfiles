@@ -11,4 +11,32 @@ M.get_listed_buf_count = function()
   -- return count
 end
 
+M.filter = function(arr, fn)
+  if type(arr) ~= "table" then
+    return arr
+  end
+
+  --  处理useCallback
+  if #arr == 2 then
+    local first_line = arr[1].lnum
+    if first_line == arr[2].lnum then
+      if (string.match(arr[1].text, 'useCallback') and string.match(arr[2].text, 'useCallback')) then
+        return { arr[1] }
+      end
+    end
+  end
+
+  local filtered = {}
+  for k, v in pairs(arr) do
+    if fn(v, k, arr) then
+      table.insert(filtered, v)
+    end
+  end
+
+  return filtered
+end
+
+M.filterReactDTS = function(value)
+  return string.match(value.user_data.targetUri, 'react/index.d.ts') == nil
+end
 return M
