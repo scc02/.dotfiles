@@ -104,7 +104,6 @@ set -x PATH $PATH $ANDROID_HOME/emulator $ANDROID_HOME/platform-tools
 set -Ux VISUAL nvim      # 选择你喜欢的编辑器，如 vim、nano 等
 set -Ux EDITOR $VISUAL   # 使 $EDITOR 指向 $VISUAL
 
-export GITHUB_TOKEN="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"
 
 alias ff='set selected (fzf --preview="bat --color=always {} --theme  Visual\ Studio\ Dark+"); and test -n "$selected"; and nvim "$selected"'
 # alias ff "fzf | xargs nvim"
