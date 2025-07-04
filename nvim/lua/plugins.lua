@@ -337,7 +337,7 @@ require("lazy").setup({
       })
     end
   },
-  {
+  --[[ {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
     branch = 'dev',
@@ -362,7 +362,7 @@ require("lazy").setup({
         }
       })
     end
-  },
+  }, ]]
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files

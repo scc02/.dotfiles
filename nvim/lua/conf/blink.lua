@@ -84,7 +84,12 @@ blink.setup({
 
     ["<Tab>"] = {
       function(cmp)
-        return cmp.select_next()
+        local is_visible = vim.api.nvim_call_function("codeium#GetStatusString", {})
+        if is_visible ~= '*' then
+            vim.fn['codeium#Accept']()
+        else
+          return cmp.select_next()
+        end
       end,
       "snippet_forward",
       "fallback",
