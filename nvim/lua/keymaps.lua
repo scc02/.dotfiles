@@ -41,6 +41,32 @@ end)
 
 map('n', ',r', ":LspRestart<CR>")
 
+-- 显示当前buffer的LSP错误到quickfix，光标保持在当前位置
+map('n', ',e', function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local diagnostics = vim.diagnostic.get(bufnr, { severity = vim.diagnostic.severity.ERROR })
+
+  local qf_items = {}
+  for _, diag in ipairs(diagnostics) do
+    table.insert(qf_items, {
+      lnum = diag.lnum + 1,
+      col = diag.col + 1,
+      text = diag.message,
+      type = 'E'
+    })
+  end
+
+  vim.fn.setqflist(qf_items)
+  if #qf_items > 0 then
+    local current_win = vim.api.nvim_get_current_win()
+    vim.cmd('copen')
+    vim.cmd('set wrap')
+    vim.api.nvim_set_current_win(current_win)
+  else
+    print('No LSP errors found in current buffer')
+  end
+end)
+
 map('n', 'g;', 'g;')
 
 map('n', 'mt', '%')
@@ -147,6 +173,21 @@ map('n', 'mm', function()
 end)
 
 map('n', ',c', ":let @+ = fnamemodify(expand('%'), ':~:.')<CR>")
+
+vim.keymap.set('v', ',c', function()
+    -- 获取可视区间的起止行号
+    local start_line = vim.fn.line("v")
+    local end_line = vim.fn.line(".")
+    if start_line > end_line then
+        start_line, end_line = end_line, start_line
+    end
+    local path = vim.fn.fnamemodify(vim.fn.expand('%'), ':~:.')
+    local line_info = start_line == end_line and (' 第' .. start_line .. '行') or (' 第' .. start_line .. '-' .. end_line .. '行')
+    -- 退出可视模式（用 feedkeys 更可靠）
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+    -- 设置寄存器
+    vim.fn.setreg('+', path .. line_info)
+end, { noremap = true, silent = true })
 
 -- map('i', '<C-o>', '<Esc>ddO')
 map('i', '<C-d>', function()
@@ -456,5 +497,5 @@ end
 map('n', 'q', '<Nop>')
 map('n', 's', '<Nop>')
 vim.keymap.set("n", "ycc", function()
-    return 'yy' .. vim.v.count1 .. "gcc']p"
+  return 'yy' .. vim.v.count1 .. "gcc']p"
 end, { remap = true, expr = true })

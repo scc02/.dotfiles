@@ -96,8 +96,8 @@ require("lazy").setup({
     tag = 'v2.1.0',
     config = function()
       require('git-conflict').setup({})
-      vim.keymap.set('n', 'cco', ':GitConflictChooseOurs<CR>', {})
-      vim.keymap.set('n', 'cct', ':GitConflictChooseTheirs<CR>', {})
+      -- vim.keymap.set('n', 'cco', ':GitConflictChooseOurs<CR>', {})
+      -- vim.keymap.set('n', 'cct', ':GitConflictChooseTheirs<CR>', {})
     end,
     event = 'BufEnter'
   },

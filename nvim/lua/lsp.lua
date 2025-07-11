@@ -4,13 +4,14 @@ local util = require 'util.util'
 local map = require('util.map')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 -- require 'lsp-conf.tsserver'.init(capabilities)
-local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint', 'ts_ls' }
+local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
     single_file_support = true,
   }
 end
+vim.lsp.enable('biome')
 
 require('lspconfig').sourcekit.setup {
   cmd = { 'sourcekit-lsp' },
@@ -46,6 +47,16 @@ nvim_lsp["tailwindCSS"].setup {
       }
     }
   }
+}
+
+nvim_lsp["ts_ls"].setup {
+  capabilities = capabilities,
+  root_dir = vim.fn.getcwd(),
+  init_options = {
+    preferences = {
+      providePrefixAndSuffixTextForRename = false,
+    },
+  },
 }
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -169,4 +180,3 @@ vim.diagnostic.config({
 --     end
 --   end
 -- })
-
