@@ -142,7 +142,17 @@ vim.diagnostic.config({
   --   -- prefix = "●",
   --   prefix = " ",
   -- },
-  virtual_lines = false,
+  -- virtual_lines = false,
+  -- virtual_text = {
+  --   severity = {
+  --     max = vim.diagnostic.severity.WARN,
+  --   },
+  -- },
+  virtual_lines = {
+    severity = {
+      min = vim.diagnostic.severity.ERROR,
+    },
+  },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = ' ',
