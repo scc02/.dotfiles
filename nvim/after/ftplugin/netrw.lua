@@ -3,10 +3,32 @@ local o = vim.opt
 
 o.colorcolumn = nil
 
--- Line numbers etc in Netrw
-map('n', 'N', '%', { remap = true, buffer = true })
+map('n', 'N', function()
+  local file_name = vim.fn.input("File name: ")
+  if file_name ~= '' then
+    local curdir = vim.b.netrw_curdir
+    vim.fn.writefile({}, curdir .. '/' .. file_name)
+    vim.cmd('e')
+    vim.fn.search('^' .. vim.fn.escape(file_name, '[]') .. '$')
+  end
+end, { remap = true, buffer = true })
 -- new Dir
-map('n', 'K', '<Plug>NetrwMakeDir', { remap = true, buffer = true })
+map('n', 'K', function()
+  local dir_name = vim.fn.input("Directory name: ")
+  if dir_name ~= '' then
+    local curdir = vim.b.netrw_curdir
+    local full_path = curdir .. '/' .. dir_name
+    if vim.fn.mkdir(full_path) == 0 then
+      print("Failed to create directory: " .. dir_name)
+      return
+    end
+    vim.cmd('e ' .. vim.fn.fnameescape(curdir))
+    -- 匹配带 / 的目录名
+    vim.defer_fn(function()
+      vim.fn.search('^' .. vim.fn.escape(dir_name, '[]') .. '/$', 'c')
+    end, 50)
+  end
+end, { remap = true, buffer = true })
 -- toggle hidden file
 map('n', '.', 'gh', { remap = true, buffer = true })
 -- delete file
