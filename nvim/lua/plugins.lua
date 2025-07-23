@@ -46,11 +46,10 @@ require("lazy").setup({
     event = 'BufEnter'
   },
   {
-    'sindrets/diffview.nvim',
+    'scc02/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     config = function() require('conf.diffview') end,
     cmd = { 'DiffviewFileHistory', 'DiffviewOpen' },
-    version = "4516612fe98ff56ae0415a259ff6361a89419b0a"
   },
   {
     "brenoprata10/nvim-highlight-colors",

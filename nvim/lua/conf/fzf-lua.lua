@@ -149,3 +149,46 @@ vim.keymap.set("n", "<leader>ft", function()
   })
 end, { desc = "Live grep for two words" }) -- 键映射描述
 -- require("fzf-lua").grep({ search = string.format("(?=.*%s)(?=.*%s)", 'half', 'page'), no_esc=true, rg_opts = [[--pcre2 --column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e]] })
+
+-- 在references文件中搜索字符
+vim.keymap.set("n", "<leader>fr", function()
+  local fzf = require("fzf-lua")
+
+  -- 检查 LSP 是否可用
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  if #clients == 0 then
+    vim.notify("没有活跃的 LSP 服务器", vim.log.levels.ERROR)
+    return
+  end
+
+  -- 获取当前光标下符号的引用（不包含声明）
+  vim.lsp.buf.references(nil, {
+    includeDeclaration = false,
+    on_list = function(options)
+      local paths_set = {}
+      local paths = {}
+
+      -- 从 LSP 返回的 items 中提取文件名
+      for _, item in ipairs(options.items) do
+        local filename = item.filename
+        if filename and not paths_set[filename] then
+          paths_set[filename] = true
+          table.insert(paths, filename)
+        end
+      end
+
+      if #paths == 0 then
+        vim.notify("没有找到引用文件", vim.log.levels.WARN)
+        return
+      end
+
+      -- 使用 fzf.grep 限制在指定文件中搜索
+      fzf.grep({
+        prompt = "Search in Files> ",
+        search_paths = paths,  -- 限制在这些文件中搜索
+        rg_opts = "--column --line-number --no-heading --color=always --smart-case",
+      })
+    end,
+  })
+end, { desc = "在当前光标符号的引用文件中搜索" })
+
