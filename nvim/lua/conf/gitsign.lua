@@ -1,9 +1,9 @@
 require('gitsigns').setup {
-  current_line_blame = true,
+  -- current_line_blame = true,
   current_line_blame_opts = {
     virt_text = true,
     virt_text_pos = 'eol',
-    delay = 400,
+    delay = 200,
     ignore_whitespace = true,
   },
   on_attach = function(bufnr)
