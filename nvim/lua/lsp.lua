@@ -1,17 +1,18 @@
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
 local lspconfig_util = require 'lspconfig.util'
 local util = require 'util.util'
 local map = require('util.map')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
+local configs = require "lspconfig.configs"
 -- require 'lsp-conf.tsserver'.init(capabilities)
 local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint' }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+  lspconfig[lsp].setup {
     capabilities = capabilities,
     single_file_support = true,
   }
 end
-vim.lsp.enable('biome')
+-- vim.lsp.enable('biome')
 
 require('lspconfig').sourcekit.setup {
   cmd = { 'sourcekit-lsp' },
@@ -37,7 +38,7 @@ require('lspconfig').sourcekit.setup {
   end,
 }
 
-nvim_lsp["tailwindCSS"].setup {
+lspconfig["tailwindCSS"].setup {
   capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
   settings = {
@@ -49,7 +50,7 @@ nvim_lsp["tailwindCSS"].setup {
   }
 }
 
-nvim_lsp["ts_ls"].setup {
+lspconfig["ts_ls"].setup {
   capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
   init_options = {
@@ -58,6 +59,38 @@ nvim_lsp["ts_ls"].setup {
     },
   },
 }
+--[[ if not configs.tsgo then
+  configs.tsgo = {
+    default_config = {
+      cmd = { "tsgo", "--lsp", "--stdio" },
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+      },
+      root_dir = lspconfig.util.root_pattern(
+        "tsconfig.json",
+        "jsconfig.json",
+        "package.json",
+        ".git",
+        "tsconfig.base.json"
+      ),
+      settings = {},
+    },
+  }
+end
+
+lspconfig.tsgo.setup {
+  capabilities = capabilities,
+  init_options = {
+    preferences = {
+      providePrefixAndSuffixTextForRename = false,
+    },
+  },
+} ]]
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -141,9 +174,9 @@ vim.diagnostic.config({
     -- current_line = true,
     -- prefix = "●",
     prefix = " ",
-      severity = {
-        min = vim.diagnostic.severity.ERROR,
-      },
+    severity = {
+      min = vim.diagnostic.severity.ERROR,
+    },
   },
   -- virtual_lines = false,
   -- virtual_text = {
