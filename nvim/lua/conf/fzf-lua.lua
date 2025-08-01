@@ -158,6 +158,7 @@ require("fzf-lua").setup({
     gitignore = false, -- 禁用 fzf-lua 默认的 gitignore 过滤
     no_header = true,
     cwd_prompt = false,
+    no_header_i = true, -- 隐藏交互式帮助信息
     winopts = {
       preview = {
         hidden = "hidden", -- 默认隐藏预览
