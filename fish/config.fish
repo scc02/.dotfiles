@@ -104,6 +104,10 @@ set -x PATH $PATH $ANDROID_HOME/emulator $ANDROID_HOME/platform-tools
 set -Ux VISUAL nvim      # 选择你喜欢的编辑器，如 vim、nano 等
 set -Ux EDITOR $VISUAL   # 使 $EDITOR 指向 $VISUAL
 
+# Load sensitive information if available
+if test -f ~/.config/fish/secrets.fish
+  source ~/.config/fish/secrets.fish
+end
 
 alias ff='set selected (fzf --preview="bat --color=always {} --theme  Visual\ Studio\ Dark+"); and test -n "$selected"; and nvim "$selected"'
 # alias ff "fzf | xargs nvim"
@@ -142,3 +146,9 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+
+alias py="python3 -m http.server 8000"
+
+alias g="gemini"
+alias c="claude"
+alias q="qwen"
