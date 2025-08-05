@@ -50,7 +50,7 @@ lspconfig["tailwindCSS"].setup {
   }
 }
 
-lspconfig["ts_ls"].setup {
+--[[ lspconfig["ts_ls"].setup {
   capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
   init_options = {
@@ -58,8 +58,8 @@ lspconfig["ts_ls"].setup {
       providePrefixAndSuffixTextForRename = false,
     },
   },
-}
---[[ if not configs.tsgo then
+} ]]
+if not configs.tsgo then
   configs.tsgo = {
     default_config = {
       cmd = { "tsgo", "--lsp", "--stdio" },
@@ -90,7 +90,7 @@ lspconfig.tsgo.setup {
       providePrefixAndSuffixTextForRename = false,
     },
   },
-} ]]
+}
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -99,22 +99,35 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local bufopts = { noremap = true, silent = true, buffer = ev.buf }
     map('n', 'gD', vim.lsp.buf.declaration, bufopts)
     map('n', 'gd', function()
-      vim.lsp.buf.definition({
-        on_list = function(options)
-          if options.items and #options.items > 1 then
-            local filtered_result = util.filter(options.items, util.filterReactDTS)
-            options.items = filtered_result
-            vim.fn.setqflist({}, " ", options)
-            vim.cmd("cfirst")
-          elseif options.items and #options.items == 1 then
-            local item = options.items[1]
-            vim.fn.setqflist({ item }, "r")
-            vim.cmd("cfirst")
-          else
-            print("No definition found")
-          end
-        end,
-      })
+      local clients = vim.lsp.get_clients({ bufnr = ev.buf })
+      local is_ts_ls_attached = false
+      for _, client in ipairs(clients) do
+        if client.name == "ts_ls" then
+          is_ts_ls_attached = true
+          break
+        end
+      end
+
+      if is_ts_ls_attached then
+        vim.lsp.buf.definition({
+          on_list = function(options)
+            if options.items and #options.items > 1 then
+              local filtered_result = util.filter(options.items, util.filterReactDTS)
+              options.items = filtered_result
+              vim.fn.setqflist({}, " ", options)
+              vim.cmd("cfirst")
+            elseif options.items and #options.items == 1 then
+              local item = options.items[1]
+              vim.fn.setqflist({ item }, "r")
+              vim.cmd("cfirst")
+            else
+              print("No definition found")
+            end
+          end,
+        })
+      else
+        vim.lsp.buf.definition()
+      end
     end, bufopts)
     map('n', 'K', vim.lsp.buf.hover, bufopts)
     map('n', '<space>rn', vim.lsp.buf.rename, bufopts)
@@ -206,6 +219,9 @@ vim.diagnostic.config({
   update_in_insert = false,
   underline = true,
   severity_sort = true,
+  float = {
+    source = true,
+  }
   -- Lsp报错的提示框
   -- float = {
   --   focusable = true,
@@ -216,4 +232,3 @@ vim.diagnostic.config({
   --   prefix = "",
   -- },
 })
-
