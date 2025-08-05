@@ -5,6 +5,7 @@ map('n', ',w', ":FzfLua grep<cr>")
 map('n', ',o', ":FzfLua oldfiles<CR>")
 map('n', '<space>.', ":FzfLua lsp_code_actions<CR>")
 map('n', '<leader>fg', ":FzfLua git_status<CR>")
+map('n', '<leader>fl', ":FzfLua<CR>")
 -- 用于查找完整的单词
 map('n', '<leader>fe', function()
   local word = vim.fn.input("Search > ")
