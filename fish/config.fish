@@ -143,3 +143,10 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+
+if test -f ~/.config/fish/secrets.fish
+  source ~/.config/fish/secrets.fish
+end
+alias c="claude"
+alias q="qwen"
+alias g="gemini"

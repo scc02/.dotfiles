@@ -11,6 +11,7 @@ rio
 karabiner
 # karabiner/automatic_backups
 fish/fish_variables
+secrets.fish
 
 nvim/plugin/packer_compiled.lua
   

@@ -37,7 +37,7 @@ require("fzf-lua").setup({
   },
   winopts = {
     preview = {
-      layout = "vertical",   -- 上下分屏（"horizontal" 是左右）
+      layout = "vertical", -- 上下分屏（"horizontal" 是左右）
       -- vertical = "down:50%", -- 向下展开，占用 50% 高度
     },
     -- on_create = function()
@@ -94,6 +94,7 @@ require("fzf-lua").setup({
     gitignore = false, -- 禁用 fzf-lua 默认的 gitignore 过滤
     no_header = true,
     cwd_prompt = false,
+    no_header_i = true,
     winopts = {
       preview = {
         hidden = "hidden", -- 默认隐藏预览
@@ -102,6 +103,7 @@ require("fzf-lua").setup({
   },
   grep = {
     no_header = true,
+    no_header_i = true,
     -- no_ignore = true,
   },
   keymap = {
