@@ -17,8 +17,8 @@ map('i', '<C-d>', '<Esc>yypi')
 -- map('i', '<C-o>', '<Esc>ddO')
 
 map('n', '[[', "<Cmd>call search('[([{<]')<CR>")
-map('n','gd', function ()
-    require('vscode').action('editor.action.revealDefinition')
+map('n', 'gd', function()
+  require('vscode').action('editor.action.revealDefinition')
 end)
 
 -- 前进光标记录newer
@@ -36,8 +36,8 @@ map('n', 'p', "p`]")
 map('n', '<tab>', "<Cmd>call VSCodeNotify('workbench.action.nextEditorInGroup')<CR>")
 map('n', '<S-tab>', "<Cmd>call VSCodeNotify('workbench.action.previousEditorInGroup')<CR>")
 
--- map('n', 'sv', "<Cmd>call VSCodeNotify('workbench.action.splitEditorRight')<CR>")
--- map('n', 'ss', "<Cmd>call VSCodeNotify('workbench.action.splitEditorDown')<CR>")
+map('n', 'sv', "<Cmd>call VSCodeNotify('workbench.action.splitEditorRight')<CR>")
+map('n', 'ss', "<Cmd>call VSCodeNotify('workbench.action.splitEditorDown')<CR>")
 map('n', '<leader>o', "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR>")
 map('n', 'co', "<Cmd>call VSCodeNotify('workbench.action.closeOtherEditors')<CR>")
 
@@ -100,10 +100,29 @@ map('n', '<leader>e', "<Cmd>call VSCodeNotify('revealInExplorer')<CR>")
 -- map('n', 'md', "<cmd>call VSCodeNotify('bookmarks.clear')<CR>")
 --
 
-map('n','<leader>l',function ()
+map('n', '<leader>l', function()
   require('vscode').action('editor.action.showHover')
 end)
 
-map('n','<leader>.',function ()
+map('n', '<leader>.', function()
   require('vscode').action('editor.action.quickFix')
 end)
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+  callback = function()
+    require('vscode').action('editor.cpp.disableenabled')
+  end
+});
+vim.api.nvim_create_autocmd("InsertEnter", {
+  callback = function()
+    require('vscode').action('editor.action.enableCppGlobally')
+  end
+});
+
+map('n', 'za', function()
+  require('vscode').action('editor.toggleFold')
+end)
+map('n', ',a', function()
+  require('vscode').action('editor.toggleFold')
+end)
+
