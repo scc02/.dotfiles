@@ -12,7 +12,7 @@ for _, lsp in ipairs(servers) do
     single_file_support = true,
   }
 end
-vim.lsp.enable('biome')
+-- vim.lsp.enable('biome')
 
 require('lspconfig').sourcekit.setup {
   cmd = { 'sourcekit-lsp' },
