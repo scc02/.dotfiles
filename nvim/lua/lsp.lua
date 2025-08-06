@@ -5,7 +5,7 @@ local map = require('util.map')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 local configs = require "lspconfig.configs"
 -- require 'lsp-conf.tsserver'.init(capabilities)
-local servers = { 'html', 'cssls', 'tailwindcss', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint' }
+local servers = { 'html', 'cssls', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
@@ -50,7 +50,7 @@ lspconfig["tailwindCSS"].setup {
   }
 }
 
---[[ lspconfig["ts_ls"].setup {
+lspconfig["ts_ls"].setup {
   capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
   init_options = {
@@ -58,8 +58,9 @@ lspconfig["tailwindCSS"].setup {
       providePrefixAndSuffixTextForRename = false,
     },
   },
-} ]]
-if not configs.tsgo then
+}
+-- 不支持rename
+--[[ if not configs.tsgo then
   configs.tsgo = {
     default_config = {
       cmd = { "tsgo", "--lsp", "--stdio" },
@@ -90,7 +91,7 @@ lspconfig.tsgo.setup {
       providePrefixAndSuffixTextForRename = false,
     },
   },
-}
+} ]]
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
