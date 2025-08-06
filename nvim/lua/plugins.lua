@@ -46,7 +46,7 @@ require("lazy").setup({
     event = 'BufEnter'
   },
   {
-    'sindrets/diffview.nvim',
+    'scc02/diffview.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
     config = function() require('conf.diffview') end,
     cmd = { 'DiffviewFileHistory', 'DiffviewOpen' }
