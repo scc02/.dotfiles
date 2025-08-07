@@ -245,28 +245,33 @@ map('n', '<C-k>', '<C-\\><C-N><C-k>')
 
 -- 关闭当前
 map('n', ',d', function()
-  local len = #vim.api.nvim_list_wins()
-  -- local bufferLen = vim.api.nvim_exec("echo len(getbufinfo({'buflisted':1}))", true)
-  local bufferLen = get_listed_buf_count()
-  if (len > 1) then
-    if (bufferLen == 1) then
-      vim.cmd("q")
-      -- 配合nvim-tree的preview
-    elseif (vim.bo.bufhidden == 'delete') then
-      -- local isNvimtreeOpen = require 'nvim-tree.view'.is_visible()
-      -- if isNvimtreeOpen then
-      --   vim.cmd('NvimTreeClose')
-      --   vim.cmd("bd!")
-      --   vim.cmd('NvimTreeOpen')
-      -- else
-      vim.cmd("bd!")
-      -- end
-    else
-      vim.cmd("b#|bd#")
-    end
-  else
-    vim.cmd('bd!')
-  end
+  vim.cmd('bd!')
+  -- local len = #vim.api.nvim_list_wins()
+  -- -- local bufferLen = vim.api.nvim_exec("echo len(getbufinfo({'buflisted':1}))", true)
+  -- local bufferLen = get_listed_buf_count()
+  -- if (len > 1) then
+  --   print("1")
+  --   if (bufferLen == 1) then
+  --     print("2")
+  --     vim.cmd("q")
+  --     -- 配合nvim-tree的preview
+  --   elseif (vim.bo.bufhidden == 'delete') then
+  --     -- local isNvimtreeOpen = require 'nvim-tree.view'.is_visible()
+  --     -- if isNvimtreeOpen then
+  --     --   vim.cmd('NvimTreeClose')
+  --     --   vim.cmd("bd!")
+  --     --   vim.cmd('NvimTreeOpen')
+  --     -- else
+  --     vim.cmd("bd!")
+  --     -- end
+  --   else
+  --     print("3")
+  --     vim.cmd("b#|bd#")
+  --   end
+  -- else
+  --   print("4")
+  --   vim.cmd('bd!')
+  -- end
 end)
 
 map('n', 'co', '<Cmd>BufferLineCloseOthers<CR>', { noremap = true, silent = true })
