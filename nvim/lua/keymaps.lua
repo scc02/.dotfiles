@@ -318,9 +318,6 @@ map({ "n", "v" }, "<leader><TAB>", function()
   cleanup_invalid_buffers(2)
   vim.cmd([[BufferLineCyclePrev]])
 end)
--- map('n', '<leader>;', "<cmd>BufferLineTogglePin<CR>")
--- map('n', 'c;', "<cmd>BufferLineGroupClose ungrouped<CR>")
--- map('n', '<leader>;', "<Cmd>BufferPin<CR>", { nowait = true })
 
 -- vim-fugitive
 map('n', '<leader>gp', function()
