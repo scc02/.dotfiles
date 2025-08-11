@@ -105,6 +105,7 @@ require("fzf-lua").setup({
   grep = {
     no_header = true,
     no_header_i = true,
+    headers = false,
     -- no_ignore = true,
   },
   keymap = {

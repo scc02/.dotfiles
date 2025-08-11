@@ -5,13 +5,32 @@ local map = require('util.map')
 local capabilities = require('blink.cmp').get_lsp_capabilities()
 local configs = require "lspconfig.configs"
 -- require 'lsp-conf.tsserver'.init(capabilities)
-local servers = { 'html', 'cssls', 'jsonls', 'rust_analyzer', 'lua_ls', 'eslint' }
+local servers = { 'html', 'cssls', 'jsonls', 'rust_analyzer', 'lua_ls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
     single_file_support = true,
   }
 end
+
+-- ESLint LSP 只在发现配置文件时启动
+lspconfig.eslint.setup {
+  capabilities = capabilities,
+  root_dir = lspconfig_util.root_pattern(
+    '.eslintrc',
+    '.eslintrc.js',
+    '.eslintrc.cjs',
+    '.eslintrc.yaml',
+    '.eslintrc.yml',
+    '.eslintrc.json',
+    'eslint.config.js',
+    'eslint.config.mjs',
+    'eslint.config.cjs'
+  ),
+  settings = {
+    packageManager = 'npm'
+  }
+}
 -- vim.lsp.enable('biome')
 
 require('lspconfig').sourcekit.setup {
