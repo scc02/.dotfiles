@@ -340,7 +340,14 @@ map('n', '<leader>gp', function()
           vim.notify('Git push output: ' .. table.concat(non_empty_lines, '\n'), vim.log.levels.INFO)
         end
       end
-    end
+    end,
+    on_exit = function(_, code)
+      if code == 0 then
+        vim.notify('Git push completed successfully', vim.log.levels.INFO)
+      else
+        vim.notify('Git push failed with exit code: ' .. code, vim.log.levels.ERROR)
+      end
+    end,
   })
 
   vim.notify('Git push started in background...', vim.log.levels.INFO)
