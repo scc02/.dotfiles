@@ -323,7 +323,29 @@ end)
 -- map('n', '<leader>;', "<Cmd>BufferPin<CR>", { nowait = true })
 
 -- vim-fugitive
-map('n', '<leader>gp', ':Git push<CR>')
+map('n', '<leader>gp', function()
+  -- 异步执行 Git push
+  vim.fn.jobstart('git push', {
+    on_stdout = function(_, data, _)
+      if data then
+        vim.notify('Git push output: ' .. table.concat(data, '\n'), vim.log.levels.INFO)
+      end
+    end,
+    on_stderr = function(_, data, _)
+      if data then
+        vim.notify('Git push error: ' .. table.concat(data, '\n'), vim.log.levels.ERROR)
+      end
+    end,
+    on_exit = function(_, code, _)
+      if code == 0 then
+        vim.notify('Git push completed successfully', vim.log.levels.INFO)
+      else
+        vim.notify('Git push failed with exit code: ' .. code, vim.log.levels.ERROR)
+      end
+    end,
+  })
+  vim.notify('Git push started in background...', vim.log.levels.INFO)
+end)
 map('n', ',g', function()
   if is_git.is_git_dir() then
     vim.cmd('Git')
