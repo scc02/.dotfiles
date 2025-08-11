@@ -340,35 +340,7 @@ map('n', '<leader>gp', function()
           vim.notify('Git push output: ' .. table.concat(non_empty_lines, '\n'), vim.log.levels.INFO)
         end
       end
-    end,
-    on_stderr = function(_, data)
-      if data then
-        -- 过滤掉空行
-        local non_empty_lines = {}
-        for _, line in ipairs(data) do
-          if line ~= "" then
-            table.insert(non_empty_lines, line)
-          end
-        end
-
-        if #non_empty_lines > 0 then
-          local output = table.concat(non_empty_lines, '\n')
-          -- 检查是否为错误信息，git push的进度信息会包含 "To " 或 " -> "
-          if output:match("^To ") or output:match(" %-> ") then
-            vim.notify('Git push progress: ' .. output, vim.log.levels.INFO)
-          else
-            vim.notify('Git push error: ' .. output, vim.log.levels.ERROR)
-          end
-        end
-      end
-    end,
-    on_exit = function(_, code)
-      if code == 0 then
-        vim.notify('Git push completed successfully', vim.log.levels.INFO)
-      else
-        vim.notify('Git push failed with exit code: ' .. code, vim.log.levels.ERROR)
-      end
-    end,
+    end
   })
 
   vim.notify('Git push started in background...', vim.log.levels.INFO)
