@@ -324,6 +324,8 @@ end)
 
 -- vim-fugitive
 map('n', '<leader>gp', function()
+  -- 关闭当前窗口
+  vim.cmd('close')
   -- 异步执行 Git push
   vim.fn.jobstart({ 'git', 'push' }, {
     on_stdout = function(_, data)
