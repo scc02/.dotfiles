@@ -327,13 +327,15 @@ map('n', '<leader>gp', function()
   -- 异步执行 Git push
   vim.fn.jobstart('git push', {
     on_stdout = function(_, data, _)
-      if data then
-        vim.notify('Git push output: ' .. table.concat(data, '\n'), vim.log.levels.INFO)
+      if data and #data > 0 and data[1] ~= "" then
+        local output = table.concat(data, '\n')
+        vim.notify('Git push output: ' .. output, vim.log.levels.INFO)
       end
     end,
     on_stderr = function(_, data, _)
-      if data then
-        vim.notify('Git push error: ' .. table.concat(data, '\n'), vim.log.levels.ERROR)
+      if data and #data > 0 and data[1] ~= "" then
+        local error = table.concat(data, '\n')
+        vim.notify('Git push error: ' .. error, vim.log.levels.ERROR)
       end
     end,
     on_exit = function(_, code, _)
