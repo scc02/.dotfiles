@@ -157,7 +157,7 @@ vim.keymap.set('v', ',c', function()
   end
   local path = vim.fn.fnamemodify(vim.fn.expand('%'), ':~:.')
   local line_info = start_line == end_line and (' 第' .. start_line .. '行') or
-  (' 第' .. start_line .. '-' .. end_line .. '行')
+      (' 第' .. start_line .. '-' .. end_line .. '行')
   -- 退出可视模式（用 feedkeys 更可靠）
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
   -- 设置寄存器
@@ -325,20 +325,38 @@ end)
 -- vim-fugitive
 map('n', '<leader>gp', function()
   -- 异步执行 Git push
-  vim.fn.jobstart('git push', {
-    on_stdout = function(_, data, _)
-      if data and #data > 0 and data[1] ~= "" then
-        local output = table.concat(data, '\n')
-        vim.notify('Git push output: ' .. output, vim.log.levels.INFO)
+  vim.fn.jobstart({ 'git', 'push' }, {
+    on_stdout = function(_, data)
+      if data then
+        -- 过滤掉空行
+        local non_empty_lines = {}
+        for _, line in ipairs(data) do
+          if line ~= "" then
+            table.insert(non_empty_lines, line)
+          end
+        end
+
+        if #non_empty_lines > 0 then
+          vim.notify('Git push output: ' .. table.concat(non_empty_lines, '\n'), vim.log.levels.INFO)
+        end
       end
     end,
-    on_stderr = function(_, data, _)
-      if data and #data > 0 and data[1] ~= "" then
-        local error = table.concat(data, '\n')
-        vim.notify('Git push error: ' .. error, vim.log.levels.ERROR)
+    on_stderr = function(_, data)
+      if data then
+        -- 过滤掉空行
+        local non_empty_lines = {}
+        for _, line in ipairs(data) do
+          if line ~= "" then
+            table.insert(non_empty_lines, line)
+          end
+        end
+
+        if #non_empty_lines > 0 then
+          vim.notify('Git push error: ' .. table.concat(non_empty_lines, '\n'), vim.log.levels.ERROR)
+        end
       end
     end,
-    on_exit = function(_, code, _)
+    on_exit = function(_, code)
       if code == 0 then
         vim.notify('Git push completed successfully', vim.log.levels.INFO)
       else
@@ -346,6 +364,7 @@ map('n', '<leader>gp', function()
       end
     end,
   })
+
   vim.notify('Git push started in background...', vim.log.levels.INFO)
 end)
 map('n', ',g', function()
