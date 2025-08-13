@@ -203,14 +203,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- end
 
 vim.diagnostic.config({
-  virtual_text = {
+  -- virtual_text = {
     -- current_line = true,
     -- prefix = "●",
-    prefix = " ",
-    severity = {
-      min = vim.diagnostic.severity.ERROR,
-    },
-  },
+    -- prefix = " ",
+    -- severity = {
+    --   min = vim.diagnostic.severity.ERROR,
+    -- },
+  -- },
   -- virtual_lines = false,
   -- virtual_text = {
   --   severity = {
