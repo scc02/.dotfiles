@@ -319,6 +319,7 @@ map('n', '<leader>gp', function()
     on_exit = function(_, code)
       if code == 0 then
         vim.notify('Git push completed successfully', vim.log.levels.INFO)
+        vim.cmd('redraw!')
       else
         vim.notify('Git push failed with exit code: ' .. code, vim.log.levels.ERROR)
       end
