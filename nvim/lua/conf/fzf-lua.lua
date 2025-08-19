@@ -2,7 +2,7 @@ local actions = require("fzf-lua").actions
 local map = require "util.map"
 map('n', ',f', ":FzfLua files<cr>")
 map('n', ',w', ":FzfLua grep<cr>")
-map('n', ',o', ":FzfLua oldfiles<CR>")
+map('n', '<space>o', ":FzfLua oldfiles<CR>")
 map('n', '<space>.', ":FzfLua lsp_code_actions<CR>")
 map('n', '<leader>fg', ":FzfLua git_status<CR>")
 map('n', '<leader>fl', ":FzfLua<CR>")

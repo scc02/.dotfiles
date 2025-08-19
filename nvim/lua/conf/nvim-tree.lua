@@ -1,29 +1,5 @@
-local api = require('nvim-tree.api')
-local list_binds = {
-  { key = "sl", cb = '<C-w>l' },
-  { key = "sf", cb = '<C-w>h' },
-  { key = "sv", cb = '' },
-  { key = "ss", cb = '' },
-  {
-    key = "h",
-    action_cb = function()
-      api.node.navigate.parent_close()
-    end
-  },
-  {
-    key = "l",
-    action_cb = function()
-      api.node.open.no_window_picker()
-    end
-  },
-  {
-    key = "<leader>fd",
-    action = "find word",
-    action_cb = function(node)
-      require('conf.telescope').telescope_find_word_in_specifeid_file(node.absolute_path)
-    end
-  },
-}
+local map       = require('util.map')
+
 local git_icons = {
   unstaged = "",
   staged = "",
@@ -33,11 +9,36 @@ local git_icons = {
   deleted = "",
   ignored = "◌"
 }
+
+map('n', ',e', function()
+  local api = require('nvim-tree.api')
+  if api.tree.is_visible() then
+    api.tree.close()
+  else
+    vim.cmd('NvimTreeFindFile')
+  end
+end)
+map('n', ',o', ':NvimTreeCollapse<CR>')
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  -- 默认按键映射
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- 自定义按键映射
+  vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
+end
+
 require 'nvim-tree'.setup {
+  on_attach = on_attach,
   view = {
-    mappings = {
-      -- list = list_binds,
-    },
+    adaptive_size = true
+    -- side = "right",
     -- float = {
     --   enable = true,
     --   open_win_config = {

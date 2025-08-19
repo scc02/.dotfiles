@@ -504,6 +504,12 @@ require("lazy").setup({
       { "<leader>po", function() require("overlook.api").open_in_original_window() end, desc = "Open popup in current window" },
       { "<leader>pr", function() require("overlook.api").restore_popup() end,           desc = "Overlook: Restore popup" },
     },
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    config = function ()
+      require('conf.nvim-tree')
+    end
   }
 
   -- {

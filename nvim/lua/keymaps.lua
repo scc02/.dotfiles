@@ -245,7 +245,40 @@ map('n', '<C-k>', '<C-\\><C-N><C-k>')
 
 -- 关闭当前
 map('n', ',d', function()
-  vim.cmd('bd!')
+  local current_buf = vim.api.nvim_get_current_buf()
+  local current_filetype = vim.bo[current_buf].filetype
+  
+  -- 如果当前是特殊类型的 buffer，使用专门的关闭方式
+  if current_filetype == 'netrw' then
+    vim.cmd('bd')
+    return
+  end
+  if current_filetype == 'NvimTree' then
+    require('nvim-tree.api').tree.close()
+    return
+  end
+  local buffers = vim.api.nvim_list_bufs()
+  local valid_buffers = {}
+  -- 收集所有有效的 buffer（排除当前要删除的、nvim-tree 等）
+  for _, buf in ipairs(buffers) do
+    if buf ~= current_buf and vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_is_loaded(buf) then
+      local filetype = vim.bo[buf].filetype
+      local bufname = vim.api.nvim_buf_get_name(buf)
+      if filetype ~= 'NvimTree' and filetype ~= 'qf' and filetype ~= 'netrw' and not string.find(bufname, 'fugitive') then
+        table.insert(valid_buffers, buf)
+      end
+    end
+  end
+  -- 如果有其他有效 buffer，切换到最近的一个
+  if #valid_buffers > 0 then
+    vim.api.nvim_set_current_buf(valid_buffers[#valid_buffers])
+  end
+  -- 安全删除 buffer
+  pcall(function()
+    if vim.api.nvim_buf_is_valid(current_buf) then
+      vim.cmd('bd! ' .. current_buf)
+    end
+  end)
 end)
 
 map('n', 'co', '<Cmd>BufferLineCloseOthers<CR>', { noremap = true, silent = true })
