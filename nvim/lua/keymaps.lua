@@ -39,7 +39,7 @@ end)
 --   end)
 -- end)
 
-map('n', ',r', ":LspRestart<CR>")
+-- map('n', ',r', ":LspRestart<CR>")
 
 map('n', 'g;', 'g;')
 
@@ -257,6 +257,7 @@ map('n', ',d', function()
     require('nvim-tree.api').tree.close()
     return
   end
+  
   local buffers = vim.api.nvim_list_bufs()
   local valid_buffers = {}
   -- 收集所有有效的 buffer（排除当前要删除的、nvim-tree 等）
@@ -264,21 +265,51 @@ map('n', ',d', function()
     if buf ~= current_buf and vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_is_loaded(buf) then
       local filetype = vim.bo[buf].filetype
       local bufname = vim.api.nvim_buf_get_name(buf)
-      if filetype ~= 'NvimTree' and filetype ~= 'qf' and filetype ~= 'netrw' and not string.find(bufname, 'fugitive') then
+      local buflisted = vim.bo[buf].buflisted
+      -- 只选择有文件名、已列出且不是特殊类型的 buffer
+      if filetype ~= 'NvimTree' and filetype ~= 'qf' and filetype ~= 'netrw' 
+         and not string.find(bufname, 'fugitive') and bufname ~= '' 
+         and buflisted then
         table.insert(valid_buffers, buf)
       end
     end
   end
-  -- 如果有其他有效 buffer，切换到最近的一个
+  
+  -- 如果有其他有效 buffer，先切换到它，再删除当前 buffer
   if #valid_buffers > 0 then
-    vim.api.nvim_set_current_buf(valid_buffers[#valid_buffers])
+    -- 选择最近访问的 buffer（通过 bufferline 插件获取顺序）
+    local target_buf = valid_buffers[1]
+    for _, buf in ipairs(valid_buffers) do
+      if vim.fn.buflisted(buf) == 1 and vim.api.nvim_buf_get_name(buf) ~= '' then
+        target_buf = buf
+        break
+      end
+    end
+    vim.api.nvim_set_current_buf(target_buf)
+  else
+    -- 如果没有有效 buffer，创建一个新的空 buffer
+    vim.cmd('enew')
   end
+  
   -- 安全删除 buffer
   pcall(function()
     if vim.api.nvim_buf_is_valid(current_buf) then
       vim.cmd('bd! ' .. current_buf)
     end
   end)
+  
+  -- 确保焦点不在 nvim-tree 上
+  local current_win_buf = vim.api.nvim_win_get_buf(0)
+  if vim.bo[current_win_buf].filetype == 'NvimTree' then
+    -- 如果当前焦点在 nvim-tree，寻找其他窗口
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local win_buf = vim.api.nvim_win_get_buf(win)
+      if vim.bo[win_buf].filetype ~= 'NvimTree' and vim.api.nvim_win_is_valid(win) then
+        vim.api.nvim_set_current_win(win)
+        break
+      end
+    end
+  end
 end)
 
 map('n', 'co', '<Cmd>BufferLineCloseOthers<CR>', { noremap = true, silent = true })
