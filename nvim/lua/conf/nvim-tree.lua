@@ -51,6 +51,7 @@ require 'nvim-tree'.setup {
     dotfiles = true,
   },
   renderer = {
+    root_folder_label = false,
     icons = {
       git_placement = "after",
       modified_placement = "after",

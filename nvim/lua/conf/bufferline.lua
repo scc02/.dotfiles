@@ -1,7 +1,7 @@
 ---@diagnostic disable: missing-fields
 vim.opt.termguicolors = true
 require("bufferline").setup {
-  highlights = require("catppuccin.groups.integrations.bufferline").get(),
+  highlights = require("catppuccin.groups.integrations.bufferline").get_theme(),
   options = {
     close_icon = 'x',
     buffer_close_icon = 'x',

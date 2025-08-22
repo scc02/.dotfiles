@@ -63,7 +63,14 @@ lspconfig["tailwindCSS"].setup {
   settings = {
     tailwindCSS = {
       experimental = {
-        configFile = './node_modules/@dian/vite-preset-react/lib/tailwindcss.config.js'
+        configFile = (function()
+          local config_path = './node_modules/@dian/vite-preset-react/lib/tailwindcss.config.js'
+          if vim.fn.filereadable(config_path) == 1 then
+            return config_path
+          else
+            return nil
+          end
+        end)()
       }
     }
   }

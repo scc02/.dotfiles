@@ -108,16 +108,21 @@ map('n', '<leader>.', function()
   require('vscode').action('editor.action.quickFix')
 end)
 
-vim.api.nvim_create_autocmd("InsertLeave", {
-  callback = function()
-    require('vscode').action('editor.cpp.disableenabled')
-  end
-});
-vim.api.nvim_create_autocmd("InsertEnter", {
-  callback = function()
-    require('vscode').action('editor.action.enableCppGlobally')
-  end
-});
+if vim.env.VSCODE_CLIENT_TYPE == 'cursor' then
+  vim.api.nvim_create_autocmd("InsertLeave", {
+    callback = function()
+      require('vscode').action('editor.cpp.disableenabled')
+    end
+  });
+  vim.api.nvim_create_autocmd("InsertEnter", {
+    callback = function()
+      require('vscode').action('editor.action.enableCppGlobally')
+    end
+  });
+else
+  -- VSCode 逻辑
+end
+
 
 map('n', 'za', function()
   require('vscode').action('editor.toggleFold')
@@ -125,4 +130,3 @@ end)
 map('n', ',a', function()
   require('vscode').action('editor.toggleFold')
 end)
-

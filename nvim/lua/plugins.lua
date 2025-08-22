@@ -505,12 +505,12 @@ require("lazy").setup({
       { "<leader>pr", function() require("overlook.api").restore_popup() end,           desc = "Overlook: Restore popup" },
     },
   },
-  {
+  --[[ {
     "nvim-tree/nvim-tree.lua",
     config = function ()
       require('conf.nvim-tree')
     end
-  }
+  } ]]
 
   -- {
   --   'sontungexpt/better-diagnostic-virtual-text',

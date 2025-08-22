@@ -92,3 +92,5 @@ alias c="claude"
 alias q="qwen"
 alias g="http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890 gemini"
 fish_add_path $HOME/.local/bin
+
+alias forward="/Users/shichencong/workplace-data/cpolar"
