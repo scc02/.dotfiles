@@ -16,20 +16,20 @@ end
 -- ESLint LSP 只在发现配置文件时启动
 lspconfig.eslint.setup {
   capabilities = capabilities,
-  root_dir = lspconfig_util.root_pattern(
-    '.eslintrc',
-    '.eslintrc.js',
-    '.eslintrc.cjs',
-    '.eslintrc.yaml',
-    '.eslintrc.yml',
-    '.eslintrc.json',
-    'eslint.config.js',
-    'eslint.config.mjs',
-    'eslint.config.cjs'
-  ),
-  settings = {
-    packageManager = 'npm'
-  }
+  -- root_dir = lspconfig_util.root_pattern(
+  --   '.eslintrc',
+  --   '.eslintrc.js',
+  --   '.eslintrc.cjs',
+  --   '.eslintrc.yaml',
+  --   '.eslintrc.yml',
+  --   '.eslintrc.json',
+  --   'eslint.config.js',
+  --   'eslint.config.mjs',
+  --   'eslint.config.cjs'
+  -- ),
+  -- settings = {
+  --   packageManager = 'npm'
+  -- }
 }
 -- vim.lsp.enable('biome')
 

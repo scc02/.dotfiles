@@ -27,11 +27,7 @@ map('n', 'gq', ":q!<CR>")
 -- map('n', 'Q', 'q')
 -- map('n', 'q', '<Nop>')
 
-map('n', ',u', function()
-  keep_position.stay_position(function()
-    vim.cmd [[u]]
-  end)
-end)
+map('n',',,', 'u')
 
 -- map('n', '<C-r>', function()
 --   keep_position.stay_position(function()

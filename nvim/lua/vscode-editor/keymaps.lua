@@ -108,7 +108,7 @@ map('n', '<leader>.', function()
   require('vscode').action('editor.action.quickFix')
 end)
 
-if vim.env.VSCODE_CLIENT_TYPE == 'cursor' then
+-- if vim.env.VSCODE_CLIENT_TYPE == 'cursor' then
   vim.api.nvim_create_autocmd("InsertLeave", {
     callback = function()
       require('vscode').action('editor.cpp.disableenabled')
@@ -119,9 +119,9 @@ if vim.env.VSCODE_CLIENT_TYPE == 'cursor' then
       require('vscode').action('editor.action.enableCppGlobally')
     end
   });
-else
-  -- VSCode 逻辑
-end
+-- else
+--   -- VSCode 逻辑
+-- end
 
 
 map('n', 'za', function()

@@ -16,3 +16,4 @@ secrets.fish
 nvim/plugin/packer_compiled.lua
   
 github-copilot 
+zed
