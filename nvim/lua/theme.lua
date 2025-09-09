@@ -2,6 +2,10 @@
 local u = require("catppuccin.utils.colors")
 local o = require("catppuccin").options
 require("catppuccin").setup {
+  float = {
+    transparent = false,
+    solid = false
+  },
   -- catppuccin_flavour = 'macchiato',
   custom_highlights = function(colors)
     return {
@@ -20,12 +24,12 @@ require("catppuccin").setup {
       -- BlinkCmpDocSeparator = {
       --   bg = colors.base
       -- },
-      BlinkCmpKind = { fg = colors.blue },
-      BlinkCmpMenu = { fg = colors.text },
-      BlinkCmpMenuBorder = { fg = colors.blue },
-      BlinkCmpDocBorder = { fg = colors.blue },
-      BlinkCmpSignatureHelpActiveParameter = { fg = colors.mauve },
-      BlinkCmpSignatureHelpBorder = { fg = colors.blue },
+      -- BlinkCmpKind = { fg = colors.blue },
+      -- BlinkCmpMenu = { fg = colors.text },
+      -- BlinkCmpMenuBorder = { fg = colors.blue },
+      -- BlinkCmpDocBorder = { fg = colors.blue },
+      -- BlinkCmpSignatureHelpActiveParameter = { fg = colors.mauve },
+      -- BlinkCmpSignatureHelpBorder = { fg = colors.blue },
       CursorLine = {
         bg = u.vary_color(
           { latte = u.lighten(colors.mantle, 1, colors.base) },

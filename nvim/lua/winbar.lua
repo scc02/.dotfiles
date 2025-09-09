@@ -39,6 +39,8 @@ local normal_hl_id = vim.fn.hlID('Normal')
 local bg_trans_id = vim.fn.synIDtrans(normal_hl_id)
 vim.api.nvim_set_hl(0, 'WinBarPath', { bg = vim.fn.synIDattr(bg_trans_id, 'bg#b'), fg = '#adbac7' })
 vim.api.nvim_set_hl(0, 'WinBarModified', { bg = '#282c34', fg = '#ff3838' })
+-- vim.api.nvim_set_hl(0, 'WinBar', { bg = '#073642' })
+-- vim.api.nvim_set_hl(0, 'WinBarPath', { bg = '#073642', fg = '#adbac7' })
 
 function M.get_winbar()
   if excludes() then

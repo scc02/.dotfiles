@@ -13,12 +13,43 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
+  -- {
+  --   'catppuccin/nvim',
+  --   name = 'catppuccin',
+  --   config = function()
+  --     require('theme')
+  --   end
+  -- },
   {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    config = function()
-      require('theme')
-    end
+    'maxmx03/solarized.nvim',
+    lazy = false,
+    priority = 1000,
+    ---@type solarized.config
+    opts = {},
+    config = function(_, opts)
+      vim.o.termguicolors = true
+      vim.o.background = 'dark'
+      require('solarized').setup({
+        on_highlights = function(colors, color)
+          local groups = {
+            FoldColumn = { bg = "NONE", fg = "NONE" },
+            SignColumn = { bg = "NONE", fg = "NONE" },
+            LineNr = { bg = "NONE", fg = colors.base01},
+            GitSignsChange = { bg = "NONE" },
+            GitSignsAdd = { bg = "NONE" },
+            GitSignsDelete = { bg = "NONE" },
+            DiagnosticSignError = { bg = "NONE" },
+            DiagnosticSignWarn = { bg = "NONE" },
+            DiagnosticSignInfo = { bg = "NONE" },
+            DiagnosticSignHint = { bg = "NONE" },
+            -- CursorLineNr = { bg = "NONE" },
+          }
+
+          return groups
+        end
+      })
+      vim.cmd.colorscheme 'solarized'
+    end,
   },
   { "windwp/nvim-autopairs",   config = function() require('conf.autopairs') end, event = "InsertEnter" },
 
@@ -493,18 +524,18 @@ require("lazy").setup({
       -- vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
     end
   },
-  {
-    "WilliamHsieh/overlook.nvim",
-    opts = {},
-
-    -- Optional: set up common keybindings
-    keys = {
-      { "<leader>pd", function() require("overlook.api").peek_definition() end,         desc = "Overlook: Peek definition" },
-      { "<leader>pc", function() require("overlook.api").close_all() end,               desc = "Overlook: Close all popup" },
-      { "<leader>po", function() require("overlook.api").open_in_original_window() end, desc = "Open popup in current window" },
-      { "<leader>pr", function() require("overlook.api").restore_popup() end,           desc = "Overlook: Restore popup" },
-    },
-  },
+  -- {
+  --   "WilliamHsieh/overlook.nvim",
+  --   opts = {},
+  --
+  --   -- Optional: set up common keybindings
+  --   keys = {
+  --     { "<leader>pd", function() require("overlook.api").peek_definition() end,         desc = "Overlook: Peek definition" },
+  --     { "<leader>pc", function() require("overlook.api").close_all() end,               desc = "Overlook: Close all popup" },
+  --     { "<leader>po", function() require("overlook.api").open_in_original_window() end, desc = "Open popup in current window" },
+  --     { "<leader>pr", function() require("overlook.api").restore_popup() end,           desc = "Overlook: Restore popup" },
+  --   },
+  -- },
   --[[ {
     "nvim-tree/nvim-tree.lua",
     config = function ()

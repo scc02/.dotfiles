@@ -447,18 +447,18 @@ map('n', '<C-RightMouse>', "<Plug>(VM-Mouse-Word)")
 map('n', '<M-C-RightMouse>', "<Plug>(VM-Mouse-Column)")
 
 -- 为了更好的undo
-vim.cmd [[
-  inoremap <Space> <C-g>u<Space>
-  inoremap <C-W> <C-G>u<C-W>
-  inoremap <C-U> <C-G>u<C-U>
-  inoremap . <c-g>u.
-  inoremap : <c-g>u:
-  inoremap ! <c-g>u!
-  inoremap ? <c-g>u?
-  inoremap , <c-g>u,
-  inoremap ， <c-g>u，
-  inoremap 。 <c-g>u。
-]]
+-- vim.cmd [[
+--   inoremap <Space> <C-g>u<Space>
+--   inoremap <C-W> <C-G>u<C-W>
+--   inoremap <C-U> <C-G>u<C-U>
+--   inoremap . <c-g>u.
+--   inoremap : <c-g>u:
+--   inoremap ! <c-g>u!
+--   inoremap ? <c-g>u?
+--   inoremap , <c-g>u,
+--   inoremap ， <c-g>u，
+--   inoremap 。 <c-g>u。
+-- ]]
 
 -- map('n', ']a', ':cn<cr>')
 -- map('n', '[a', ':cp<cr>')
