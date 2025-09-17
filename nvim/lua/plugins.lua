@@ -13,14 +13,14 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
-  -- {
-  --   'catppuccin/nvim',
-  --   name = 'catppuccin',
-  --   config = function()
-  --     require('theme')
-  --   end
-  -- },
   {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    config = function()
+      require('theme')
+    end
+  },
+  --[[ {
     'maxmx03/solarized.nvim',
     lazy = false,
     priority = 1000,
@@ -50,7 +50,7 @@ require("lazy").setup({
       })
       vim.cmd.colorscheme 'solarized'
     end,
-  },
+  }, ]]
   { "windwp/nvim-autopairs",   config = function() require('conf.autopairs') end, event = "InsertEnter" },
 
   ({
@@ -277,7 +277,7 @@ require("lazy").setup({
     dependencies = { 'nvim-treesitter' },
     config = function()
       require('treesj').setup({
-        _default_keymaps = false,
+        use_default_keymaps = false,
       });
       vim.keymap.set('n', '<leader>j', ':TSJToggle<CR>', { silent = true })
     end,

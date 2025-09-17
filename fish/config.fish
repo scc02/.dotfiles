@@ -57,15 +57,22 @@ set -Ux EDITOR $VISUAL   # 使 $EDITOR 指向 $VISUAL
 alias ff='set selected (fzf --preview="bat --color=always {} --theme  Visual\ Studio\ Dark+"); and test -n "$selected"; and nvim "$selected"'
 
 
-# set -Ux FZF_DEFAULT_OPTS "\
-# --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-# --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,gutter:-1 \
-# --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
-# --color=selected-bg:#45475a \
-# --multi"
+set -Ux FZF_DEFAULT_OPTS "\
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,gutter:-1 \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--multi"
 
 # fix esc slow
 export ESCDELAY="1"
+
+# set -Ux FZF_DEFAULT_OPTS "\
+# --color=bg+:-1,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+# --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:-1 \
+# --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+# --color=selected-bg:-1 \
+# --multi"
 
 # 检查是否为 alacritty 终端
 # if test "$TERM" = "xterm-256color"
@@ -93,3 +100,5 @@ alias g="http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890 gemi
 fish_add_path $HOME/.local/bin
 
 alias forward="/Users/shichencong/workplace-data/cpolar"
+
+set -gx PATH "/Users/shichencong/lsp" $PATH

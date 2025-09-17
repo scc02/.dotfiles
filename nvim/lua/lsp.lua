@@ -211,12 +211,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.diagnostic.config({
   -- virtual_text = {
-    -- current_line = true,
-    -- prefix = "●",
-    -- prefix = " ",
-    -- severity = {
-    --   min = vim.diagnostic.severity.ERROR,
-    -- },
+  -- current_line = true,
+  -- prefix = "●",
+  -- prefix = " ",
+  -- severity = {
+  --   min = vim.diagnostic.severity.ERROR,
+  -- },
   -- },
   -- virtual_lines = false,
   -- virtual_text = {
@@ -259,3 +259,12 @@ vim.diagnostic.config({
   --   prefix = "",
   -- },
 })
+
+-- require('lspconfig').ds_pinyin_lsp.setup {
+--   init_options = {
+--     db_path = "/Users/shichencong/lsp/dict.db3",
+--     completion_on = true,
+--     match_as_same_as_input = true,
+--   },
+--   filetypes = { "*" }
+-- }

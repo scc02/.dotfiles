@@ -543,3 +543,6 @@ map('n', 's', '<Nop>')
 vim.keymap.set("n", "ycc", function()
   return 'yy' .. vim.v.count1 .. "gcc']p"
 end, { remap = true, expr = true })
+
+-- vim.api.nvim_set_keymap('n', '[f', ':cprevious<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', ']f', ':cnext<CR>', { noremap = true, silent = true })
