@@ -327,7 +327,7 @@ require("lazy").setup({
     ---@type Flash.Config
     opts = {
       jump = {
-        pos = 'range'
+        pos = 'end'
       },
       highlight = {
         backdrop = false,
