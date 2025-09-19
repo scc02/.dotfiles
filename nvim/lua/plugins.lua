@@ -457,35 +457,37 @@ require("lazy").setup({
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
     config = function()
-      -- require('bqf').setup({
-      --   preview = {
-      --     show_title = false,
-      --   }
-      -- })
+      require('bqf').setup({
+        preview = {
+          auto_preview = false
+        }
+      })
     end
   },
   {
-    "saghen/blink.cmp",
-    dependencies = {
-      {
-        'L3MON4D3/LuaSnip',
-        version = 'v2.*',
-        -- dependencies = {
-        --   'rafamadriz/friendly-snippets',
-        --   config = function()
-        --     require("luasnip.loaders.from_vscode").lazy_load()
-        --   end
-        -- },
-        config = function()
-          require('conf.luasnip')
-        end,
-      }
-    },
-    version = "*",
-    opts_extend = { "sources.default" },
+    "hrsh7th/nvim-cmp",
     config = function()
-      require("conf.blink")
-    end
+      require("conf.cmp")
+    end,
+    -- event = {"InsertEnter","CmdlineEnter"},
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      dependencies = {
+        {
+          'L3MON4D3/LuaSnip',
+          version = 'v2.*',
+          config = function()
+            require('conf.luasnip')
+          end,
+        },
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lua",
+        "onsails/lspkind.nvim",
+        'hrsh7th/cmp-cmdline'
+      },
+    },
   },
   {
     "ibhagwan/fzf-lua",

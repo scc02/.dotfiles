@@ -2,19 +2,21 @@ local lspconfig = require('lspconfig')
 local lspconfig_util = require 'lspconfig.util'
 local util = require 'util.util'
 local map = require('util.map')
-local capabilities = require('blink.cmp').get_lsp_capabilities()
+-- local capabilities = require('blink.cmp').get_lsp_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local configs = require "lspconfig.configs"
 -- require 'lsp-conf.tsserver'.init(capabilities)
 local servers = { 'html', 'cssls', 'jsonls', 'rust_analyzer', 'lua_ls' }
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     capabilities = capabilities,
     single_file_support = true,
-  }
+  })
+  vim.lsp.enable(lsp)
 end
 
 -- ESLint LSP 只在发现配置文件时启动
-lspconfig.eslint.setup {
+vim.lsp.config('eslint', {
   capabilities = capabilities,
   -- root_dir = lspconfig_util.root_pattern(
   --   '.eslintrc',
@@ -30,34 +32,35 @@ lspconfig.eslint.setup {
   -- settings = {
   --   packageManager = 'npm'
   -- }
-}
+})
+vim.lsp.enable('eslint')
 -- vim.lsp.enable('biome')
 
-require('lspconfig').sourcekit.setup {
-  cmd = { 'sourcekit-lsp' },
-  capabilities = capabilities,
-  filetypes = { 'swift', 'objc', 'objcpp', 'c', 'cpp' },
-  root_dir = function(filename)
-    -- fix expo项目主入口在ios文件夹里
-    local current_dir = vim.fn.getcwd()
-    local ios_dir = current_dir .. '/ios'
+-- require('lspconfig').sourcekit.setup {
+--   cmd = { 'sourcekit-lsp' },
+--   capabilities = capabilities,
+--   filetypes = { 'swift', 'objc', 'objcpp', 'c', 'cpp' },
+--   root_dir = function(filename)
+--     -- fix expo项目主入口在ios文件夹里
+--     local current_dir = vim.fn.getcwd()
+--     local ios_dir = current_dir .. '/ios'
+--
+--     if vim.fn.isdirectory(ios_dir) == 1 then
+--       filename = current_dir .. '/ios' -- /Users/shichencong/workplace/2025/expo/ios
+--     end
+--     -- local file = io.open("a.log", "w")
+--     -- file:write(filename)
+--     -- file:close()
+--
+--     return lspconfig_util.root_pattern 'buildServer.json' (filename)
+--         or lspconfig_util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
+--         -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
+--         or lspconfig_util.root_pattern('compile_commands.json', 'Package.swift')(filename)
+--         or vim.fs.dirname(vim.fs.find('.git', { path = filename, upward = true })[1])
+--   end,
+-- }
 
-    if vim.fn.isdirectory(ios_dir) == 1 then
-      filename = current_dir .. '/ios' -- /Users/shichencong/workplace/2025/expo/ios
-    end
-    -- local file = io.open("a.log", "w")
-    -- file:write(filename)
-    -- file:close()
-
-    return lspconfig_util.root_pattern 'buildServer.json' (filename)
-        or lspconfig_util.root_pattern('*.xcodeproj', '*.xcworkspace')(filename)
-        -- better to keep it at the end, because some modularized apps contain multiple Package.swift files
-        or lspconfig_util.root_pattern('compile_commands.json', 'Package.swift')(filename)
-        or vim.fs.dirname(vim.fs.find('.git', { path = filename, upward = true })[1])
-  end,
-}
-
-lspconfig["tailwindCSS"].setup {
+vim.lsp.config('tailwindCSS', {
   capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
   settings = {
@@ -74,9 +77,10 @@ lspconfig["tailwindCSS"].setup {
       }
     }
   }
-}
+})
+vim.lsp.enable('tailwindCSS')
 
-lspconfig["ts_ls"].setup {
+vim.lsp.config('ts_ls', {
   capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
   init_options = {
@@ -84,7 +88,8 @@ lspconfig["ts_ls"].setup {
       providePrefixAndSuffixTextForRename = false,
     },
   },
-}
+})
+vim.lsp.enable('ts_ls')
 -- 不支持rename
 --[[ if not configs.tsgo then
   configs.tsgo = {
@@ -260,11 +265,19 @@ vim.diagnostic.config({
   -- },
 })
 
--- require('lspconfig').ds_pinyin_lsp.setup {
---   init_options = {
---     db_path = "/Users/shichencong/lsp/dict.db3",
---     completion_on = true,
---     match_as_same_as_input = true,
---   },
---   filetypes = { "*" }
--- }
+vim.lsp.config('ds_pinyin_lsp', {
+  init_options = {
+    db_path = "/Users/shichencong/lsp/dict.db3",
+    show_symbols = false
+  },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+    "lua"
+  },
+})
+vim.lsp.enable('ds_pinyin_lsp')
