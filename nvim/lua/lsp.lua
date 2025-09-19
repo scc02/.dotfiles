@@ -90,39 +90,35 @@ vim.lsp.config('ts_ls', {
   },
 })
 vim.lsp.enable('ts_ls')
--- 不支持rename
---[[ if not configs.tsgo then
-  configs.tsgo = {
-    default_config = {
-      cmd = { "tsgo", "--lsp", "--stdio" },
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx",
-      },
-      root_dir = lspconfig.util.root_pattern(
-        "tsconfig.json",
-        "jsconfig.json",
-        "package.json",
-        ".git",
-        "tsconfig.base.json"
-      ),
-      settings = {},
-    },
-  }
-end
 
-lspconfig.tsgo.setup {
+--[[ vim.lsp.config('tsgo',{
   capabilities = capabilities,
   init_options = {
     preferences = {
       providePrefixAndSuffixTextForRename = false,
     },
   },
-} ]]
+  default_config = {
+    cmd = { "tsgo", "--lsp", "--stdio" },
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
+    root_dir = lspconfig.util.root_pattern(
+      "tsconfig.json",
+      "jsconfig.json",
+      "package.json",
+      ".git",
+      "tsconfig.base.json"
+    ),
+    settings = {},
+  }
+})
+vim.lsp.enable('tsgo') ]]
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -282,3 +278,13 @@ vim.lsp.config('ds_pinyin_lsp', {
   },
 })
 vim.lsp.enable('ds_pinyin_lsp')
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+    if client:supports_method('textDocument/documentColor') then
+      vim.lsp.document_color.enable(true, args.buf)
+    end
+  end
+})

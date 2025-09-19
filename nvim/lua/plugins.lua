@@ -88,7 +88,7 @@ require("lazy").setup({
   --     require 'colorizer'.setup()
   --   end
   -- },
-  {
+  --[[ {
     "brenoprata10/nvim-highlight-colors",
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -108,7 +108,7 @@ require("lazy").setup({
     --   local cwd = vim.fn.getcwd()
     --   return not cwd:match("expo")
     -- end
-  },
+  }, ]]
   {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",

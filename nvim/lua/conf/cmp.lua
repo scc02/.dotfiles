@@ -10,9 +10,10 @@ local has_words_before = function()
 end
 
 
- function trim(s)
-   return (s:gsub("^%s*(.-)%s*$", "%1"))
-   end
+function trim(s)
+  return (s:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 cmp.setup({
   completion = {
     completeopt = 'menu,menuone,noinsert'
@@ -56,7 +57,7 @@ cmp.setup({
       if trim(is_visible) ~= '*' then
         vim.api.nvim_input(vim.fn['codeium#Accept']())
       elseif cmp.visible() then
-      -- if cmp.visible() then
+        -- if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
@@ -117,10 +118,6 @@ cmp.setup({
 
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline({
-    ['<C-n>'] = function()
-    end,
-    ['<C-p>'] = function()
-    end,
   }),
   sources = { {
     name = 'buffer'
@@ -129,10 +126,6 @@ cmp.setup.cmdline('/', {
 
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline({
-    ['<C-n>'] = function()
-    end,
-    ['<C-p>'] = function()
-    end,
   }),
   sources = cmp.config.sources({ {
     name = 'path'
