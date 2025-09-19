@@ -330,7 +330,13 @@ require("lazy").setup({
         pos = 'range'
       },
       highlight = {
-        backdrop = false
+        backdrop = false,
+        -- matches = false,
+        groups = {
+          label = '@comment.error',
+          match = '@comment.error',
+          current = '@comment.error'
+        }
       },
       prompt = {
         enabled = false,

@@ -268,7 +268,8 @@ vim.diagnostic.config({
 vim.lsp.config('ds_pinyin_lsp', {
   init_options = {
     db_path = "/Users/shichencong/lsp/dict.db3",
-    show_symbols = false
+    show_symbols = false,
+    max_suggest = 5
   },
   filetypes = {
     "javascript",
