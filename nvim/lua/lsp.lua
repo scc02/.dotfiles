@@ -142,12 +142,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
             if options.items and #options.items > 1 then
               local filtered_result = util.filter(options.items, util.filterReactDTS)
               options.items = filtered_result
-              vim.fn.setqflist({}, " ", options)
-              vim.cmd("cfirst")
+              if #options.items >= 1 then
+                local item = options.items[1]
+                if item.filename then
+                  vim.cmd("edit " .. item.filename)
+                end
+                vim.api.nvim_win_set_cursor(0, {item.lnum, item.col - 1})
+              end
             elseif options.items and #options.items == 1 then
               local item = options.items[1]
-              vim.fn.setqflist({ item }, "r")
-              vim.cmd("cfirst")
+              if item.filename then
+                vim.cmd("edit " .. item.filename)
+              end
+              vim.api.nvim_win_set_cursor(0, {item.lnum, item.col - 1})
             else
               print("No definition found")
             end
