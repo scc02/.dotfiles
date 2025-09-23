@@ -59,9 +59,11 @@ ls.add_snippets(nil, {
 })
 
 
-local js_doc_snip = s("/**", fmt([[/**
-* {}
-*/]], { i(0) }))
+-- local js_doc_snip = s("/**", fmt([[/**
+-- * {}
+-- */]], { i(0) }))
+
+local double_slash_comment_snip = s("//", fmt([[/** {} */]], { i(0) }))
 
 local use_effect_snip = s("ue", fmt([[
 useEffect(() => {{
@@ -120,7 +122,8 @@ for _, value in ipairs(frontend_file) do
     log_with_prefix_snip,
     use_state_snip,
     -- log_with_prefix_snip,
-    js_doc_snip,
+    -- js_doc_snip,
+    double_slash_comment_snip,
     class_name_snip,
     react_native_function_component
   })

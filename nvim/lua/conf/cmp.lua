@@ -53,10 +53,7 @@ cmp.setup({
     end,
 
     ["<Tab>"] = cmp.mapping(function(fallback)
-      local is_visible = vim.api.nvim_call_function("codeium#GetStatusString", {})
-      if trim(is_visible) ~= '*' then
-        vim.api.nvim_input(vim.fn['codeium#Accept']())
-      elseif cmp.visible() then
+      if cmp.visible() then
         -- if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then

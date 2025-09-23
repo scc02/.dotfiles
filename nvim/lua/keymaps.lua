@@ -459,6 +459,18 @@ map('n', '<M-C-RightMouse>', "<Plug>(VM-Mouse-Column)")
 --   inoremap ， <c-g>u，
 --   inoremap 。 <c-g>u。
 -- ]]
+-- 精简版 undo break 配置
+local undo_break_keys = { " ", ".", ",", "!", "?", ":", "，", "。", "！", "？" }
+
+for _, key in ipairs(undo_break_keys) do
+  vim.keymap.set("i", key, "<C-g>u" .. key, { noremap = true, silent = true })
+end
+
+-- 对删除单词和删除到行首也做撤销分隔
+vim.keymap.set("i", "<C-W>", "<C-g>u<C-W>", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-U>", "<C-g>u<C-U>", { noremap = true, silent = true })
+vim.keymap.set("n", "o", "o<C-g>u", { noremap = true })
+vim.keymap.set("n", "O", "O<C-g>u", { noremap = true })
 
 -- map('n', ']a', ':cn<cr>')
 -- map('n', '[a', ':cp<cr>')

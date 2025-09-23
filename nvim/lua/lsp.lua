@@ -145,14 +145,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
               if #options.items >= 1 then
                 local item = options.items[1]
                 if item.filename then
-                  vim.cmd("edit " .. item.filename)
+                  -- 检查当前文件是否与目标文件相同
+                  local current_file = vim.api.nvim_buf_get_name(0)
+                  if current_file ~= item.filename then
+                    vim.cmd("edit " .. vim.fn.fnameescape(item.filename))
+                  end
                 end
                 vim.api.nvim_win_set_cursor(0, {item.lnum, item.col - 1})
               end
             elseif options.items and #options.items == 1 then
               local item = options.items[1]
               if item.filename then
-                vim.cmd("edit " .. item.filename)
+                -- 检查当前文件是否与目标文件相同
+                local current_file = vim.api.nvim_buf_get_name(0)
+                if current_file ~= item.filename then
+                  vim.cmd("edit " .. vim.fn.fnameescape(item.filename))
+                end
               end
               vim.api.nvim_win_set_cursor(0, {item.lnum, item.col - 1})
             else
@@ -281,7 +289,8 @@ vim.lsp.config('ds_pinyin_lsp', {
     "typescript",
     "typescriptreact",
     "typescript.tsx",
-    "lua"
+    "lua",
+    "gitcommit"
   },
 })
 vim.lsp.enable('ds_pinyin_lsp')
