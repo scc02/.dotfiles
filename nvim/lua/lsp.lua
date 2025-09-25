@@ -126,7 +126,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
     local bufopts = { noremap = true, silent = true, buffer = ev.buf }
     map('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    map('n', 'gd', function()
+    map('n', 'gd', vim.lsp.buf.definition, bufopts)
+    --[[ map('n', 'gd', function()
       local clients = vim.lsp.get_clients({ bufnr = ev.buf })
       local is_ts_ls_attached = false
       for _, client in ipairs(clients) do
@@ -171,7 +172,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       else
         vim.lsp.buf.definition()
       end
-    end, bufopts)
+    end, bufopts) ]]
     map('n', 'K', vim.lsp.buf.hover, bufopts)
     map('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     -- map('n', '<space>.', vim.lsp.buf.code_action, bufopts)
@@ -300,7 +301,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
     if client:supports_method('textDocument/documentColor') then
-      vim.lsp.document_color.enable(true, args.buf)
+      if vim.lsp.document_color ~= nil then
+        vim.lsp.document_color.enable(true, args.buf)
+      end
     end
   end
 })
