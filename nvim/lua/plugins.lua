@@ -13,14 +13,14 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
-  {
+  --[[ {
     'catppuccin/nvim',
     name = 'catppuccin',
     config = function()
       require('theme')
     end
-  },
-  --[[ {
+  }, ]]
+  {
     'maxmx03/solarized.nvim',
     lazy = false,
     priority = 1000,
@@ -34,7 +34,7 @@ require("lazy").setup({
           local groups = {
             FoldColumn = { bg = "NONE", fg = "NONE" },
             SignColumn = { bg = "NONE", fg = "NONE" },
-            LineNr = { bg = "NONE", fg = colors.base01},
+            LineNr = { bg = "NONE", fg = colors.base01 },
             GitSignsChange = { bg = "NONE" },
             GitSignsAdd = { bg = "NONE" },
             GitSignsDelete = { bg = "NONE" },
@@ -42,6 +42,7 @@ require("lazy").setup({
             DiagnosticSignWarn = { bg = "NONE" },
             DiagnosticSignInfo = { bg = "NONE" },
             DiagnosticSignHint = { bg = "NONE" },
+            Normal = { bg = "#002838" },
             -- CursorLineNr = { bg = "NONE" },
           }
 
@@ -50,7 +51,7 @@ require("lazy").setup({
       })
       vim.cmd.colorscheme 'solarized'
     end,
-  }, ]]
+  },
   { "windwp/nvim-autopairs",   config = function() require('conf.autopairs') end, event = "InsertEnter" },
 
   ({
@@ -82,12 +83,12 @@ require("lazy").setup({
     config = function() require('conf.diffview') end,
     cmd = { 'DiffviewFileHistory', 'DiffviewOpen' }
   },
-  -- {
-  --   'norcalli/nvim-colorizer.lua',
-  --   config=function ()
-  --     require 'colorizer'.setup()
-  --   end
-  -- },
+  {
+    'norcalli/nvim-colorizer.lua',
+    config=function ()
+      require 'colorizer'.setup()
+    end
+  },
   --[[ {
     "brenoprata10/nvim-highlight-colors",
     config = function()
@@ -362,6 +363,11 @@ require("lazy").setup({
     event = 'VeryLazy',
     config = function()
       require('illuminate').configure({
+        providers = {
+          -- 'lsp',
+          'treesitter',
+          'regex',
+        },
         filetypes_denylist = {
           'harpoon',
           'fugitive',

@@ -296,14 +296,14 @@ vim.lsp.config('ds_pinyin_lsp', {
 })
 vim.lsp.enable('ds_pinyin_lsp')
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-    if client:supports_method('textDocument/documentColor') then
-      if vim.lsp.document_color ~= nil then
-        vim.lsp.document_color.enable(true, args.buf)
-      end
-    end
-  end
-})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(args)
+--     local client = vim.lsp.get_client_by_id(args.data.client_id)
+--
+--     if client:supports_method('textDocument/documentColor') then
+--       if vim.lsp.document_color ~= nil then
+--         vim.lsp.document_color.enable(true, args.buf)
+--       end
+--     end
+--   end
+-- })
