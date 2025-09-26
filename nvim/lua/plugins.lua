@@ -112,32 +112,28 @@ require("lazy").setup({
     cmd = { 'DiffviewFileHistory', 'DiffviewOpen' }
   },
   {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require 'colorizer'.setup()
-    end
-  },
-  --[[ {
     "brenoprata10/nvim-highlight-colors",
     config = function()
-      vim.api.nvim_create_autocmd("LspAttach", {
+      vim.api.nvim_create_autocmd("lspattach", {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
 
           if client and client.name == 'sourcekit' then
-            client.server_capabilities.colorProvider = false
+            client.server_capabilities.colorprovider = false
           end
         end,
       })
-      require('nvim-highlight-colors').setup({})
+      require('nvim-highlight-colors').setup({
+        enable_tailwind = true
+      })
     end,
-    event = 'BufEnter',
+    event = 'bufenter',
     -- cond = function()
     --   -- https://github.com/brenoprata10/nvim-highlight-colors/issues/123
     --   local cwd = vim.fn.getcwd()
     --   return not cwd:match("expo")
     -- end
-  }, ]]
+  },
   {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
