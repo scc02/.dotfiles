@@ -479,10 +479,10 @@ vim.keymap.set("n", "O", "O<C-g>u", { noremap = true })
 
 map('n', ',a', 'za')
 
-map('n', '<C-.>', function()
+map('n', '<C-n>', function()
   require('illuminate').goto_next_reference()
 end)
-map('n', '<C-,>', function()
+map('n', '<C-p>', function()
   require('illuminate').goto_prev_reference()
 end)
 if vim.g.neovide then
