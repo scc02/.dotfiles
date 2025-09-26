@@ -1,6 +1,13 @@
 ---@diagnostic disable: missing-fields
 vim.opt.termguicolors = true
 require("bufferline").setup {
+  highlights = {
+    buffer_selected = {
+      fg = '#fdf6e3',
+      bold = true,
+      italic = true,
+    },
+  },
   -- highlights = require("catppuccin.special.bufferline").get_theme(),
   options = {
     close_icon = 'x',
