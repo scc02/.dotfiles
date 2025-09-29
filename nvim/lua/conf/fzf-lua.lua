@@ -5,7 +5,7 @@ map('n', ',w', ":FzfLua grep<cr>")
 map('n', '<space>o', ":FzfLua oldfiles<CR>")
 map('n', '<space>.', ":FzfLua lsp_code_actions<CR>")
 map('n', '<leader>fg', ":FzfLua git_status<CR>")
-map('n', '<leader>fm', ":FzfLua grep_cWORD<CR>")
+map('n', '<leader>fm', ":FzfLua grep_cword<CR>")
 map('n', '<leader>fl', ":FzfLua<CR>")
 -- 用于查找完整的单词
 map('n', '<leader>fe', function()
