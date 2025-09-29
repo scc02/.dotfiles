@@ -13,73 +13,77 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
-  -- {
-  --   'catppuccin/nvim',
-  --   name = 'catppuccin',
-  --   config = function()
-  --     require('theme')
-  --   end
-  -- },
   {
-    'maxmx03/solarized.nvim',
-    lazy = false,
-    priority = 1000,
-    ---@type solarized.config
-    opts = {},
-    config = function(_, opts)
-      vim.o.termguicolors = true
-      vim.o.background = 'dark'
-      local colors = {
-        base04  = '#00202b',
-        base03  = '#073642',
-        -- base03 = '#002937',
-        base02  = '#073642',
-        base01  = '#586e75',
-        base00  = '#657b83',
-        base0   = '#839496',
-        base1   = '#93a1a1',
-        base2   = '#eee8d5',
-        base3   = '#fdf6e3',
-        yellow  = '#b58900',
-        orange  = '#b86114',
-        -- red     = '#d75f5f',
-        violet  = '#887ec8',
-        blue    = '#268bd2',
-        cyan    = '#2aa198',
-        green   = '#84a800',
-        magenta = '#d33682',
-        red     = "#dc322f",
-      }
-      require('solarized').setup({
-        on_highlights = function(colors, color)
-          local groups = {
-            FoldColumn = { bg = "NONE", fg = "NONE" },
-            SignColumn = { bg = "NONE", fg = "NONE" },
-            LineNr = { bg = "NONE", fg = colors.base01 },
-            GitSignsChange = { bg = "NONE" },
-            GitSignsAdd = { bg = "NONE" },
-            GitSignsDelete = { bg = "NONE" },
-            DiagnosticSignError = { bg = "NONE" },
-            DiagnosticSignWarn = { bg = "NONE" },
-            DiagnosticSignInfo = { bg = "NONE" },
-            DiagnosticSignHint = { bg = "NONE" },
-            Normal = { bg = "#032837" },
-            ["@property.json"] = { fg = "#778e19" },
-            ["@keyword.import.tsx"] = { fg = "#778e19" },
-            MatchParen = { fg = colors.red, bg= "#899696" },
-            -- ["@_jsx_attribute.tsx"] = { fg = colors.base1 },
-            -- ["@variable.member.tsx"] = { fg = colors.base1 },
-            -- ["@lsp.type.property.typescriptreact"] = { fg = colors.base1 },
-            -- Property = { fg = colors.base1 },
-            -- CursorLineNr = { bg = "NONE" },
-          }
-
-          return groups
-        end
-      })
-      vim.cmd.colorscheme 'solarized'
-    end,
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    config = function()
+      require('theme')
+    end
   },
+  -- {
+  --   'maxmx03/solarized.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   ---@type solarized.config
+  --   opts = {},
+  --   config = function(_, opts)
+  --     vim.o.termguicolors = true
+  --     vim.o.background = 'dark'
+  --     local colors = {
+  --       base04  = '#00202b',
+  --       base03  = '#073642',
+  --       -- base03 = '#002937',
+  --       base02  = '#073642',
+  --       base01  = '#586e75',
+  --       base00  = '#657b83',
+  --       base0   = '#839496',
+  --       base1   = '#93a1a1',
+  --       base2   = '#eee8d5',
+  --       base3   = '#fdf6e3',
+  --       yellow  = '#b58900',
+  --       orange  = '#b86114',
+  --       -- red     = '#d75f5f',
+  --       violet  = '#887ec8',
+  --       blue    = '#268bd2',
+  --       cyan    = '#2aa198',
+  --       green   = '#84a800',
+  --       magenta = '#d33682',
+  --       red     = "#dc322f",
+  --     }
+  --     require('solarized').setup({
+  --       on_highlights = function(colors, color)
+  --         local groups = {
+  --           FoldColumn = { bg = "NONE", fg = "NONE" },
+  --           SignColumn = { bg = "NONE", fg = "NONE" },
+  --           LineNr = { bg = "NONE", fg = colors.base01 },
+  --           GitSignsChange = { bg = "NONE" },
+  --           GitSignsAdd = { bg = "NONE" },
+  --           GitSignsDelete = { bg = "NONE" },
+  --           DiagnosticSignError = { bg = "NONE" },
+  --           DiagnosticSignWarn = { bg = "NONE" },
+  --           DiagnosticSignInfo = { bg = "NONE" },
+  --           DiagnosticSignHint = { bg = "NONE" },
+  --           Normal = { bg = "#032837" },
+  --           ["@property.json"] = { fg = "#778e19" },
+  --           ["@keyword.import.tsx"] = { fg = "#778e19" },
+  --           MatchParen = { fg = colors.red },
+  --           -- DiagnosticVirtualTextError = { bg = "NonText" },
+  --           DiagnosticVirtualTextWarn = { fg = "#586e75" },
+  --           DiagnosticVirtualTextInfo = { fg = "#586e75" },
+  --           DiagnosticVirtualTextHint = { fg = "#586e75" },
+  --           -- ["@_jsx_attribute.tsx"] = { fg = colors.base1 },
+  --           -- ["@variable.member.tsx"] = { fg = colors.base1 },
+  --           -- ["@lsp.type.property.typescriptreact"] = { fg = colors.base1 },
+  --           -- Property = { fg = colors.base1 },
+  --           -- CursorLineNr = { bg = "NONE" },
+  --         }
+  --
+  --         return groups
+  --       end
+  --     })
+  --     vim.cmd.colorscheme 'solarized'
+  --   end,
+  -- },
   { "windwp/nvim-autopairs",   config = function() require('conf.autopairs') end, event = "InsertEnter" },
 
   ({
@@ -142,7 +146,7 @@ require("lazy").setup({
         opts = {
           enable_close = true,         -- Auto close tags
           enable_rename = true,        -- Auto rename pairs of tags
-          enable_close_on_slash = true -- Auto close on trailing </
+          enable_close_on_slash = false -- Auto close on trailing </
         },
         per_filetype = {
           ["html"] = {
@@ -388,7 +392,7 @@ require("lazy").setup({
     config = function()
       require('illuminate').configure({
         providers = {
-          -- 'lsp',
+          'lsp',
           'treesitter',
           'regex',
         },
@@ -500,7 +504,7 @@ require("lazy").setup({
       })
     end
   },
-  {
+  --[[ {
     "hrsh7th/nvim-cmp",
     config = function()
       require("conf.cmp")
@@ -524,6 +528,29 @@ require("lazy").setup({
         'hrsh7th/cmp-cmdline'
       },
     },
+  }, ]]
+    {
+    "saghen/blink.cmp",
+    dependencies = {
+      {
+        'L3MON4D3/LuaSnip',
+        version = 'v2.*',
+        -- dependencies = {
+        --   'rafamadriz/friendly-snippets',
+        --   config = function()
+        --     require("luasnip.loaders.from_vscode").lazy_load()
+        --   end
+        -- },
+        config = function()
+          require('conf.luasnip')
+        end,
+      }
+    },
+    version = "*",
+    opts_extend = { "sources.default" },
+    config = function()
+      require("conf.blink")
+    end
   },
   {
     "ibhagwan/fzf-lua",

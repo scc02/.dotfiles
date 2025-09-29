@@ -2,8 +2,8 @@ local lspconfig = require('lspconfig')
 local lspconfig_util = require 'lspconfig.util'
 local util = require 'util.util'
 local map = require('util.map')
--- local capabilities = require('blink.cmp').get_lsp_capabilities()
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities()
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local configs = require "lspconfig.configs"
 -- require 'lsp-conf.tsserver'.init(capabilities)
 local servers = { 'html', 'cssls', 'jsonls', 'rust_analyzer', 'lua_ls' }
@@ -80,7 +80,7 @@ vim.lsp.config('tailwindCSS', {
 })
 vim.lsp.enable('tailwindCSS')
 
-vim.lsp.config('ts_ls', {
+--[[ vim.lsp.config('ts_ls', {
   capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
   init_options = {
@@ -89,9 +89,9 @@ vim.lsp.config('ts_ls', {
     },
   },
 })
-vim.lsp.enable('ts_ls')
+vim.lsp.enable('ts_ls') ]]
 
---[[ vim.lsp.config('tsgo',{
+vim.lsp.config('tsgo',{
   capabilities = capabilities,
   init_options = {
     preferences = {
@@ -118,7 +118,7 @@ vim.lsp.enable('ts_ls')
     settings = {},
   }
 })
-vim.lsp.enable('tsgo') ]]
+vim.lsp.enable('tsgo')
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -228,12 +228,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.diagnostic.config({
   -- virtual_text = {
-  -- current_line = true,
-  -- prefix = "●",
-  -- prefix = " ",
-  -- severity = {
-  --   min = vim.diagnostic.severity.ERROR,
-  -- },
+  --   -- current_line = true,
+  --   prefix = "●",
+  --   -- prefix = " ",
+  --   severity = {
+  --     min = vim.diagnostic.severity.ERROR,
+  --   },
   -- },
   -- virtual_lines = false,
   -- virtual_text = {

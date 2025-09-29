@@ -34,6 +34,7 @@ blink.setup({
       }
     },
     accept = {
+      create_undo_point = false,
       auto_brackets = {
         enabled = false,
       },
@@ -84,12 +85,12 @@ blink.setup({
 
     ["<Tab>"] = {
       function(cmp)
-        local is_visible = vim.api.nvim_call_function("codeium#GetStatusString", {})
-        if is_visible ~= '*' then
-            vim.fn['codeium#Accept']()
-        else
-          return cmp.select_next()
-        end
+        -- local is_visible = vim.api.nvim_call_function("codeium#GetStatusString", {})
+        -- if is_visible ~= '*' then
+        --     vim.fn['codeium#Accept']()
+        -- else
+        return cmp.select_next()
+        -- end
       end,
       "snippet_forward",
       "fallback",
@@ -141,4 +142,3 @@ blink.setup({
   },
 
 })
-

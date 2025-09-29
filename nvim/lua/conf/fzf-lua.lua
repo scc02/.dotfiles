@@ -15,9 +15,10 @@ map('n', '<leader>fe', function()
     local args = vim.fn.input("Args > ")
     local arg_len = #args
     if arg_len ~= 0 then
+
       require("fzf-lua").live_grep({
         search = word,
-        rg_opts = args,
+        rg_opts = args .. " --line-number --column",
         prompt = "Grep> "
       })
     end
@@ -129,7 +130,7 @@ require("fzf-lua").setup({
 })
 
 -- 查找两个单词
-vim.keymap.set("n", "<leader>ft", function()
+vim.keymap.set("n", "<leader>fw", function()
   local word1 = vim.fn.input("Enter first word: ")
   if word1 == "" then return end -- 如果输入为空，则退出
 
