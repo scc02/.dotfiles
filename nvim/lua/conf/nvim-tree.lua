@@ -10,7 +10,7 @@ local git_icons = {
   ignored = "◌"
 }
 
-map('n',',r',':NvimTreeFindFile<CR>')
+map('n', ',r', ':NvimTreeFindFile<CR>')
 map('n', ',e', function()
   local api = require('nvim-tree.api')
   if api.tree.is_visible() then

@@ -80,7 +80,7 @@ vim.lsp.config('tailwindCSS', {
 })
 vim.lsp.enable('tailwindCSS')
 
---[[ vim.lsp.config('ts_ls', {
+vim.lsp.config('ts_ls', {
   capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
   init_options = {
@@ -89,9 +89,9 @@ vim.lsp.enable('tailwindCSS')
     },
   },
 })
-vim.lsp.enable('ts_ls') ]]
+vim.lsp.enable('ts_ls')
 
-vim.lsp.config('tsgo',{
+--[[ vim.lsp.config('tsgo',{
   capabilities = capabilities,
   init_options = {
     preferences = {
@@ -118,7 +118,7 @@ vim.lsp.config('tsgo',{
     settings = {},
   }
 })
-vim.lsp.enable('tsgo')
+vim.lsp.enable('tsgo') ]]
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -126,8 +126,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
     local bufopts = { noremap = true, silent = true, buffer = ev.buf }
     map('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    map('n', 'gd', vim.lsp.buf.definition, bufopts)
-    --[[ map('n', 'gd', function()
+    -- map('n', 'gd', vim.lsp.buf.definition, bufopts)
+    map('n', 'gd', function()
       local clients = vim.lsp.get_clients({ bufnr = ev.buf })
       local is_ts_ls_attached = false
       for _, client in ipairs(clients) do
@@ -172,7 +172,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       else
         vim.lsp.buf.definition()
       end
-    end, bufopts) ]]
+    end, bufopts)
     map('n', 'K', vim.lsp.buf.hover, bufopts)
     map('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     -- map('n', '<space>.', vim.lsp.buf.code_action, bufopts)

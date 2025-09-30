@@ -34,7 +34,7 @@ blink.setup({
       }
     },
     accept = {
-      create_undo_point = false,
+      create_undo_point = true,
       auto_brackets = {
         enabled = false,
       },

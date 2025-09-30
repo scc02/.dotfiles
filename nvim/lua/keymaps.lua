@@ -474,8 +474,40 @@ vim.keymap.set("n", "O", "O<C-g>u", { noremap = true })
 
 -- map('n', ']a', ':cn<cr>')
 -- map('n', '[a', ':cp<cr>')
--- map('n', ']f', ':cnf<cr>')
--- map('n', '[f', ':cpf<cr>')
+
+map('n','<leader>cp',":copen<cr>")
+-- 动态键位映射：根据 trouble.nvim 是否打开切换行为
+local function is_trouble_open()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.bo[buf].filetype == 'trouble' then
+      return true
+    end
+  end
+  return false
+end
+
+map('n', ']f', function()
+  if is_trouble_open() then
+    require('trouble').next({ skip_groups = true, jump = true })
+  else
+    local ok = pcall(vim.cmd, 'cnf')
+    if not ok then
+      vim.cmd('cfirst')
+    end
+  end
+end)
+
+map('n', '[f', function()
+  if is_trouble_open() then
+    require('trouble').prev({ skip_groups = true, jump = true })
+  else
+    local ok = pcall(vim.cmd, 'cpf')
+    if not ok then
+      vim.cmd('clast')
+    end
+  end
+end)
 
 map('n', ',a', 'za')
 

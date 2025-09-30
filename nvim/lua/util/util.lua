@@ -37,7 +37,10 @@ M.filter = function(arr, fn)
 end
 
 M.filterReactDTS = function(value)
-  return string.match(value.user_data.targetUri, 'react/index.d.ts') == nil
+  if string.match(value.user_data.targetUri, '/index.d.ts') == nil and string.match(value.user_data.targetUri, 'react') == nil then
+    return true
+  end
+  return false
 end
 return M
 

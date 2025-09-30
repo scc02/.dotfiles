@@ -140,7 +140,7 @@ vim.api.nvim_create_augroup("delete_pre_buffer", { clear = true })
 vim.api.nvim_create_autocmd('BufEnter', {
   group = "delete_pre_buffer",
   callback = function()
-    local exclude_filetype = { "", 'netrw', 'trouble' }
+    local exclude_filetype = { "", 'netrw', 'trouble', 'NvimTree' }
     if vim.tbl_contains(exclude_filetype, vim.bo.filetype) then
       return
     end

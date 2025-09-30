@@ -19,8 +19,8 @@ require('trouble').setup({
 
 local opts = { noremap = true, silent = true }
 -- vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>TroubleToggle<cr>', opts)
-vim.api.nvim_set_keymap('n', '[f', ':lua require("trouble").prev({ skip_groups = true, jump = true })<CR>', opts)
-vim.api.nvim_set_keymap('n', ']f', ':lua require("trouble").next({ skip_groups = true, jump = true })<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '[f', ':lua require("trouble").prev({ skip_groups = true, jump = true })<CR>', opts)
+-- vim.api.nvim_set_keymap('n', ']f', ':lua require("trouble").next({ skip_groups = true, jump = true })<CR>', opts)
 map('n', '<leader>q', function()
   require("trouble").next({ jump = true })
 end)
