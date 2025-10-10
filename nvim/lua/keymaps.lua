@@ -273,14 +273,23 @@ map('n', ',d', function()
   
   -- 如果有其他有效 buffer，先切换到它，再删除当前 buffer
   if #valid_buffers > 0 then
-    -- 选择最近访问的 buffer（通过 bufferline 插件获取顺序）
-    local target_buf = valid_buffers[1]
+    -- 使用 alternate buffer (#) 作为首选，这是上一个访问的 buffer
+    local alt_buf = vim.fn.bufnr('#')
+    local target_buf = nil
+
+    -- 检查 alternate buffer 是否在有效列表中
     for _, buf in ipairs(valid_buffers) do
-      if vim.fn.buflisted(buf) == 1 and vim.api.nvim_buf_get_name(buf) ~= '' then
-        target_buf = buf
+      if buf == alt_buf then
+        target_buf = alt_buf
         break
       end
     end
+
+    -- 如果 alternate buffer 不可用，选择列表中的第一个
+    if not target_buf then
+      target_buf = valid_buffers[1]
+    end
+
     vim.api.nvim_set_current_buf(target_buf)
   else
     -- 如果没有有效 buffer，创建一个新的空 buffer
