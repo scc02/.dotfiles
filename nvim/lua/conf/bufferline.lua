@@ -8,7 +8,7 @@ require("bufferline").setup {
   --     italic = true,
   --   },
   -- },
-  highlights = require("catppuccin.special.bufferline").get_theme(),
+  -- highlights = require("catppuccin.special.bufferline").get_theme(),
   options = {
     close_icon = 'x',
     buffer_close_icon = 'x',

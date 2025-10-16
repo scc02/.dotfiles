@@ -71,7 +71,7 @@ map('n', '<C-r>', "<Cmd>call VSCodeNotify('redo')<CR>")
 -- map('n', 'gcc', '<Plug>VSCodeCommentaryLine')
 
 -- --文件树相关
--- map('n', '<leader>fc', "<cmd>call VSCodeNotify('workbench.files.action.collapseExplorerFolders')<CR>")
+map('n', '<leader>fc', "<cmd>call VSCodeNotify('workbench.files.action.collapseExplorerFolders')<CR>")
 map('n', '<leader>e', "<Cmd>call VSCodeNotify('revealInExplorer')<CR>")
 
 -- --surround
