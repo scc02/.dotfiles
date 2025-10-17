@@ -118,6 +118,7 @@ require("fzf-lua").setup({
       ["alt-p"]  = "toggle-preview",
       ["ctrl-f"] = "half-page-down",
       ["ctrl-b"] = "half-page-up",
+      ["ctrl-q"] = "select-all+accept",
     }
   },
   actions = {
