@@ -15,7 +15,6 @@ map('n', '<leader>fe', function()
     local args = vim.fn.input("Args > ")
     local arg_len = #args
     if arg_len ~= 0 then
-
       require("fzf-lua").live_grep({
         search = word,
         rg_opts = args .. " --line-number --column",
@@ -35,6 +34,9 @@ end)
 -- end) -- map('n', '<leader>fo', M.reveal_in_finder)
 
 require("fzf-lua").setup({
+  defaults = {
+    cwd = vim.fn.getcwd(-1),
+  },
   fzf_opts = {
     ["--cycle"] = "", -- 启用循环
   },
@@ -96,7 +98,7 @@ require("fzf-lua").setup({
     rg_opts = [[--files --hidden --no-ignore --iglob '!node_modules/**' --iglob '!.git/**']],
     gitignore = false, -- 禁用 fzf-lua 默认的 gitignore 过滤
     no_header = true,
-    cwd_prompt = false,
+    -- cwd_prompt = false,
     no_header_i = true,
     winopts = {
       preview = {

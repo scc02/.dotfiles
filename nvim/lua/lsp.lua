@@ -128,50 +128,50 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', 'gD', vim.lsp.buf.declaration, bufopts)
     -- map('n', 'gd', vim.lsp.buf.definition, bufopts)
     map('n', 'gd', function()
-      local clients = vim.lsp.get_clients({ bufnr = ev.buf })
-      local is_ts_ls_attached = false
-      for _, client in ipairs(clients) do
-        if client.name == "ts_ls" then
-          is_ts_ls_attached = true
-          break
-        end
-      end
-
-      if is_ts_ls_attached then
-        vim.lsp.buf.definition({
-          on_list = function(options)
-            if options.items and #options.items > 1 then
-              local filtered_result = util.filter(options.items, util.filterReactDTS)
-              options.items = filtered_result
-              if #options.items >= 1 then
-                local item = options.items[1]
-                if item.filename then
-                  -- 检查当前文件是否与目标文件相同
-                  local current_file = vim.api.nvim_buf_get_name(0)
-                  if current_file ~= item.filename then
-                    vim.cmd("edit " .. vim.fn.fnameescape(item.filename))
-                  end
-                end
-                vim.api.nvim_win_set_cursor(0, {item.lnum, item.col - 1})
-              end
-            elseif options.items and #options.items == 1 then
-              local item = options.items[1]
-              if item.filename then
-                -- 检查当前文件是否与目标文件相同
-                local current_file = vim.api.nvim_buf_get_name(0)
-                if current_file ~= item.filename then
-                  vim.cmd("edit " .. vim.fn.fnameescape(item.filename))
-                end
-              end
-              vim.api.nvim_win_set_cursor(0, {item.lnum, item.col - 1})
-            else
-              print("No definition found")
-            end
-          end,
-        })
-      else
+      -- local clients = vim.lsp.get_clients({ bufnr = ev.buf })
+      -- local is_ts_ls_attached = false
+      -- for _, client in ipairs(clients) do
+      --   if client.name == "ts_ls" then
+      --     is_ts_ls_attached = true
+      --     break
+      --   end
+      -- end
+      --
+      -- if is_ts_ls_attached then
+      --   vim.lsp.buf.definition({
+      --     on_list = function(options)
+      --       if options.items and #options.items > 1 then
+      --         local filtered_result = util.filter(options.items, util.filterReactDTS)
+      --         options.items = filtered_result
+      --         if #options.items >= 1 then
+      --           local item = options.items[1]
+      --           if item.filename then
+      --             -- 检查当前文件是否与目标文件相同
+      --             local current_file = vim.api.nvim_buf_get_name(0)
+      --             if current_file ~= item.filename then
+      --               vim.cmd("edit " .. vim.fn.fnameescape(item.filename))
+      --             end
+      --           end
+      --           vim.api.nvim_win_set_cursor(0, {item.lnum, item.col - 1})
+      --         end
+      --       elseif options.items and #options.items == 1 then
+      --         local item = options.items[1]
+      --         if item.filename then
+      --           -- 检查当前文件是否与目标文件相同
+      --           local current_file = vim.api.nvim_buf_get_name(0)
+      --           if current_file ~= item.filename then
+      --             vim.cmd("edit " .. vim.fn.fnameescape(item.filename))
+      --           end
+      --         end
+      --         vim.api.nvim_win_set_cursor(0, {item.lnum, item.col - 1})
+      --       else
+      --         print("No definition found")
+      --       end
+      --     end,
+      --   })
+      -- else
         vim.lsp.buf.definition()
-      end
+      -- end
     end, bufopts)
     map('n', 'K', vim.lsp.buf.hover, bufopts)
     map('n', '<space>rn', vim.lsp.buf.rename, bufopts)
