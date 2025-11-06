@@ -8,9 +8,10 @@ working-directory = true
 cursor-text = #131517
 maximize = true
 cursor-style-blink = false
+shell-integration-features = no-cursor
 cursor-style = bar
 # 光标轨迹特效相关文件
-custom-shader = "~/.config/ghostty/shaders/cursor_smear.glsl"
+# custom-shader = "~/.config/ghostty/shaders/cursor_smear.glsl"
 # 输入文本时隐藏鼠标
 mouse-hide-while-typing = true
 

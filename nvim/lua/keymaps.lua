@@ -366,8 +366,11 @@ end)
 
 -- vim-fugitive
 map('n', '<leader>gp', function()
-  -- 关闭当前窗口
-  vim.cmd('close')
+  local filetype = vim.bo.filetype
+  if filetype == 'fugitive' then
+    -- 关闭当前窗口
+    vim.cmd('close')
+  end
   -- 异步执行 Git push
   vim.fn.jobstart({ 'git', 'push' }, {
     on_stdout = function(_, data)
