@@ -409,7 +409,8 @@ require("lazy").setup({
           'qf',
           'gitcommit',
           'DiffviewFiles',
-          'TelescopePrompt'
+          'TelescopePrompt',
+          'NvimTree'
         },
       })
     end

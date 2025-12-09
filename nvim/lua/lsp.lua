@@ -277,24 +277,24 @@ vim.diagnostic.config({
   -- },
 })
 
-vim.lsp.config('ds_pinyin_lsp', {
-  init_options = {
-    db_path = "/Users/shichencong/lsp/dict.db3",
-    show_symbols = false,
-    max_suggest = 5
-  },
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx",
-    "lua",
-    "gitcommit"
-  },
-})
-vim.lsp.enable('ds_pinyin_lsp')
+-- vim.lsp.config('ds_pinyin_lsp', {
+--   init_options = {
+--     db_path = "/Users/shichencong/lsp/dict.db3",
+--     show_symbols = false,
+--     max_suggest = 5
+--   },
+--   filetypes = {
+--     "javascript",
+--     "javascriptreact",
+--     "javascript.jsx",
+--     "typescript",
+--     "typescriptreact",
+--     "typescript.tsx",
+--     "lua",
+--     "gitcommit"
+--   },
+-- })
+-- vim.lsp.enable('ds_pinyin_lsp')
 
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --   callback = function(args)

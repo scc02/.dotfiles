@@ -109,16 +109,16 @@ map('n', '<leader>.', function()
 end)
 
 -- if vim.env.VSCODE_CLIENT_TYPE == 'cursor' then
-  vim.api.nvim_create_autocmd("InsertLeave", {
-    callback = function()
-      require('vscode').action('editor.cpp.disableenabled')
-    end
-  });
-  vim.api.nvim_create_autocmd("InsertEnter", {
-    callback = function()
-      require('vscode').action('editor.action.enableCppGlobally')
-    end
-  });
+  -- vim.api.nvim_create_autocmd("InsertLeave", {
+  --   callback = function()
+  --     require('vscode').action('editor.cpp.disableenabled')
+  --   end
+  -- });
+  -- vim.api.nvim_create_autocmd("InsertEnter", {
+  --   callback = function()
+  --     require('vscode').action('editor.action.enableCppGlobally')
+  --   end
+  -- });
 -- else
 --   -- VSCode 逻辑
 -- end

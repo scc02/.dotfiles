@@ -49,12 +49,18 @@ require 'nvim-tree'.setup {
   },
   filters = {
     dotfiles = true,
+    git_ignored = false,  -- 👈 不隐藏 .gitignore 中的文件
   },
   renderer = {
     root_folder_label = false,
     icons = {
       git_placement = "after",
       modified_placement = "after",
+      show = {
+        folder = false,
+        -- file = false,
+        -- folder_arrow = false,
+      },
       glyphs = {
         git = git_icons
       }
