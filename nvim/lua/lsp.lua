@@ -80,45 +80,49 @@ vim.lsp.config('tailwindCSS', {
 })
 vim.lsp.enable('tailwindCSS')
 
-vim.lsp.config('ts_ls', {
-  capabilities = capabilities,
-  root_dir = vim.fn.getcwd(),
-  init_options = {
-    preferences = {
-      providePrefixAndSuffixTextForRename = false,
+local enable_new_ts_lsp = false
+if enable_new_ts_lsp then
+  vim.lsp.config('tsgo', {
+    capabilities = capabilities,
+    init_options = {
+      preferences = {
+        providePrefixAndSuffixTextForRename = false,
+      },
     },
-  },
-})
-vim.lsp.enable('ts_ls')
+    default_config = {
+      cmd = { "tsgo", "--lsp", "--stdio" },
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+      },
+      root_dir = lspconfig.util.root_pattern(
+        "tsconfig.json",
+        "jsconfig.json",
+        "package.json",
+        ".git",
+        "tsconfig.base.json"
+      ),
+      settings = {},
+    }
+  })
+  vim.lsp.enable('tsgo')
+else
+  vim.lsp.config('ts_ls', {
+    capabilities = capabilities,
+    root_dir = vim.fn.getcwd(),
+    init_options = {
+      preferences = {
+        providePrefixAndSuffixTextForRename = false,
+      },
+    },
+  })
+  vim.lsp.enable('ts_ls')
+end
 
---[[ vim.lsp.config('tsgo',{
-  capabilities = capabilities,
-  init_options = {
-    preferences = {
-      providePrefixAndSuffixTextForRename = false,
-    },
-  },
-  default_config = {
-    cmd = { "tsgo", "--lsp", "--stdio" },
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescriptreact",
-      "typescript.tsx",
-    },
-    root_dir = lspconfig.util.root_pattern(
-      "tsconfig.json",
-      "jsconfig.json",
-      "package.json",
-      ".git",
-      "tsconfig.base.json"
-    ),
-    settings = {},
-  }
-})
-vim.lsp.enable('tsgo') ]]
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -170,7 +174,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       --     end,
       --   })
       -- else
-        vim.lsp.buf.definition()
+      vim.lsp.buf.definition()
       -- end
     end, bufopts)
     map('n', 'K', vim.lsp.buf.hover, bufopts)
