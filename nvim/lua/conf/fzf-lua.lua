@@ -37,8 +37,10 @@ require("fzf-lua").setup({
   defaults = {
     cwd = vim.fn.getcwd(-1),
   },
+  -- fzf_bin = "sk",
   fzf_opts = {
-    ["--cycle"] = "", -- 启用循环
+    ["--cycle"] = "",       -- 启用循环
+    -- ["--algo"] = "frizbee"  -- 启动typo resistant
   },
   winopts = {
     preview = {

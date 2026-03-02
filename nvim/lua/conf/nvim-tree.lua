@@ -48,8 +48,9 @@ require 'nvim-tree'.setup {
     -- },
   },
   filters = {
-    dotfiles = true,
-    git_ignored = false,  -- 👈 不隐藏 .gitignore 中的文件
+    dotfiles = false,  -- 设置为 false 表示显示 dotfiles (以 . 开头的文件)
+    custom = { ".git" },  -- 可选择性地排除某些文件或文件夹
+    git_ignored = false,  -- 不隐藏 .gitignore 中的文件
   },
   renderer = {
     root_folder_label = false,
