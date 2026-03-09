@@ -33,6 +33,32 @@ local function on_attach(bufnr)
   -- 自定义按键映射
   vim.keymap.set('n', 'l', api.node.open.edit, opts('Open'))
   vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
+  -- 搜索文件
+  vim.keymap.set('n', '<leader>ff', function()
+    local node = api.tree.get_node_under_cursor()
+    if not node then return end
+
+    local path = node.absolute_path
+    local search_path
+
+    if vim.fn.isdirectory(path) == 1 then
+      search_path = path
+    else
+      search_path = vim.fn.fnamemodify(path, ':h')
+    end
+
+    require("fzf-lua").files({
+      cwd = search_path,
+    })
+  end, opts('Search Files'))
+  -- reveal in finder
+  vim.keymap.set('n', '<leader>fo', function()
+    local node = api.tree.get_node_under_cursor()
+    if not node then return end
+
+    local fullPath = node.absolute_path
+    vim.fn.jobstart('open -R "' .. fullPath .. '"', { detach = true })
+  end, opts('Reveal in Finder'))
 end
 
 require 'nvim-tree'.setup {
