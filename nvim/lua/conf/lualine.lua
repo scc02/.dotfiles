@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd('BufLeave', {
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = "catppuccin",
+    -- theme = "catppuccin",
     -- theme = "solarized",
     globalstatus = true,
     section_separators = { left = '', right = '' },
