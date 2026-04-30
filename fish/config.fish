@@ -103,3 +103,6 @@ alias forward="/Users/shichencong/workplace-data/cpolar"
 
 set -gx PATH "/Users/shichencong/lsp" $PATH
 
+alias zl="/Users/shichencong/source/zellij"
+
+set -gx PATH "/Users/shichencong/execute/flutter" $PATH

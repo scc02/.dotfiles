@@ -18,20 +18,15 @@ end
 -- ESLint LSP 只在发现配置文件时启动
 vim.lsp.config('eslint', {
   capabilities = capabilities,
-  -- root_dir = lspconfig_util.root_pattern(
-  --   '.eslintrc',
-  --   '.eslintrc.js',
-  --   '.eslintrc.cjs',
-  --   '.eslintrc.yaml',
-  --   '.eslintrc.yml',
-  --   '.eslintrc.json',
-  --   'eslint.config.js',
-  --   'eslint.config.mjs',
-  --   'eslint.config.cjs'
-  -- ),
-  -- settings = {
-  --   packageManager = 'npm'
-  -- }
+  handlers = {
+    -- 静默 textDocument/diagnostic 错误，避免 merge 冲突时命令行报错
+    ['textDocument/diagnostic'] = function(err, result, ctx, config)
+      if err then
+        return
+      end
+      return vim.lsp.handlers['textDocument/diagnostic'](err, result, ctx, config)
+    end,
+  },
 })
 vim.lsp.enable('eslint')
 -- vim.lsp.enable('biome')

@@ -3,7 +3,9 @@
     "allow": [
       "mcp__context7__query-docs",
       "WebSearch",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(bash ~/.claude/skills/web-access/scripts/check-deps.sh)",
+      "Bash(curl:*)"
     ]
   }
 }
