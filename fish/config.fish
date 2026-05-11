@@ -105,4 +105,4 @@ set -gx PATH "/Users/shichencong/lsp" $PATH
 
 alias zl="/Users/shichencong/source/zellij"
 
-set -gx PATH "/Users/shichencong/execute/flutter" $PATH
+set -gx PATH "/Users/shichencong/execute/flutter/bin" $PATH
