@@ -109,7 +109,16 @@ map({ 'n', 'v' }, '<leader>e', function()
     end
   end
 end)
-map('t', '<Esc>', '<C-\\><C-n>')
+vim.keymap.set('t', '<Esc>', function()
+  if vim.bo.filetype == 'toggleterm' then
+    local job_id = vim.b.terminal_job_id
+    if job_id then
+      vim.api.nvim_chan_send(job_id, '\27')
+    end
+    return ''
+  end
+  return '<C-\\><C-n>'
+end, { expr = true, silent = true })
 
 local isHtmlNode = function()
   local curbuf = vim.api.nvim_get_current_buf()
