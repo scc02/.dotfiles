@@ -188,7 +188,7 @@ require("lazy").setup({
   }, ]]
   {
     "akinsho/toggleterm.nvim",
-    keys = { "<C-\\>" },
+    keys = { "<C-,>" },
     config = function() require('conf.toggleterm') end,
   },
 
@@ -533,7 +533,7 @@ require("lazy").setup({
       },
     },
   }, ]]
-    {
+  {
     "saghen/blink.cmp",
     dependencies = {
       {
@@ -607,7 +607,7 @@ require("lazy").setup({
   -- },
   {
     "nvim-tree/nvim-tree.lua",
-    config = function ()
+    config = function()
       require('conf.nvim-tree')
     end
   },
@@ -622,7 +622,12 @@ require("lazy").setup({
   --     })
   --   end
   -- },
-  { "yioneko/nvim-yati",  requires = "nvim-treesitter/nvim-treesitter" }
+  -- { "yioneko/nvim-yati", requires = "nvim-treesitter/nvim-treesitter" },
+  {
+    'nemanjamalesija/smart-paste.nvim',
+    event = 'VeryLazy',
+    config = true,
+  },
 }, {
   defaults = {
     lazy = false

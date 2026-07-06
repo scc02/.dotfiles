@@ -34,9 +34,6 @@ end)
 -- end) -- map('n', '<leader>fo', M.reveal_in_finder)
 
 require("fzf-lua").setup({
-  defaults = {
-    cwd = vim.fn.getcwd(-1),
-  },
   -- fzf_bin = "sk",
   fzf_opts = {
     ["--cycle"] = "",       -- 启用循环
@@ -96,9 +93,7 @@ require("fzf-lua").setup({
   --   height = 0.3,  -- 高度占屏幕的 30%
   -- },
   files = {
-    -- 搜索所有文件，除了 node_modules 和 .git 目录，如果想要搜索node_modules，netrw里使用<leader>ff在指定目录下搜索
-    -- rg_opts = [[--files --hidden --no-ignore --iglob '!node_modules/**' --iglob '!.git/**']],
-    gitignore = false, -- 禁用 fzf-lua 默认的 gitignore 过滤
+    -- no_ignore = true,
     no_header = true,
     -- cwd_prompt = false,
     no_header_i = true,

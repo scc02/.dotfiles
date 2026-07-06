@@ -95,6 +95,7 @@ if test -f ~/.config/fish/secrets.fish
   source ~/.config/fish/secrets.fish
 end
 alias c="claude"
+alias a="agent"
 alias q="qwen"
 alias g="http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890 gemini"
 fish_add_path $HOME/.local/bin
@@ -106,3 +107,12 @@ set -gx PATH "/Users/shichencong/lsp" $PATH
 alias zl="/Users/shichencong/source/zellij"
 
 set -gx PATH "/Users/shichencong/execute/flutter/bin" $PATH
+
+set -gx PATH "/Users/shichencong/execute/apache-maven-3.9.16/bin/" $PATH
+
+set -gx PATH "/usr/local/mysql-9.7.0-macos15-arm64/bin/" $PATH
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/Users/shichencong/.local/bin" $PATH
+fnm env --use-on-cd | source

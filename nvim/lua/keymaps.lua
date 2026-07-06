@@ -109,8 +109,17 @@ map({ 'n', 'v' }, '<leader>e', function()
     end
   end
 end)
+
+
 vim.keymap.set('t', '<Esc>', function()
   if vim.bo.filetype == 'toggleterm' then
+    -- local now = vim.loop.hrtime()
+    -- local last = vim.b.toggleterm_esc_last or 0
+    -- if now - last < 300 * 1000000 then
+    --   vim.b.toggleterm_esc_last = nil
+    --   return '<C-\\><C-n>'
+    -- end
+    -- vim.b.toggleterm_esc_last = now
     local job_id = vim.b.terminal_job_id
     if job_id then
       vim.api.nvim_chan_send(job_id, '\27')
@@ -119,6 +128,12 @@ vim.keymap.set('t', '<Esc>', function()
   end
   return '<C-\\><C-n>'
 end, { expr = true, silent = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'toggleterm',
+  callback = function()
+    vim.keymap.set('t', '<C-;>', '<C-\\><C-n>', { buffer = true, silent = true })
+  end,
+})
 
 local isHtmlNode = function()
   local curbuf = vim.api.nvim_get_current_buf()
