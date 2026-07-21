@@ -75,7 +75,7 @@ vim.lsp.config('tailwindCSS', {
 })
 vim.lsp.enable('tailwindCSS')
 
-local enable_new_ts_lsp = false
+local enable_new_ts_lsp = true
 if enable_new_ts_lsp then
   vim.lsp.config('tsgo', {
     capabilities = capabilities,

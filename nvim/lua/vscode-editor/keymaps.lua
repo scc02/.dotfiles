@@ -108,16 +108,31 @@ map('n', '<leader>.', function()
   require('vscode').action('editor.action.quickFix')
 end)
 
-vim.api.nvim_create_autocmd("InsertLeave", {
-  callback = function()
-    require('vscode').action('editor.cpp.disableenabled')
-  end
-});
-vim.api.nvim_create_autocmd("InsertEnter", {
-  callback = function()
-    require('vscode').action('editor.action.enableCppGlobally')
-  end
-});
+-- cursor
+-- vim.api.nvim_create_autocmd("InsertLeave", {
+--   callback = function()
+--     require('vscode').action('editor.cpp.disableenabled')
+--   end
+-- });
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--   callback = function()
+--     require('vscode').action('editor.action.enableCppGlobally')
+--   end
+-- });
+
+
+-- vscode 
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--   callback = function()
+--     require("vscode").action("github.copilot.enable")
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("InsertLeave", {
+--   callback = function()
+--     require("vscode").action("github.copilot.disable")
+--   end,
+-- })
 
 map('n', 'za', function()
   require('vscode').action('editor.toggleFold')
