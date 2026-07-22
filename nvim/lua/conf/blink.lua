@@ -142,3 +142,6 @@ blink.setup({
   },
 
 })
+
+-- 接受补全时记录光标，使 undo/redo 行为接近 VS Code（不跳到 auto-import）
+require('util.cmp_undo').setup_blink_hook()

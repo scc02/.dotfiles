@@ -1,6 +1,5 @@
 ---@diagnostic disable: unused-local
 local nvim_lsp = require('lspconfig')
-local keep_position = require('util.keep_position')
 
 local M = {}
 M.init = function()

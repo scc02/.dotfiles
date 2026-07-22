@@ -1,5 +1,5 @@
 local map                  = require('util.map')
-local keep_position        = require('util.keep_position')
+local cmp_undo             = require('util.cmp_undo')
 local is_git               = require('util.is_git')
 local get_listed_buf_count = require('util.util').get_listed_buf_count
 
@@ -27,13 +27,16 @@ map('n', 'gq', ":q!<CR>")
 -- map('n', 'Q', 'q')
 -- map('n', 'q', '<Nop>')
 
-map('n',',,', 'u')
-
--- map('n', '<C-r>', function()
---   keep_position.stay_position(function()
---     vim.cmd('redo')
---   end)
--- end)
+-- 补全 + auto-import 的 undo/redo 光标行为对齐 VS Code
+map('n', 'u', function()
+  cmp_undo.undo()
+end)
+map('n', ',,', function()
+  cmp_undo.undo()
+end)
+map('n', '<C-r>', function()
+  cmp_undo.redo()
+end)
 
 -- map('n', ',r', ":LspRestart<CR>")
 
@@ -84,11 +87,11 @@ map('n', ',s', function()
 end, { noremap = true, silent = false })
 
 map('n', ',t', function()
-  keep_position.stay_position(function()
-    local file_path = vim.api.nvim_buf_get_name(0);
-    vim.cmd [[tabnew]]
-    vim.cmd('e ' .. file_path)
-  end)
+  local view = vim.fn.winsaveview()
+  local file_path = vim.api.nvim_buf_get_name(0)
+  vim.cmd [[tabnew]]
+  vim.cmd('e ' .. file_path)
+  vim.fn.winrestview(view)
 end)
 map('n', 'tn', ':tabnext<CR>')
 map('n', 'tp', ':tabprevious<CR>')
