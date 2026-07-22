@@ -6,6 +6,12 @@ require("catppuccin").setup {
     transparent = false,
     solid = false
   },
+  integrations = {
+    blink_cmp = {
+      enabled = true,
+      style = 'bordered',
+    },
+  },
   -- catppuccin_flavour = 'macchiato',
   custom_highlights = function(colors)
     return {
@@ -77,4 +83,3 @@ require("catppuccin").setup {
 }
 
 vim.cmd.colorscheme "catppuccin"
-
