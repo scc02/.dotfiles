@@ -11,5 +11,10 @@ conf="${HOME}/.config/tmux/popup.conf"
 # Refresh an existing popup server; -f handles the first start.
 tmux -L popup source-file "$conf" 2>/dev/null || true
 
+# Start the shell before drawing the popup, avoiding an empty popup frame.
+if ! tmux -L popup has-session -t "=$name" 2>/dev/null; then
+  tmux -L popup -f "$conf" new-session -d -s "$name" -c "$path" || exit 1
+fi
+
 tmux popup -d "$path" -xC -yC -w"$width" -h"$height" -b rounded -S 'fg=#94E2D5' -E \
-  "tmux -L popup -f '$conf' new-session -A -s '$name'"
+  "tmux -L popup attach-session -t '=$name'"
