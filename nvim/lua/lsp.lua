@@ -306,3 +306,12 @@ vim.diagnostic.config({
 --     end
 --   end
 -- })
+
+-- vim.lsp.config('jdtls', {
+--   cmd = {
+--     vim.fn.stdpath('data') .. '/mason/packages/jdtls/bin/jdtls',
+--     '--java-executable',
+--     '/Users/shichencong/Library/Java/JavaVirtualMachines/ms-21.0.11/Contents/Home/bin/java',
+--   },
+-- })
+-- vim.lsp.enable('jdtls')
