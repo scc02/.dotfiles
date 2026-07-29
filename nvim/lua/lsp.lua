@@ -77,32 +77,30 @@ vim.lsp.enable('tailwindCSS')
 
 local enable_new_ts_lsp = true
 if enable_new_ts_lsp then
+  -- vim.lsp.config 字段需平铺；default_config 是旧 lspconfig.configs 写法，这里无效
   vim.lsp.config('tsgo', {
+    cmd = { 'tsgo', '--lsp', '--stdio' },
+    filetypes = {
+      'javascript',
+      'javascriptreact',
+      'javascript.jsx',
+      'typescript',
+      'typescriptreact',
+      'typescript.tsx',
+    },
+    root_markers = {
+      'tsconfig.json',
+      'jsconfig.json',
+      'package.json',
+      'tsconfig.base.json',
+      '.git',
+    },
     capabilities = capabilities,
     init_options = {
       preferences = {
         providePrefixAndSuffixTextForRename = false,
       },
     },
-    default_config = {
-      cmd = { "tsgo", "--lsp", "--stdio" },
-      filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx",
-      },
-      root_dir = lspconfig.util.root_pattern(
-        "tsconfig.json",
-        "jsconfig.json",
-        "package.json",
-        ".git",
-        "tsconfig.base.json"
-      ),
-      settings = {},
-    }
   })
   vim.lsp.enable('tsgo')
 else
