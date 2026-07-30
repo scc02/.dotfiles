@@ -83,25 +83,25 @@ blink.setup({
       "fallback"
     },
 
-    ["<Tab>"] = {
-      function(cmp)
-        -- local is_visible = vim.api.nvim_call_function("codeium#GetStatusString", {})
-        -- if is_visible ~= '*' then
-        --     vim.fn['codeium#Accept']()
-        -- else
-        return cmp.select_next()
-        -- end
-      end,
-      "snippet_forward",
-      "fallback",
-    },
-    ["<S-Tab>"] = {
-      function(cmp)
-        return cmp.select_prev()
-      end,
-      "snippet_backward",
-      "fallback",
-    },
+    -- ["<Tab>"] = {
+    --   function(cmp)
+    --     -- local is_visible = vim.api.nvim_call_function("codeium#GetStatusString", {})
+    --     -- if is_visible ~= '*' then
+    --     --     vim.fn['codeium#Accept']()
+    --     -- else
+    --     return cmp.select_next()
+    --     -- end
+    --   end,
+    --   "snippet_forward",
+    --   "fallback",
+    -- },
+    -- ["<S-Tab>"] = {
+    --   function(cmp)
+    --     return cmp.select_prev()
+    --   end,
+    --   "snippet_backward",
+    --   "fallback",
+    -- },
     ["<C-k>"] = { "show" },
     ["<C-j>"] = { "hide", "fallback" },
   },
