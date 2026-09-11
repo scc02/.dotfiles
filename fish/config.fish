@@ -54,14 +54,41 @@ set -Ux VISUAL nvim      # 选择你喜欢的编辑器，如 vim、nano 等
 set -Ux EDITOR $VISUAL   # 使 $EDITOR 指向 $VISUAL
 
 
-alias ff='set selected (fzf --preview="bat --color=always {} --theme  Visual\ Studio\ Dark+"); and test -n "$selected"; and nvim "$selected"'
+alias ff='set selected (fzf --preview="bat --color=always {} --theme Catppuccin\ Mocha"); and test -n "$selected"; and nvim "$selected"'
 
+# rg 搜文字 → fzf 选结果 → nvim 打开到对应行
+# 用法: fr <pattern>
+function fr
+    if test (count $argv) -eq 0
+        echo 'Usage: fr <pattern>'
+        return 1
+    end
+
+    set -l selected (
+        rg --color=always --line-number --no-heading --smart-case -- $argv \
+        | fzf --ansi \
+            --delimiter ':' \
+            --preview 'bat --color=always --theme "Catppuccin Mocha" --highlight-line {2} {1}' \
+            --preview-window '+{2}+3/3'
+    )
+    and test -n "$selected"
+    and begin
+        set -l args
+        for item in $selected
+            set -l file (string split -f1 -- ':' $item)
+            set -l line (string split -f2 -- ':' $item)
+            set -a args "+$line" $file
+        end
+        nvim $args
+    end
+end
 
 set -Ux FZF_DEFAULT_OPTS "\
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc,gutter:-1 \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --color=selected-bg:#45475a \
+--gutter=' ' \
 --multi"
 
 # fix esc slow

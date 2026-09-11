@@ -75,7 +75,7 @@ vim.lsp.config('tailwindCSS', {
 })
 vim.lsp.enable('tailwindCSS')
 
-local enable_new_ts_lsp = true
+local enable_new_ts_lsp = false
 if enable_new_ts_lsp then
   -- vim.lsp.config 字段需平铺；default_config 是旧 lspconfig.configs 写法，这里无效
   vim.lsp.config('tsgo', {

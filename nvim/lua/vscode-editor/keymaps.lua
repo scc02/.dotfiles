@@ -42,6 +42,8 @@ map('n', '<leader>o', "<Cmd>call VSCodeNotify('editor.action.formatDocument')<CR
 map('n', 'co', "<Cmd>call VSCodeNotify('workbench.action.closeOtherEditors')<CR>")
 
 -- map('n', 'gr', "<Cmd>call VSCodeNotify('references-view.findReference')<CR>")
+map('n', 'gr', "<cmd>call VSCodeNotify('editor.action.goToReferences')<CR>")
+map('n', '<leader>gr', "<cmd>call VSCodeNotify('references-view.findReferences')<CR>")
 map('n', '[d', "<Cmd>call VSCodeNotify('editor.action.marker.prevInFiles')<CR>")
 map('n', ']d', "<Cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<CR>")
 map('n', '<leader>rn', "<Cmd>call VSCodeNotify('editor.action.rename')<CR>")
