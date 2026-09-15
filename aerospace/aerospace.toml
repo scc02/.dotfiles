@@ -223,4 +223,5 @@ automatically-unhide-macos-hidden-apps = false
     shift-down = ['volume set 0', 'mode main']
 
     [[on-window-detected]]
+    if = 'true'
     run = 'layout floating'
