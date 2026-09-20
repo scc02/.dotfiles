@@ -47,7 +47,7 @@ local options = {
   signcolumn = "yes",
   -- 折叠代码 默认有些代码无法识别折叠 比如jsx等
   -- foldmethod = "indent",
-  foldexpr = "nvim_treesitter#foldexpr()",
+  foldexpr = "v:lua.vim.treesitter.foldexpr()",
   foldmethod = 'expr',
   -- 默认打开文件不折叠
   -- foldenable = false,
@@ -106,3 +106,47 @@ vim.cmd [[
 vim.g.netrw_sort_sequence = '[[\\/]$,*]'
 
 vim.g.augment_workspace_folders = { "." }
+
+-- Neovim 内置 treesitter 高亮（不依赖 nvim-treesitter 插件的 highlight 模块）
+local treesitter_highlight_filetypes = {
+  'css',
+  'typescript',
+  'typescriptreact',
+  'javascript',
+  'javascriptreact',
+  'html',
+  'lua',
+  'json',
+  'rust',
+  'tsx',
+  'jsx',
+  'ets',
+}
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = treesitter_highlight_filetypes,
+  callback = function(args)
+    local max_filesize = 80 * 1024 -- 80 KB，大文件跳过高亮
+    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+    if ok and stats and stats.size > max_filesize then
+      return
+    end
+    pcall(vim.treesitter.start)
+  end,
+})
+
+-- 鸿蒙 .ets 用 tsx parser 高亮（filetype 保持 ets，避免 ts_ls 乱报错）
+vim.filetype.add({
+  extension = {
+    ets = 'ets',
+  },
+})
+vim.treesitter.language.register('tsx', 'ets')
+
+-- 恢复旧版 incremental_selection 的 g.（Nvim 0.12 内置 vim.treesitter.select）
+-- 原配置：init_selection / node_incremental 都是 g.
+vim.keymap.set({ 'n', 'x' }, 'g.', function()
+  vim.treesitter.select('parent', vim.v.count1)
+end, { desc = 'Treesitter expand node selection' })
+
+

@@ -24,30 +24,16 @@ map('n', '<leader>fe', function()
   end
 end)
 
--- map('n', '<leader>fd', function()
---   local filetype = vim.bo.filetype
---   local handledPath = vim.fn['defx#get_candidate']().action__path
---   require("fzf-lua").files({
---     cwd = handledPath, -- 指定搜索目录
---     prompt = "Files in my_project> ", -- 自定义提示符
---   })
--- end) -- map('n', '<leader>fo', M.reveal_in_finder)
-
 require("fzf-lua").setup({
   -- fzf_bin = "sk",
   fzf_opts = {
-    ["--cycle"] = "",       -- 启用循环
-    -- ["--algo"] = "frizbee"  -- 启动typo resistant
+    ["--cycle"] = "", -- 启用循环
   },
   winopts = {
     preview = {
       layout = "vertical", -- 上下分屏（"horizontal" 是左右）
-      -- vertical = "down:50%", -- 向下展开，占用 50% 高度
+      delay = 100,         -- 选中停一下再渲染，快速翻结果时少卡
     },
-    -- on_create = function()
-    --   vim.cmd [[highlight FzfCursor gui=vert]]
-    --   vim.cmd [[setlocal winhighlight=TermCursor:FzfCursor]]
-    -- end
   },
   oldfiles = {
     cwd_only = true, -- 限制只显示当前工作目录下的历史文件
@@ -59,17 +45,20 @@ require("fzf-lua").setup({
       no_header = true
     }
   },
+  -- lua_ls 要求 Previewers 含 git_diff；我们只覆盖 builtin，运行时会与默认合并
+  ---@diagnostic disable-next-line: missing-fields
   previewers = {
     builtin = {
-      syntax_limit_b = 1024 * 100, -- 100K
-      limit_b        = 1024 * 1024 * 10
-    }
+      -- syntax = false, -- 预览纯文本，不做 syntax / treesitter 高亮
+      -- 超过此大小：仍预览，但不做语法高亮（防卡）
+      syntax_limit_b = 1024 * 100, -- 100KB
+      -- 超过此大小：直接不预览内容，只提示文件过大
+      limit_b        = 1024 * 512, -- 512KB
+      treesitter = {
+        enabled = false,
+      },
+    },
   },
-  -- winopts = {
-  --   preview = {
-  --     hidden = true,
-  --   }
-  -- },
   lsp = {
     code_actions = {
       silent = true,
