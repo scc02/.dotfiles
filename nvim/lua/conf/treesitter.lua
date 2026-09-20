@@ -31,11 +31,10 @@ require 'nvim-treesitter.configs'.setup {
   }
 }
 
--- vim.treesitter.language.register('scss', 'less')
---
--- 可选：打开文件时自动展开折叠（防止 treesitter 异常时全折叠）
--- vim.api.nvim_create_autocmd("BufReadPost", {
---   callback = function()
---     vim.cmd("normal zR")
---   end
--- })
+-- 鸿蒙 .ets 用 tsx 高亮（filetype 保持 ets，避免 ts_ls 乱报错）
+vim.filetype.add({
+  extension = {
+    ets = 'ets',
+  },
+})
+vim.treesitter.language.register('tsx', 'ets')
