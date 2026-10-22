@@ -250,6 +250,8 @@ require("lazy").setup({
 
 
   { "neovim/nvim-lspconfig", config = function() require('lsp') end },
+  -- Java LSP：在 ftplugin/java.lua 里启动
+  { "mfussenegger/nvim-jdtls", ft = "java" },
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",

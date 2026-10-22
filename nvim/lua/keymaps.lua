@@ -29,13 +29,19 @@ map('n', 'gq', ":q!<CR>")
 
 -- 补全 + auto-import 的 undo/redo 光标行为对齐 VS Code
 map('n', 'u', function()
-  cmp_undo.undo()
+  for _ = 1, vim.v.count1 do
+    cmp_undo.undo()
+  end
 end)
 map('n', ',,', function()
-  cmp_undo.undo()
+  for _ = 1, vim.v.count1 do
+    cmp_undo.undo()
+  end
 end)
 map('n', '<C-r>', function()
-  cmp_undo.redo()
+  for _ = 1, vim.v.count1 do
+    cmp_undo.redo()
+  end
 end)
 
 -- map('n', ',r', ":LspRestart<CR>")

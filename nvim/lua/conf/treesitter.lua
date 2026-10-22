@@ -9,6 +9,7 @@ local ensure_installed = {
   'html',
   'lua',
   'json',
+  'java',
   -- 'rust',
 }
 

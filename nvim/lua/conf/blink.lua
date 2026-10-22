@@ -102,7 +102,14 @@ blink.setup({
     --   "snippet_backward",
     --   "fallback",
     -- },
-    ["<C-k>"] = { "show" },
+    -- 有 neocursor 建议时接受（或跳到建议处），没有时照常打开补全菜单
+    ["<C-k>"] = {
+      function()
+        local ok, neocursor = pcall(require, "neocursor")
+        return ok and neocursor.accept()
+      end,
+      "show",
+    },
     ["<C-j>"] = { "hide", "fallback" },
   },
   sources = {
