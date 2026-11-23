@@ -4,8 +4,8 @@ if not ok then return end
 
 local home = os.getenv('HOME')
 local mason = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
--- jdtls 本身需要 JDK 21+ 才能运行
-local java21 = '/opt/homebrew/opt/openjdk@21/bin/java'
+-- jdtls 本身需要 JDK 25+ 才能运行（1.63 起要求 JavaSE 25）
+local java25 = '/opt/homebrew/opt/openjdk@25/bin/java'
 
 local root_dir = vim.fs.root(0, { 'mvnw', 'gradlew', 'pom.xml', 'build.gradle', 'build.gradle.kts', 'settings.gradle', '.git' })
 if not root_dir then return end
@@ -16,7 +16,7 @@ jdtls.start_or_attach({
   name = 'jdtls',
   cmd = {
     mason .. '/bin/jdtls',
-    '--java-executable', java21,
+    '--java-executable', java25,
     '--jvm-arg=-javaagent:' .. mason .. '/lombok.jar',
     '-data', workspace,
   },
@@ -27,9 +27,9 @@ jdtls.start_or_attach({
       configuration = {
         -- 项目编译可用的 JDK
         runtimes = {
-          { name = 'JavaSE-11', path = '/Library/Java/JavaVirtualMachines/jdk-11.jdk/Contents/Home' },
           { name = 'JavaSE-17', path = '/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home', default = true },
           { name = 'JavaSE-21', path = '/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home' },
+          { name = 'JavaSE-25', path = '/opt/homebrew/opt/openjdk@25/libexec/openjdk.jdk/Contents/Home' },
         },
       },
       signatureHelp = { enabled = true },

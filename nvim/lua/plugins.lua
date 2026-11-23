@@ -354,7 +354,12 @@ require("lazy").setup({
     'j-hui/fidget.nvim',
     tag = "legacy",
     config = function()
-      require "fidget".setup {}
+      -- jdtls 校验/诊断进度太密，写 Java 时右下角会一直刷；其它语言照常显示
+      require("fidget").setup({
+        sources = {
+          jdtls = { ignore = true },
+        },
+      })
     end
   },
   {
